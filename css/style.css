@@ -1,0 +1,391 @@
+    html {
+      scroll-padding-top: 6rem;
+    }
+
+    :root {
+      --gold: #D4AF37;
+      --ink: #030303;
+      --paper: #d4d4d4;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #030303;
+      color: #d4d4d4;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050505;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #222;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #333;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Glassmorphism Panel */
+    .glass-panel {
+      background: rgba(10, 10, 10, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Watermark / Ghost Text */
+    .ghost-text {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+    }
+
+    /* Background Mesh & Animations */
+    @keyframes grid-drift {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+    .animated-grid-bg {
+      background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+      background-size: 40px 40px;
+      animation: grid-drift 10s linear infinite;
+    }
+
+    @keyframes blob-drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(24px, -18px) scale(1.06); }
+    }
+    .animate-blob {
+      animation: blob-drift 12s ease-in-out infinite;
+    }
+
+    @keyframes ghost-drift {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      50% { transform: translate(-50%, -52%) scale(1.02); opacity: 0.85; }
+    }
+    .animate-ghost-drift {
+      animation: ghost-drift 14s ease-in-out infinite;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 4s ease-in-out infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .reveal-group > * {
+      animation: float-up 1s ease-out forwards;
+      opacity: 0;
+    }
+    .reveal-group > *:nth-child(1) { animation-delay: 0.1s; }
+    .reveal-group > *:nth-child(2) { animation-delay: 0.25s; }
+    .reveal-group > *:nth-child(3) { animation-delay: 0.4s; }
+    .reveal-group > *:nth-child(4) { animation-delay: 0.55s; }
+    .reveal-group > *:nth-child(5) { animation-delay: 0.7s; }
+    .reveal-group > *:nth-child(6) { animation-delay: 0.85s; }
+
+    /* Scroll Reveals */
+    @keyframes scroll-blur-in {
+      0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .animate-on-scroll {
+      animation: scroll-blur-in 0.8s ease-out both;
+      animation-play-state: paused;
+    }
+    .animate-on-scroll.is-visible {
+      animation-play-state: running;
+    }
+
+    /* Conic spin for Premium CTA */
+    @keyframes conic-spin {
+      to { transform: rotate(360deg); }
+    }
+    .animate-conic-spin {
+      animation: conic-spin 2s linear infinite;
+    }
+
+    /* Shimmer Sweep Animation */
+    @keyframes shimmer-sweep {
+      from { transform: translateX(-100%) skewX(-15deg); }
+      to { transform: translateX(200%) skewX(-15deg); }
+    }
+    .animate-shimmer-sweep {
+      animation: shimmer-sweep 1.5s infinite;
+      animation-play-state: paused;
+    }
+    .group:hover .animate-shimmer-sweep {
+      animation-play-state: running;
+    }
+
+    /* Flashlight tracking card */
+    .flashlight-card {
+      position: relative;
+    }
+    .flashlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.1), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .flashlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Cronograma Timeline — nós numerados + linha com preenchimento (estilo Luminae, adaptado pro dark/gold) */
+    .cronograma-section {
+      position: relative;
+      overflow-x: hidden;
+    }
+    .cronograma-track {
+      position: relative;
+    }
+    .cronograma-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+    /* Modo pinado (GSAP ScrollTrigger, só desktop ≥1024px, ver script no fim do body).
+       height (não min-height): o conteúdo (cabeçalho + 6 passos) é mais alto que uma
+       tela, então precisa travar o stage em exatamente 100vh pra o overflow:hidden
+       cortar de verdade e o scroll interno da timeline (JS) ter efeito. */
+    .cronograma-section.is-ready .cronograma-stage {
+      height: 100vh;
+      padding-top: 88px;
+      padding-bottom: 3rem;
+      align-items: stretch;
+    }
+    /* Janela própria da timeline: cabeçalho fica FORA daqui, então nunca é
+       sobreposto pelo conteúdo da timeline quando ela "rola" internamente. */
+    .cronograma-section.is-ready .cronograma-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .cronograma-viewport {
+      position: relative;
+    }
+    .cronograma-section.is-ready .cronograma-viewport {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      /* respiro horizontal + vertical pro anel/brilho do nó ativo não ser cortado pelo overflow:hidden
+         (o nó 01 nasce colado no topo da janela, mesmo problema que o das laterais) —
+         margem negativa cancela o deslocamento visual em ambos os eixos */
+      padding: 20px;
+      margin: -20px;
+    }
+    @supports (height: 100svh) {
+      .cronograma-section.is-ready .cronograma-stage {
+        height: 100svh;
+      }
+    }
+
+    .cronograma-timeline {
+      position: relative;
+      --progress: 0;
+      --node-size: 52px;
+      will-change: transform;
+    }
+    /* Linha contínua (do centro do 1º nó ao centro do último), preenchimento por cima */
+    .cronograma-line {
+      position: absolute;
+      top: calc(var(--node-size) / 2);
+      bottom: calc(var(--node-size) / 2);
+      left: calc(var(--node-size) / 2);
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .cronograma-line-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(var(--progress, 0) * 100%);
+      background: linear-gradient(180deg, var(--gold), #8a6f1f);
+      border-radius: 2px;
+      will-change: height;
+    }
+    .cronograma-steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      position: relative;
+      z-index: 2;
+    }
+    .cronograma-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .cronograma-node {
+      position: relative;
+      flex: 0 0 auto;
+      width: var(--node-size);
+      height: var(--node-size);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.4);
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 0 0 6px #020202;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease;
+    }
+    .cronograma-node-num {
+      transition: opacity 0.3s ease;
+    }
+    .cronograma-node-check {
+      position: absolute;
+      font-size: 1.3rem;
+      opacity: 0;
+      transform: scale(0.5);
+      color: #020202;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cronograma-content {
+      flex: 1;
+      min-width: 0;
+      padding-top: 0.35rem;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+
+    /* Estados ATIVO/CONCLUÍDO — setados via JS (data-state), valem sempre */
+    .cronograma-step[data-state="active"] .cronograma-node {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: scale(1.1);
+      box-shadow: 0 0 0 6px #020202, 0 0 0 11px rgba(212, 175, 55, 0.18);
+    }
+    .cronograma-step[data-state="done"] .cronograma-node {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #020202;
+    }
+    .cronograma-step[data-state="done"] .cronograma-node-num {
+      opacity: 0;
+    }
+    .cronograma-step[data-state="done"] .cronograma-node-check {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Só no modo pinado: passos futuros ficam recuados/suaves */
+    .cronograma-section.is-ready .cronograma-step[data-state="idle"] .cronograma-content {
+      opacity: 0.28;
+      transform: translateY(14px);
+      filter: blur(1.5px);
+    }
+    .cronograma-section.is-ready .cronograma-step[data-state="active"] .cronograma-content,
+    .cronograma-section.is-ready .cronograma-step[data-state="done"] .cronograma-content {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    /* Fallback estático (mobile/tablet, sem JS, ou "reduzir movimento"): tudo legível de uma vez */
+    .cronograma-section:not(.is-ready) .cronograma-node {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #020202;
+    }
+    .cronograma-section:not(.is-ready) .cronograma-node-check {
+      display: none;
+    }
+    .cronograma-section:not(.is-ready) .cronograma-line-fill {
+      height: 100%;
+    }
+
+    /* Nó um pouco menor no mobile, pra não encostar na borda */
+    @media (max-width: 767px) {
+      .cronograma-timeline {
+        --node-size: 32px;
+      }
+      .cronograma-node {
+        box-shadow: 0 0 0 3px #020202;
+        font-size: 0.7rem;
+      }
+      .cronograma-node-check {
+        font-size: 0.9rem;
+      }
+      .cronograma-steps {
+        gap: 1.5rem;
+      }
+      .cronograma-step {
+        gap: 0.85rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cronograma-content,
+      .cronograma-node {
+        transition: none;
+      }
+    }
+
+    /* Infinite Marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 25s linear infinite;
+    }
+
+    /* Header Scrolled Style */
+    #main-header.is-scrolled {
+      background-color: rgba(3, 3, 3, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Custom Grayscale Hover Transition */
+    .premium-grayscale-transition {
+      filter: grayscale(100%) contrast(1.05) brightness(0.95);
+      transform: scale(1.05);
+      transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #hero:hover .premium-grayscale-transition {
+      filter: grayscale(0%) contrast(1) brightness(1);
+      transform: scale(1.08);
+    }

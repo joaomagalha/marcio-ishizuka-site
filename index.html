@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
+  <title>Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular</title>
+  <meta name="theme-color" content="#030303">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Open Graph / preview ao compartilhar no WhatsApp, Instagram etc. -->
+  <!-- og:url e og:image usam o domínio final (academia.ninjadafoto.com.br, já comprado,
+       DNS ainda não conectado) — funciona sozinho assim que o domínio for apontado, sem editar nada aqui. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://academia.ninjadafoto.com.br/">
+  <meta property="og:title" content="Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular">
+  <meta property="og:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
+  <meta property="og:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular">
+  <meta name="twitter:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
+  <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Iconify Icons CDN -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <!-- GSAP + ScrollTrigger (timeline interativa pinada da seção Cronograma, só desktop) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Configuration for Custom Variables -->
+  <script src="js/tailwind-config.js"></script>
+
+  <!-- Custom Core Design System Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- 1. NAVIGATION HEADER -->
+  <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="text-white tracking-[0.1em] sm:tracking-[0.2em] text-[10px] sm:text-xs font-light uppercase flex items-center gap-2 sm:gap-3" aria-label="Márcio Ishizuka Home">
+        <svg width="19" height="19" viewBox="0 0 512 512" fill="currentColor" class="text-gold/80 shrink-0 sm:w-[23px] sm:h-[23px]" aria-hidden="true">
+          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
+          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
+          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
+          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
+        </svg>
+        <span>Márcio Ishizuka</span>
+      </a>
+
+      <!-- Navigation links -->
+      <nav class="hidden md:flex items-center gap-10 text-[10px] uppercase tracking-[0.2em] font-light">
+        <a href="#aprendizado" class="text-neutral-400 hover:text-white transition-colors duration-300">Aula Ao Vivo</a>
+        <a href="#trajetoria" class="text-neutral-400 hover:text-white transition-colors duration-300">Quem é o Márcio</a>
+        <a href="#contato" class="text-neutral-400 hover:text-white transition-colors duration-300">Contato</a>
+      </nav>
+
+      <!-- CTA Button -->
+      <div>
+        <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 bg-white hover:bg-neutral-200 text-black rounded-full transition-all duration-300 text-[9px] sm:text-[10px] tracking-wide sm:tracking-widest uppercase font-medium overflow-hidden hover:scale-105 active:scale-95 whitespace-nowrap">
+          <span class="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+          <span class="relative z-10">Entrar no Grupo</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CANVAS -->
+  <main class="flex-grow">
+
+    <!-- ================================================================= -->
+    <!-- 2. HERO — FLAGSHIP SECTION                                        -->
+    <!-- ================================================================= -->
+    <section id="hero" class="relative lg:min-h-screen lg:h-screen flex items-center overflow-hidden pt-24 pb-14 lg:pt-24 lg:pb-0">
+      
+      <!-- BACKGROUND LAYERS -->
+      <!-- Mesh dotted structure -->
+      <div class="absolute inset-0 animated-grid-bg opacity-40 pointer-events-none z-0"></div>
+      
+      <!-- Glowing blobs: breathing gold + white -->
+      <div class="absolute top-[15%] right-[10%] w-[380px] lg:w-[480px] h-[380px] lg:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.06] rounded-full pointer-events-none animate-blob z-0"></div>
+      <div class="absolute bottom-[5%] left-[20%] w-[280px] lg:w-[380px] h-[280px] lg:h-[380px] bg-white blur-[120px] opacity-[0.03] rounded-full pointer-events-none animate-blob z-0" style="animation-delay: -5s;"></div>
+
+      <!-- Watermark / Oversized Ghost Typography behind headline -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none z-0 animate-ghost-drift">
+        <span class="font-display ghost-text text-[22vw] leading-none whitespace-nowrap font-medium tracking-tighter uppercase select-none">ISHIZUKA</span>
+      </div>
+
+      <!-- PORTRAIT IMAGE FULL BLEED BLENDED (Outside of rectangle) -->
+      <div class="absolute right-0 top-0 w-full lg:w-1/2 h-full z-0 overflow-hidden select-none pointer-events-none">
+        <!-- Portrait Image with smooth zoom and grayscale transition -->
+        <img src="./assets/01-head-ishizuka.png"
+             alt="Retrato de Márcio Ishizuka"
+             class="w-full h-full object-cover object-[68%_12%] lg:object-[center_right] premium-grayscale-transition"
+             loading="eager"
+             width="800"
+             height="1000">
+
+        <!-- Left Fade (Desktop only): Fades the image to the background dark color -->
+        <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#030303] to-transparent z-10 hidden lg:block"></div>
+        
+        <!-- Right Fade: Blends image edge if screen is very wide -->
+        <div class="absolute inset-y-0 right-0 w-1/12 bg-gradient-to-l from-[#030303] to-transparent z-10 hidden lg:block"></div>
+        
+        <!-- Top Fade: Blends with sticky header and top margin -->
+        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#030303] to-transparent z-10"></div>
+        
+        <!-- Bottom Fade: Blends with infinite marquee divider -->
+        <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent z-10"></div>
+        
+        <!-- Mobile overlays for legibility -->
+        <div class="absolute inset-0 bg-[#030303]/70 lg:hidden z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303] lg:hidden z-10"></div>
+      </div>
+
+      <!-- MAIN CONTENT WRAPPER -->
+      <div class="max-w-7xl mx-auto px-6 w-full relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- LEFT COLUMN: Content & Philosophy -->
+        <div class="lg:col-span-7 flex flex-col justify-center text-left reveal-group">
+          
+          <!-- Category Eyebrow Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit cursor-default">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-60"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+            </span>
+            <span>Aula ao vivo e gratuita · Ninja Fácil</span>
+          </div>
+
+          <!-- Main Editorial Title -->
+          <h1 class="font-display text-xl sm:text-3xl md:text-[2.15rem] lg:text-[2.4rem] text-white leading-[1.35] tracking-tight mb-6 max-w-xl">
+            Em 1 aula ao vivo e gratuita, vou te ensinar a gravar <span class="text-gold italic">fotos e vídeos profissionais</span> usando só o celular que você já tem no bolso.
+          </h1>
+
+          <!-- O que você vai aprender / promessas-chave -->
+          <ul class="flex flex-col gap-3 max-w-xl mb-10">
+            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
+              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              Passo a passo do zero
+            </li>
+            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
+              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              Sem comprar nenhum equipamento
+            </li>
+            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
+              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              Resultado prático ainda durante a aula
+            </li>
+          </ul>
+
+          <!-- Action Buttons / CTAs -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10">
+            <!-- Premium CTA Beam: Conic border glowing ring + Shimmer inside -->
+            <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
+              <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
+              <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-8 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
+                <span class="absolute inset-0 overflow-hidden rounded-full">
+                  <span class="animate-shimmer-sweep absolute top-0 left-0 h-full w-full -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 group-hover:opacity-100"></span>
+                </span>
+                <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+                <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
+                <iconify-icon icon="solar:arrow-right-linear" width="14" class="relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300"></iconify-icon>
+              </span>
+            </a>
+
+            <!-- Glass Secondary CTA -->
+            <a href="#aprendizado" class="group relative inline-flex items-center gap-2 px-5 py-3 sm:px-8 sm:py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/50 text-white rounded-full transition-all duration-500 overflow-hidden text-xs tracking-widest uppercase font-light">
+              <span class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/10 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+              <span>Como Funciona a Aula</span>
+            </a>
+          </div>
+
+          <!-- Metadados / Specs Row -->
+          <div class="grid grid-cols-3 gap-4 py-6 border-t border-white/5 text-neutral-400 max-w-xl">
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="solar:map-point-linear" width="16" class="text-gold/80"></iconify-icon>
+              <div class="text-left">
+                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Presença</p>
+                <p class="text-xs text-white mt-1 font-light">Cuiabá, MT</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="solar:global-linear" width="16" class="text-gold/80"></iconify-icon>
+              <div class="text-left">
+                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Herança</p>
+                <p class="text-xs text-white mt-1 font-light">Cultura Japonesa</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="solar:star-fall-linear" width="16" class="text-gold/80"></iconify-icon>
+              <div class="text-left">
+                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Trajetória</p>
+                <p class="text-xs text-white mt-1 font-light">15+ Anos de Arte</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Grid placeholder on desktop to balance text, and container for the floating badge -->
+        <div class="hidden lg:flex lg:col-span-5 relative h-full min-h-[400px] items-end justify-end pb-12 pointer-events-none">
+          <!-- Editorial Pill Badge Overlay (próxima aula ao vivo) -->
+          <div class="glass-panel rounded-full px-5 py-3 border border-white/10 backdrop-blur-md flex items-center gap-3 pointer-events-auto select-none">
+            <div class="flex items-center justify-center w-9 h-9 rounded-full border border-gold/30 bg-gold/5 shrink-0">
+              <iconify-icon icon="solar:calendar-linear" width="16" class="text-gold"></iconify-icon>
+            </div>
+            <div>
+              <p class="text-[7px] uppercase tracking-widest text-neutral-500 leading-none">Próxima Aula Ao Vivo</p>
+              <p class="text-[9px] text-white font-light mt-0.5">10 de Setembro · 21h (Cuiabá)</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scrolling indicator (Indicator of continuation) -->
+      <div class="absolute bottom-8 left-6 hidden lg:flex items-center gap-3 text-neutral-600 z-10 pointer-events-none select-none">
+        <span class="w-px h-10 bg-gradient-to-b from-neutral-600 to-transparent"></span>
+        <span class="text-[9px] uppercase tracking-[0.25em] font-light">Deslizar</span>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 3. TRUST / CAPABILITY TICKER — INFINITE MARQUEE                   -->
+    <!-- ================================================================= -->
+    <section class="relative border-y border-white/5 bg-[#020202] py-8 overflow-hidden z-10">
+      <div class="glow-bg absolute inset-0 pointer-events-none"></div>
+      <div class="hide-scrollbar overflow-hidden relative z-10">
+        <!-- Mask overlay on left & right borders for soft fading marquee transition -->
+        <div class="absolute left-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-r from-[#030303] to-transparent"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-l from-[#030303] to-transparent"></div>
+
+        <div class="flex w-max animate-marquee gap-16 whitespace-nowrap text-[10px] font-light uppercase tracking-[0.25em] text-neutral-500 select-none">
+          <!-- Duplicated set for seamless loop -->
+          <div class="flex gap-16 items-center">
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:camera-linear" class="text-gold/60"></iconify-icon>Câmera Pelo Celular</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:sun-2-linear" class="text-gold/60"></iconify-icon>Luz e Enquadramento</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:clapperboard-open-linear" class="text-gold/60"></iconify-icon>Roteiro e Direção</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:layers-minimalistic-linear" class="text-gold/60"></iconify-icon>Edição Simples</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:chart-2-linear" class="text-gold/60"></iconify-icon>Conteúdo Que Vende</span>
+          </div>
+          <div class="flex gap-16 items-center" aria-hidden="true">
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:camera-linear" class="text-gold/60"></iconify-icon>Câmera Pelo Celular</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:sun-2-linear" class="text-gold/60"></iconify-icon>Luz e Enquadramento</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:clapperboard-open-linear" class="text-gold/60"></iconify-icon>Roteiro e Direção</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:layers-minimalistic-linear" class="text-gold/60"></iconify-icon>Edição Simples</span>
+            <span class="flex items-center gap-2"><iconify-icon icon="solar:chart-2-linear" class="text-gold/60"></iconify-icon>Conteúdo Que Vende</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 3. BÔNUS EXCLUSIVO — presente pra quem entra no grupo             -->
+    <!-- ================================================================= -->
+    <section id="bonus" class="relative py-14 sm:py-20 lg:py-28 overflow-hidden bg-[#030303] border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.05] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+
+      <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          <!-- Coluna visual: mockup real do checklist -->
+          <div class="animate-on-scroll flex justify-center order-2 lg:order-1">
+            <div class="relative w-full max-w-[260px] sm:max-w-[300px]">
+              <!-- Luz ambiente sutil atrás do objeto, no idioma do design system (radial suave, sem bloom saturado) -->
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-[#D4AF37] blur-[55px] opacity-[0.18] rounded-full pointer-events-none" aria-hidden="true"></div>
+              <img src="./assets/checklist-ninja-facil-mockup-pdf.png" alt="Mockup do PDF Checklist Ninja Fácil: equipamentos baratos pra começar" class="relative z-10 w-full h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)]" loading="lazy">
+              <!-- Sombra de contato no chão, pra ancorar o objeto -->
+              <div class="absolute bottom-2 inset-x-8 h-4 bg-black/60 blur-lg rounded-[100%] pointer-events-none" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <!-- Coluna de texto -->
+          <div class="animate-on-scroll order-1 lg:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit cursor-default">
+              <span>Presente exclusivo pra quem participar</span>
+            </div>
+            <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
+              Antes mesmo da aula começar, você já sai ganhando.
+            </h2>
+            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-6 max-w-md">
+              Todo mundo que participar da aula ao vivo recebe o <span class="text-white">Checklist Ninja Fácil</span>: o que vale (e o que não vale) comprar pra gravar seus primeiros vídeos, lapela, luz e indicação de celular, mais um desconto de um parceiro do Márcio pra quem precisar trocar de aparelho.
+            </p>
+
+            <!-- Badge de valor (ancoragem) -->
+            <div class="glass-panel rounded-2xl border border-gold/20 flex items-stretch overflow-hidden max-w-md mb-6">
+              <div class="flex-1 px-5 py-4 border-r border-white/10">
+                <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Valor deste checklist</p>
+                <p class="text-lg text-neutral-500 font-light line-through decoration-red-400/60">De R$47</p>
+              </div>
+              <div class="flex-1 px-5 py-4">
+                <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Por participar da aula</p>
+                <p class="font-display text-2xl text-gold">Grátis</p>
+              </div>
+            </div>
+
+            <p class="text-xs text-neutral-500 font-light mb-8">Liberado durante a aula ao vivo, dia 10 de setembro. Só rola pra quem estiver lá.</p>
+            <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
+              <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
+              <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
+                <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+                <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 4. URGÊNCIA — por que é agora ou nunca (real, não fabricada)      -->
+    <!-- ================================================================= -->
+    <section id="urgencia" class="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#020202] border-t border-white/5">
+      <div class="max-w-2xl mx-auto px-6 relative z-10 text-center">
+        <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
+          <iconify-icon icon="solar:videocamera-record-linear" width="14" class="text-gold/80"></iconify-icon>
+          <span>Por que agora</span>
+        </div>
+        <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
+          Essa aula é só ao vivo, sem gravação depois.
+        </h2>
+        <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-xl mx-auto">
+          Se der pra você entrar no grupo e estar lá no dia 10 de setembro às 21h, é a única forma de acompanhar. Não fica um replay guardado pra assistir depois.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 5. O QUE VOCÊ VAI APRENDER — Nível 1 da esteira (câmera pelo celular) -->
+    <!-- ================================================================= -->
+    <section id="aprendizado" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="max-w-2xl mx-auto text-center mb-10 sm:mb-14 lg:mb-16">
+          <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
+            <iconify-icon icon="solar:playlist-check-linear" width="14" class="text-gold/80"></iconify-icon>
+            <span>O que você vai aprender</span>
+          </div>
+          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
+            Tudo isso, ao vivo, numa aula só.
+          </h2>
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.1s">
+            Você não precisa de uma câmera profissional pra começar. Primeiro o Márcio te ensina a enxergar e dominar aquilo que já está na sua mão. É por ele que vamos começar.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.1s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:camera-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Câmera Pelo Celular</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Como segurar, configurar e enquadrar sem precisar de equipamento caro.</p>
+          </div>
+
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.2s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:sun-2-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Luz e Enquadramento</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Aproveitar a luz que você já tem em casa, sem comprar nenhum equipamento.</p>
+          </div>
+
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.3s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:clapperboard-open-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Roteiro e Direção</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena com naturalidade, sem travar na frente da câmera.</p>
+          </div>
+
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.4s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:layers-minimalistic-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Edição Simples</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Cortes e ajustes rápidos, sem precisar dominar um app complicado.</p>
+          </div>
+
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.5s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:chart-2-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Conteúdo Que Vende</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
+          </div>
+
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.6s">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
+              <iconify-icon icon="solar:eye-linear" width="22" class="text-gold/80"></iconify-icon>
+            </div>
+            <h3 class="font-display text-base text-white mb-2">Fotos Que Impressionam</h3>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Retratos e still simples que parecem produção profissional, só com o que você já tem.</p>
+          </div>
+        </div>
+
+        <p class="animate-on-scroll text-center text-xs text-neutral-500 font-light mt-10 mb-8" style="animation-delay:0.7s">
+          Depois desse primeiro passo, tem caminho pra quem quiser ir além (câmera profissional, formação avançada), mas isso é assunto pra depois. Hoje é só sobre o que você já tem no bolso.
+        </p>
+
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mb-6" style="animation-delay:0.75s">
+          <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
+            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            10 de setembro, ao vivo, às 21h
+          </p>
+          <p class="text-sm sm:text-base text-gold font-medium">
+            Vagas limitadas no grupo do WhatsApp
+          </p>
+        </div>
+
+        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.85s">
+          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
+            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
+            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
+              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 5.5 CRONOGRAMA DA AULA — PROVISÓRIO, horários fictícios pra dar    -->
+    <!-- estrutura visual. Validar com o Márcio em 25/08/2026 e substituir -->
+    <!-- pelos horários reais (tarefa criada no Notion). Os blocos de      -->
+    <!-- conteúdo em si (câmera, luz, roteiro, edição, conteúdo, fotos)    -->
+    <!-- são reais, só a divisão de tempo entre eles é um rascunho.        -->
+    <!-- ================================================================= -->
+    <section id="cronograma" class="cronograma-section relative overflow-hidden bg-[#020202] border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
+
+      <div class="cronograma-track">
+        <div class="cronograma-stage">
+          <div class="cronograma-inner max-w-2xl mx-auto px-6 relative z-10 w-full">
+            <div class="text-center mb-10 sm:mb-14 lg:mb-16">
+              <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+                <span>Como vai funcionar</span>
+              </div>
+              <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Uma aula com começo, meio e fim. Sem enrolação.</h2>
+              <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">Direto ao ponto, do início ao fim da aula ao vivo.</p>
+            </div>
+
+            <div class="cronograma-viewport">
+              <div class="cronograma-timeline" data-cronograma>
+                <div class="cronograma-line" aria-hidden="true">
+                  <div class="cronograma-line-fill"></div>
+                </div>
+
+                <ol class="cronograma-steps">
+
+                  <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">01</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h00</p>
+                    <h3 class="font-display text-lg text-white mb-1">Abertura</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Por que isso importa agora e o que muda na forma como você vai gravar a partir de hoje.</p>
+                  </div>
+                </li>
+
+                <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">02</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h10</p>
+                    <h3 class="font-display text-lg text-white mb-1">Câmera pelo celular, luz e enquadramento</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Como segurar, configurar e aproveitar a luz que você já tem, sem comprar equipamento.</p>
+                  </div>
+                </li>
+
+                <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">03</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h30</p>
+                    <h3 class="font-display text-lg text-white mb-1">Roteiro, direção e edição simples</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena, e os cortes e ajustes rápidos que fazem a diferença.</p>
+                  </div>
+                </li>
+
+                <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">04</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h50</p>
+                    <h3 class="font-display text-lg text-white mb-1">Conteúdo que vende e fotos que impressionam</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
+                  </div>
+                </li>
+
+                <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">05</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">22h10</p>
+                    <h3 class="font-display text-lg text-white mb-1">Checklist liberado</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">O bônus (PDF com os itens baratos pra começar) é liberado pra quem estiver na aula.</p>
+                  </div>
+                </li>
+
+                <li class="cronograma-step" data-state="idle">
+                  <div class="cronograma-node" aria-hidden="true">
+                    <span class="cronograma-node-num">06</span>
+                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                  </div>
+                  <div class="cronograma-content">
+                    <p class="text-xs uppercase tracking-widest text-gold mb-1">22h20</p>
+                    <h3 class="font-display text-lg text-white mb-1">Perguntas e encerramento</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Espaço aberto pra tirar dúvidas antes de fechar a noite.</p>
+                  </div>
+                </li>
+
+              </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 6.5 PRA QUEM É — autosseleção do avatar real                       -->
+    <!-- ================================================================= -->
+    <section id="pra-quem" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-[#020202] border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
+
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-10 sm:mb-14 lg:mb-16">
+          <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+            <span>Pra quem é essa aula</span>
+          </div>
+          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Você pode ser excelente no que faz. Se ninguém vê, o mercado não percebe.</h2>
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">Antes de entrar no grupo, vê se essa aula é mesmo pra você.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          <div class="animate-on-scroll glass-panel rounded-2xl border border-gold/20 p-6 sm:p-7" style="animation-delay:0.1s">
+            <p class="text-[10px] uppercase tracking-widest text-gold mb-5">É pra você se</p>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Você já domina o que faz (médico, advogado, consultor, palestrante, dono de negócio, prestador de serviço) mas nunca conseguiu gravar um vídeo decente de si mesmo
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Sente que tem valor pra mostrar, mas trava na hora de aparecer, gravar ou editar
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Nunca gravou um vídeo com o próprio celular, ou já tentou e não gostou do resultado
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Quer aprender do absoluto zero, sem comprar equipamento nenhum
+              </li>
+            </ul>
+          </div>
+
+          <div class="animate-on-scroll glass-panel rounded-2xl border border-white/5 p-6 sm:p-7" style="animation-delay:0.2s">
+            <p class="text-[10px] uppercase tracking-widest text-neutral-500 mb-5">Não é pra você se</p>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
+                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                Você já grava e edita seus próprios vídeos com tranquilidade, esse conteúdo vai parecer básico
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
+                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                Está procurando virar fotógrafo profissional ou prestador de serviço de fotografia, esse é outro caminho, não é o desta aula
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
+                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                Quer direto câmera profissional, luz de estúdio e formação avançada, isso existe no caminho do Márcio, mas é assunto pra depois, não desta aula
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 7. QUEM É O MÁRCIO — autoridade como história pessoal, sem números fabricados -->
+    <!-- ================================================================= -->
+    <section id="trajetoria" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-[#020202] border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.1] pointer-events-none z-0" aria-hidden="true"></div>
+      <div class="absolute top-[10%] right-[8%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
+          <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+            <span>Quem é o Márcio</span>
+          </div>
+          <p class="animate-on-scroll text-xs uppercase tracking-[0.25em] text-gold/80 font-light" style="animation-delay:0.1s">Fotógrafo · Mentor · Palestrante</p>
+        </div>
+
+        <div class="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-12 lg:gap-16 items-start">
+
+          <!-- Coluna da foto -->
+          <div class="animate-on-scroll relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[320px]" style="animation-delay:0.15s">
+            <div class="hidden sm:block absolute -top-3 -left-3 w-10 h-10 border-t border-l border-gold/40 pointer-events-none" aria-hidden="true"></div>
+            <div class="hidden sm:block absolute -bottom-3 -right-3 w-10 h-10 border-b border-r border-gold/40 pointer-events-none" aria-hidden="true"></div>
+            <div class="relative rounded-2xl overflow-hidden border border-white/10">
+              <img src="./assets/marcio-retrato.jpg" alt="Retrato de Márcio Ishizuka, fotógrafo, mentor e palestrante" class="w-full h-auto object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" aria-hidden="true"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <p class="text-white text-sm font-medium">Márcio Ishizuka</p>
+                <p class="text-[10px] text-gold uppercase tracking-widest mt-0.5">15+ Anos de Mercado</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna de texto -->
+          <div class="animate-on-scroll" style="animation-delay:0.25s">
+            <blockquote class="font-display text-xl sm:text-3xl text-white leading-[1.35] tracking-tight mb-6">
+              "Não era a câmera que precisava melhorar. <span class="text-gold italic">Era eu.</span>"
+            </blockquote>
+
+            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-4">
+              Há mais de 15 anos o Márcio é fotógrafo profissional em Cuiabá. 99% dos clientes chegam por agências de publicidade, não por procura direta do público. É um nome forte no mercado B2B, mas praticamente desconhecido de quem não trabalha com propaganda.
+            </p>
+            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-8">
+              A trajetória pessoal dele é o maior diferencial. Foi no Japão que entendeu, pela primeira vez, que equipamento sozinho não bastava. De volta ao Brasil, com muito pouco dinheiro no bolso, teve que provar pra si mesmo que aquilo que tinha aprendido era suficiente pra recomeçar do zero. Ele conta essa história inteira, pela primeira vez, na aula ao vivo do dia 10 de setembro.
+            </p>
+
+            <ul class="space-y-3 mb-10">
+              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Nome consolidado no mercado publicitário de Cuiabá, mesmo sendo desconhecido do público geral
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Passou por 9 trabalhos veiculados em outdoor pela cidade sem que a própria família soubesse que eram dele
+              </li>
+              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
+                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                Raízes na cultura japonesa e no budô, base da disciplina que aplica atrás das câmeras
+              </li>
+            </ul>
+
+            <div class="grid grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/5">
+              <div>
+                <p class="font-display text-xl sm:text-3xl text-gold">15+</p>
+                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Anos de Mercado</p>
+              </div>
+              <div>
+                <p class="font-display text-xl sm:text-3xl text-gold">99%</p>
+                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Clientes via Agência</p>
+              </div>
+              <div>
+                <p class="font-display text-xl sm:text-3xl text-gold">9</p>
+                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Trabalhos em Outdoor</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-16 pt-8 sm:pt-14 border-t border-white/5" style="animation-delay:0.35s">
+          <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
+            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            10 de setembro, ao vivo, às 21h
+          </p>
+          <p class="text-sm sm:text-base text-gold font-medium mb-3">
+            Vagas limitadas no grupo do WhatsApp
+          </p>
+          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
+            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
+            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
+              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 8. FAQ — objeções reais (empatia + lógica) + dúvidas logísticas    -->
+    <!-- ================================================================= -->
+    <section id="faq" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
+      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
+      <div class="absolute bottom-[5%] left-[10%] w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] bg-[#D4AF37] blur-[140px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+
+      <div class="max-w-3xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-10 sm:mb-14 lg:mb-16">
+          <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+            <span>Perguntas frequentes</span>
+          </div>
+          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Antes de entrar, tira suas dúvidas.</h2>
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">As perguntas que mais aparecem quando alguém pensa em participar.</p>
+        </div>
+
+        <div class="space-y-3">
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.1s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Não tenho facilidade com tecnologia, ainda assim consigo acompanhar?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal achar isso quando a maioria dos tutoriais parece ter sido feita por quem já nasceu usando aplicativo. Mas o problema nunca foi a idade, foi a forma como ensinaram até hoje. Na aula, o passo a passo começa do absoluto zero.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.15s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Não sei se vou ter tempo, será que vale a pena entrar?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A rotina cheia é real, não é desculpa. Por isso a aula é só uma vez, com hora marcada (21h) e sem enrolação: você separa esse horário, participa ao vivo, e sai com o passo a passo pronto, sem precisar voltar todo dia num curso longo.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.2s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Meu celular não é bom, dá pra fazer mesmo assim?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Dá. A promessa da aula já parte disso: usar o celular que você já tem no bolso, sem comprar câmera nem equipamento caro. E quem participar ainda sai com o checklist de itens baratos pra melhorar o resultado, se quiser.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.25s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Já tentei aprender sozinho antes e não consegui. Vai ser diferente dessa vez?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A maioria dos tutoriais parte do princípio que você já sabe onde estão os botões. Aqui não. Não precisa aprender o aplicativo inteiro, só um punhado de funções essenciais já resolve a maior parte do que você vai gravar e editar.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.3s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Tenho vergonha de aparecer em vídeo, isso é um problema?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal se sentir exposto numa ferramenta nova, ainda mais aparecendo em vídeo. Mas quem assiste quer o seu conhecimento, não perfeição técnica. O foco da aula é te dar segurança pra gravar, não te transformar em ator.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.35s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Meu filho ou funcionário já cuida disso pra mim. Por que aprender eu mesmo?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Delegar parece mais fácil até depender de terceiro pra tudo travar sua velocidade e o controle sobre a sua própria imagem. Ter autonomia pra gravar e ajustar na hora que precisar, sem esperar ninguém, sai mais rápido no fim.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.4s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">A aula é paga?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. A aula ao vivo é 100% gratuita. Você só precisa entrar no grupo do WhatsApp pra receber o link de acesso e os avisos antes do dia 10 de setembro.</p>
+          </details>
+
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.45s">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
+              <span class="text-sm sm:text-base text-white font-light">Vai ter gravação disponível depois?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+            </summary>
+            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. É só ao vivo, sem replay depois. Se der pra você estar lá no dia 10 de setembro às 21h, é a única forma de acompanhar.</p>
+          </details>
+
+        </div>
+
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-14 mb-6" style="animation-delay:0.5s">
+          <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
+            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            10 de setembro, ao vivo, às 21h
+          </p>
+          <p class="text-sm sm:text-base text-gold font-medium">
+            Vagas limitadas no grupo do WhatsApp
+          </p>
+        </div>
+
+        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.6s">
+          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
+            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
+            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
+              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- 4. FOOTER                                                          -->
+  <!-- ================================================================= -->
+  <footer id="contato" class="py-12 border-t border-white/5 bg-[#020202] z-10">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="p-8 lg:p-16 glass-panel border border-white/10 rounded-3xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+          <!-- Marca -->
+          <div>
+            <div class="flex items-center mb-6">
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/5 mr-3 shrink-0">
+                <svg width="21" height="21" viewBox="0 0 512 512" fill="currentColor" class="text-gold" aria-hidden="true">
+                  <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
+                  <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
+                  <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
+                  <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
+                </svg>
+              </span>
+              <span class="font-display text-xl text-white tracking-tight">Márcio Ishizuka</span>
+            </div>
+            <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 max-w-xs">
+              Aula ao vivo e gratuita: aprenda a gravar fotos e vídeos profissionais usando só o celular que você já tem no bolso.
+            </p>
+            <div class="flex items-center gap-4">
+              <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
+                <iconify-icon icon="mdi:whatsapp" width="18" class="text-white"></iconify-icon>
+              </a>
+              <a href="https://instagram.com/ninjadafoto" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
+                <iconify-icon icon="mdi:instagram" width="18" class="text-white"></iconify-icon>
+              </a>
+            </div>
+          </div>
+
+          <!-- Navegação -->
+          <div>
+            <h4 class="text-xs font-medium text-white mb-6 uppercase tracking-widest">Navegação</h4>
+            <ul class="space-y-4">
+              <li><a href="#aprendizado" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Aula Ao Vivo</a></li>
+              <li><a href="#pra-quem" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Pra Quem É</a></li>
+              <li><a href="#cronograma" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Como Vai Funcionar</a></li>
+              <li><a href="#trajetoria" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Quem É O Márcio</a></li>
+            </ul>
+          </div>
+
+          <!-- Ajuda -->
+          <div>
+            <h4 class="text-xs font-medium text-white mb-6 uppercase tracking-widest">Ajuda</h4>
+            <ul class="space-y-4">
+              <li><a href="#bonus" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Bônus</a></li>
+              <li><a href="#faq" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Perguntas Frequentes</a></li>
+              <li><a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Entrar No Grupo</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[8px] sm:text-[10px] uppercase tracking-normal sm:tracking-[0.2em] text-neutral-500 font-light">
+        <span class="whitespace-nowrap">Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
+        <span class="text-neutral-600">Cuiabá, Mato Grosso.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- 5. INTERACTION & ANIMATION SCRIPTS                                -->
+  <!-- ================================================================= -->
+  <script src="js/main.js"></script>
+
+  <!-- Timeline interativa da seção Cronograma (GSAP ScrollTrigger, mesma técnica do site do Luminae) -->
+  <script src="js/cronograma.js"></script>
+</body>
+</html>
