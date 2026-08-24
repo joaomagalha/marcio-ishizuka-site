@@ -379,15 +379,14 @@
       border-bottom-color: rgba(255, 255, 255, 0.05);
     }
 
-    /* Custom Grayscale Hover Transition */
+    /* Subtle zoom on hover (imagem já vem preto-e-branco de fábrica — sem filter ao vivo,
+       que era o que causava o artefato visual em algumas resoluções, ver 2026-08-24) */
     .premium-grayscale-transition {
-      filter: grayscale(100%) contrast(1.05) brightness(0.95);
       transform: translateZ(0) scale(1.05);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #hero:hover .premium-grayscale-transition {
-      filter: grayscale(0%) contrast(1) brightness(1);
       transform: translateZ(0) scale(1.08);
     }
