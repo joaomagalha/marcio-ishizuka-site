@@ -79,21 +79,12 @@
     fill.style.transform = 'scaleX(1)';
     pctEl.textContent = '100%';
 
-    if (reduced) {
-      el.classList.add('is-open');
-      root.classList.remove('is-preloading');
-      setTimeout(cleanup, 400);
-      return;
-    }
-
-    // 1) a lâmina corta a tela na diagonal
-    el.classList.add('is-cut');
-    // 2) as duas metades se afastam e a hero começa a animar junto com a abertura
-    setTimeout(function () {
-      el.classList.add('is-open');
-      root.classList.remove('is-preloading');
-    }, 300);
-    setTimeout(cleanup, 1150);
+    // A tela some por opacidade e a hero é liberada no mesmo instante: como a
+    // primeira palavra dela só entra em 0.25s, o preto já saiu de cena quando o
+    // conteúdo começa a aparecer.
+    el.classList.add('is-leaving');
+    root.classList.remove('is-preloading');
+    setTimeout(cleanup, reduced ? 400 : 550);
   }
 
   function mark(key) {
