@@ -390,3 +390,33 @@
     #hero:hover .premium-grayscale-transition {
       transform: translateZ(0) scale(1.08);
     }
+
+    /* Título da Hero: revelação palavra por palavra (efeito exclusivo desse título,
+       não usado em mais nenhum lugar do site — ver 2026-08-24). O JS (main.js) separa
+       o texto em palavras e aplica .split-word-wrap/.split-word em cada uma; aqui só
+       cancelamos a entrada padrão herdada de .reveal-group > * pra não duplicar animação. */
+    #hero h1.hero-title {
+      animation: none !important;
+      opacity: 1;
+    }
+    .split-word-wrap {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .split-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(110%);
+      animation: hero-word-slide-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes hero-word-slide-up {
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .split-word {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }

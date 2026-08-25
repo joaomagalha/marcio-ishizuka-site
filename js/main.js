@@ -45,3 +45,43 @@
         motionObserver.observe(el);
       });
     }
+
+    // Título da Hero: separa em palavras e aplica entrada escalonada (efeito exclusivo
+    // desse título — ver css/style.css .split-word). Preserva o <span class="text-gold">
+    // aninhado (as palavras dentro dele saem coloridas, herdando o estilo do pai).
+    (function () {
+      const heading = document.querySelector('#hero h1.hero-title');
+      if (!heading) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const BASE_DELAY = 0.25; // alinhado ao delay do h1 dentro do .reveal-group
+      const STEP = 0.045;
+      let wordIndex = 0;
+
+      function wrapWords(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach((part) => {
+            if (part === '') return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(part));
+              return;
+            }
+            const wrap = document.createElement('span');
+            wrap.className = 'split-word-wrap';
+            const word = document.createElement('span');
+            word.className = 'split-word';
+            word.style.animationDelay = (BASE_DELAY + wordIndex * STEP).toFixed(3) + 's';
+            word.textContent = part;
+            wordIndex++;
+            wrap.appendChild(word);
+            frag.appendChild(wrap);
+          });
+          node.parentNode.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          Array.from(node.childNodes).forEach(wrapWords);
+        }
+      }
+
+      Array.from(heading.childNodes).forEach(wrapWords);
+    })();
