@@ -119,17 +119,28 @@
     .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 4s; }
     .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 4s; }
 
-    /* Scroll Reveals */
+    /* Scroll Reveals. Mesmo problema que a hero tinha (ver commit "Achado o problema
+       real"): antes, a entrada ficava sempre declarada e só a animation-play-state
+       trocava de paused pra running quando .is-visible chegava — só que resumir uma
+       animação pausada não é garantia em todo motor de navegador, e essas seções são
+       exatamente onde isso continuava travando. Agora não existe pausa/resumo: o
+       bloco começa só com opacity:0 e SEM nenhuma animação de entrada declarada; a
+       animação de entrada só passa a existir quando .is-visible chega (JS via
+       IntersectionObserver), o que pro navegador é uma animação nova começando do
+       zero — não uma retomada. */
     @keyframes scroll-blur-in {
       0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
       100% { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
     .animate-on-scroll {
-      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 4s forwards;
-      animation-play-state: paused, running;
+      opacity: 0;
+      /* Só o resgate aqui, sempre correndo: garante que o bloco aparece sozinho mesmo
+         se o IntersectionObserver nunca rodar (JS quebrado, IntersectionObserver
+         indisponível etc.), sem depender de .is-visible chegar. */
+      animation: force-visible-failsafe 0s linear 4s forwards;
     }
     .animate-on-scroll.is-visible {
-      animation-play-state: running, running;
+      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 4s forwards;
     }
 
     /* Mobile: o WebKit do iOS renderiza blur contínuo (background-position animado,
@@ -149,10 +160,10 @@
       }
       /* Mais curta que no desktop: no celular o usuário rola mais rápido e passa
          menos tempo com o bloco em tela, então 0.8s fazia o conteúdo parecer
-         atrasado em vez de elegante. animation-name/duration aqui têm 2 valores
-         (entrada, resgate) pra não derrubar o force-visible-failsafe definido
-         acima — um valor só reaplicaria "scroll-fade-in-mobile" nas duas posições. */
-      .animate-on-scroll {
+         atrasado em vez de elegante. Escopado a .is-visible (não .animate-on-scroll
+         sozinho) pelo mesmo motivo do bloco acima: antes do .is-visible chegar não
+         pode existir animação de entrada nenhuma declarada, só o resgate. */
+      .animate-on-scroll.is-visible {
         animation-name: scroll-fade-in-mobile, force-visible-failsafe;
         animation-duration: .45s, 0s;
       }
