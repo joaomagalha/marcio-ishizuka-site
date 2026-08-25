@@ -224,7 +224,7 @@
   <link rel="stylesheet" href="css/tailwind.build.css?v=20260825f">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825m">
+  <link rel="stylesheet" href="css/style.css?v=20260825n">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
@@ -326,8 +326,8 @@
       <div class="absolute inset-0 animated-grid-bg opacity-40 pointer-events-none z-0"></div>
       
       <!-- Glowing blobs: breathing gold + white -->
-      <div class="absolute top-[15%] right-[10%] w-[380px] lg:w-[480px] h-[380px] lg:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.06] rounded-full pointer-events-none animate-blob z-0"></div>
-      <div class="absolute bottom-[5%] left-[20%] w-[280px] lg:w-[380px] h-[280px] lg:h-[380px] bg-white blur-[120px] opacity-[0.03] rounded-full pointer-events-none animate-blob z-0" style="animation-delay: -5s;"></div>
+      <div class="absolute top-[15%] right-[10%] w-[380px] lg:w-[480px] h-[380px] lg:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.06] rounded-full decor-blob pointer-events-none animate-blob z-0"></div>
+      <div class="absolute bottom-[5%] left-[20%] w-[280px] lg:w-[380px] h-[280px] lg:h-[380px] bg-white blur-[120px] opacity-[0.03] rounded-full decor-blob decor-blob-white pointer-events-none animate-blob z-0" style="animation-delay: -5s;"></div>
 
       <!-- Watermark / Oversized Ghost Typography behind headline -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none z-0 animate-ghost-drift">
@@ -505,7 +505,7 @@
     <!-- ================================================================= -->
     <section id="bonus" class="relative py-14 sm:py-20 lg:py-28 overflow-hidden bg-[#030303] border-t border-white/5">
       <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.05] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.05] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
 
       <div class="max-w-5xl mx-auto px-6 relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -514,7 +514,7 @@
           <div class="flex justify-center order-2 lg:order-1">
             <div class="relative w-full max-w-[260px] sm:max-w-[300px]">
               <!-- Luz ambiente sutil atrás do objeto, no idioma do design system (radial suave, sem bloom saturado) -->
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-[#D4AF37] blur-[55px] opacity-[0.18] rounded-full pointer-events-none" aria-hidden="true"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-[#D4AF37] blur-[55px] opacity-[0.18] rounded-full decor-blob pointer-events-none" aria-hidden="true"></div>
               <img src="./assets/checklist-ninja-facil-mockup-pdf.webp" alt="Mockup do PDF Checklist Ninja Fácil: equipamentos baratos pra começar" class="relative z-10 w-full h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)]" loading="lazy">
               <!-- Sombra de contato no chão, pra ancorar o objeto -->
               <div class="absolute bottom-2 inset-x-8 h-4 bg-black/60 blur-lg rounded-[100%] pointer-events-none" aria-hidden="true"></div>
@@ -582,7 +582,7 @@
     <!-- ================================================================= -->
     <section id="aprendizado" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
       <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
 
       <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="max-w-2xl mx-auto text-center mb-10 sm:mb-14 lg:mb-16">
@@ -847,7 +847,7 @@
     <!-- ================================================================= -->
     <section id="trajetoria" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-[#020202] border-t border-white/5">
       <div class="absolute inset-0 animated-grid-bg opacity-[0.1] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-[10%] right-[8%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+      <div class="absolute top-[10%] right-[8%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
 
       <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
@@ -943,7 +943,7 @@
     <!-- ================================================================= -->
     <section id="faq" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
       <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute bottom-[5%] left-[10%] w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] bg-[#D4AF37] blur-[140px] opacity-[0.04] rounded-full pointer-events-none animate-blob z-0" aria-hidden="true"></div>
+      <div class="absolute bottom-[5%] left-[10%] w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] bg-[#D4AF37] blur-[140px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
 
       <div class="max-w-3xl mx-auto px-6 relative z-10">
         <div class="text-center mb-10 sm:mb-14 lg:mb-16">

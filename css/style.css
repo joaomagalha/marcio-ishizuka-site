@@ -119,6 +119,41 @@
     .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 4s; }
     .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 4s; }
 
+    /* Mobile (≤1023px): pintura barata, obrigatório. Essa regra já existiu
+       (commit 62897b6, "Congela fundo decorativo animado no mobile") e se perdeu
+       num refactor — o sintoma voltou na hora: seção em branco ao rolar no iPhone.
+       O motivo: cada seção tem grid de fundo com background-position animado
+       (repaint contínuo) + blob gigante com filter: blur(120–150px) animando, e
+       21 painéis com backdrop-filter. O WebKit do iOS rasteriza isso tão devagar
+       que os tiles da seção seguinte não ficam prontos quando o scroll chega nela.
+       Aqui: animação decorativa congelada, blur decorativo vira radial-gradient
+       (mesmo visual de brilho difuso, custo ~zero) e vidro vira fundo sólido
+       translúcido. Desktop mantém o efeito completo. NÃO REMOVER de novo. */
+    @media (max-width: 1023px) {
+      .animated-grid-bg,
+      .animate-blob,
+      .animate-ghost-drift {
+        animation: none;
+      }
+      .decor-blob {
+        filter: none;
+        background: radial-gradient(circle closest-side, rgba(212, 175, 55, 0.85), rgba(212, 175, 55, 0.35) 55%, transparent 100%);
+      }
+      .decor-blob-white {
+        background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.35) 55%, transparent 100%);
+      }
+      .glass-panel {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(10, 10, 10, 0.75);
+      }
+      #main-header.is-scrolled {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: rgba(3, 3, 3, 0.92);
+      }
+    }
+
     /* Conteúdo abaixo da hero: SEM animação de entrada, ponto final. Histórico
        (ver git log deste bloco): 1) revelar ao rolar com pausar/resumir, 2)
        animação nova via IntersectionObserver, 3) resgate mais rápido, 4) animar
