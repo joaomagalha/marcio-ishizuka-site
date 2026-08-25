@@ -7,6 +7,188 @@
   <title>Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular</title>
   <meta name="theme-color" content="#030303">
 
+  <!-- Liga o preloader já no parse, antes da hero renderizar, pra que as animações de
+       entrada fiquem pausadas atrás da tela de carregamento em vez de rodar escondidas.
+       Fica inline de propósito: se dependesse de um arquivo externo, a hero já teria
+       começado a animar antes do script chegar. O timeout é uma segunda trava de
+       segurança, caso js/preloader.js não carregue por algum motivo. -->
+  <script>
+    document.documentElement.classList.add('is-preloading');
+    setTimeout(function () {
+      document.documentElement.classList.remove('is-preloading');
+    }, 8000);
+  </script>
+
+  <!-- CSS crítico da tela de carregamento.
+       Inline de propósito (única exceção no projeto, o resto do CSS está em css/):
+       precisa pintar no primeiro frame possível. Se estivesse em css/style.css, o
+       usuário veria fundo branco até o arquivo chegar, exatamente o que a tela de
+       carregamento existe pra evitar. -->
+  <style>
+    html { background: #030303; }
+
+    /* Segura a entrada da hero enquanto o preloader está na frente */
+    html.is-preloading .reveal-group > *,
+    html.is-preloading .split-word { animation-play-state: paused; }
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: none;
+      /* Trava de segurança em CSS puro: se o JS falhar, a tela some sozinha */
+      animation: preloader-failsafe 0s linear 8s forwards;
+    }
+    @keyframes preloader-failsafe {
+      to { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+
+    /* As duas metades que o corte separa */
+    .preloader-half {
+      position: absolute;
+      inset: 0;
+      background: #030303;
+      will-change: transform;
+      transition: transform .75s cubic-bezier(.76, 0, .24, 1);
+    }
+    /* A metade de cima avança 0.5% além da linha do corte de propósito: se as duas
+       encostassem exatamente, o antialiasing deixava um fio do site aparecendo na
+       diagonal antes da hora. Sobrepondo, a emenda some. */
+    .preloader-half-top { clip-path: polygon(0 0, 100% 0, 100% 38.5%, 0 62.5%); }
+    .preloader-half-bottom { clip-path: polygon(0 62%, 100% 38%, 100% 100%, 0 100%); }
+    #preloader.is-open .preloader-half-top { transform: translate(-4%, -105%); }
+    #preloader.is-open .preloader-half-bottom { transform: translate(4%, 105%); }
+
+    /* A lâmina: varre da esquerda pra direita exatamente na linha do corte */
+    .preloader-slash {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      clip-path: inset(0 100% 0 0);
+    }
+    #preloader.is-cut .preloader-slash {
+      animation: preloader-slash-sweep .26s cubic-bezier(.4, 0, .2, 1) forwards;
+    }
+    @keyframes preloader-slash-sweep {
+      to { clip-path: inset(0 0 0 0); }
+    }
+    .preloader-slash-line {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 61.9%, 100% 37.9%, 100% 38.25%, 0 62.25%);
+      background: linear-gradient(90deg, rgba(212,175,55,0) 0%, #D4AF37 18%, #fff 50%, #D4AF37 82%, rgba(212,175,55,0) 100%);
+      filter: drop-shadow(0 0 10px rgba(212,175,55,.85));
+    }
+
+    .preloader-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity .22s ease, transform .5s ease;
+    }
+    #preloader.is-cut .preloader-content {
+      opacity: 0;
+      transform: scale(.96);
+    }
+
+    /* Marca ninja com anéis girando (leitura de shuriken, sem virar desenho animado) */
+    .preloader-mark {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .preloader-mark svg {
+      width: 46px;
+      height: 46px;
+      color: #D4AF37;
+      animation: preloader-breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes preloader-breathe {
+      0%, 100% { opacity: .78; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .preloader-ring, .preloader-ring-2 {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid transparent;
+    }
+    .preloader-ring {
+      inset: -16px;
+      border-top-color: #D4AF37;
+      border-right-color: rgba(212,175,55,.3);
+      animation: preloader-spin 1.1s linear infinite;
+    }
+    .preloader-ring-2 {
+      inset: -27px;
+      border-style: dashed;
+      border-color: rgba(212,175,55,.16);
+      animation: preloader-spin 7s linear infinite reverse;
+    }
+    @keyframes preloader-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .preloader-phrase {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 18px;
+      transition: opacity .2s ease;
+    }
+
+    .preloader-bar {
+      position: relative;
+      width: 168px;
+      height: 1px;
+      background: rgba(255,255,255,.09);
+      overflow: hidden;
+    }
+    .preloader-bar-fill {
+      position: absolute;
+      inset: 0;
+      background: #D4AF37;
+      box-shadow: 0 0 8px rgba(212,175,55,.7);
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .preloader-pct {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.32);
+      margin-top: 14px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .preloader-mark svg,
+      .preloader-ring,
+      .preloader-ring-2 { animation: none; }
+      #preloader { transition: opacity .3s linear; }
+      #preloader.is-open { opacity: 0; }
+      #preloader.is-open .preloader-half-top,
+      #preloader.is-open .preloader-half-bottom { transform: none; }
+    }
+  </style>
+  <noscript>
+    <style>
+      #preloader { display: none !important; }
+    </style>
+  </noscript>
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -29,6 +211,7 @@
   <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
 
   <!-- Site scripts primeiro na ordem de defer, pra não esperar CDN externa (iconify/gsap) antes de rodar -->
+  <script src="js/preloader.js?v=20260825c" defer></script>
   <script src="js/main.js?v=20260825a" defer></script>
 
   <!-- Iconify Icons / GSAP: não bloqueiam o parser (defer), executam em ordem antes do DOMContentLoaded -->
@@ -36,6 +219,13 @@
   <!-- GSAP + ScrollTrigger (timeline interativa pinada da seção Cronograma, só desktop) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Abre DNS/TLS com as CDNs externas antes de precisar delas. Como a tela de
+       carregamento só sai quando tudo termina, cada handshake economizado aqui
+       encurta direto o tempo que ela fica em tela. -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://code.iconify.design" crossorigin>
+  <link rel="preconnect" href="https://api.iconify.design" crossorigin>
 
   <!-- Google Fonts: Playfair Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +241,42 @@
   <link rel="stylesheet" href="css/style.css?v=20260825b">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- ================================================================= -->
+  <!-- 0. TELA DE CARREGAMENTO (sai com corte de katana) — ver js/preloader.js -->
+  <!-- ================================================================= -->
+  <div id="preloader" role="status" aria-label="Carregando o site">
+    <!-- As duas metades que se separam depois do corte -->
+    <div class="preloader-half preloader-half-top" aria-hidden="true"></div>
+    <div class="preloader-half preloader-half-bottom" aria-hidden="true"></div>
+
+    <!-- A lâmina -->
+    <div class="preloader-slash" aria-hidden="true">
+      <span class="preloader-slash-line"></span>
+    </div>
+
+    <div class="preloader-content">
+      <div class="preloader-mark">
+        <span class="preloader-ring" aria-hidden="true"></span>
+        <span class="preloader-ring-2" aria-hidden="true"></span>
+        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
+          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
+          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
+          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
+        </svg>
+      </div>
+
+      <p class="preloader-phrase">Ajustando a luz</p>
+
+      <div class="preloader-bar" aria-hidden="true">
+        <span class="preloader-bar-fill"></span>
+      </div>
+
+      <p class="preloader-pct">0%</p>
+    </div>
+  </div>
+
 
   <!-- 1. NAVIGATION HEADER -->
   <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 border-b border-transparent">
@@ -111,6 +337,7 @@
              alt="Retrato de Márcio Ishizuka"
              class="w-full h-full object-cover object-[68%_12%] lg:object-[72%_15%] premium-grayscale-transition"
              loading="eager"
+             fetchpriority="high"
              width="800"
              height="1000">
 
