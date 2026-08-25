@@ -72,7 +72,12 @@
     // Título da Hero: separa em palavras e aplica entrada escalonada (efeito exclusivo
     // desse título — ver css/style.css .split-word). Preserva o <span class="text-gold">
     // aninhado (as palavras dentro dele saem coloridas, herdando o estilo do pai).
-    (function () {
+    // try/catch de propósito: um erro aqui não pode impedir o bloco de resgate da
+    // hero (logo abaixo) de rodar — os dois são a última linha de defesa contra
+    // conteúdo travado invisível, e main.js é um único arquivo, então uma exceção
+    // não tratada num bloco anterior interrompe todo o resto do arquivo.
+    try {
+      (function () {
       const heading = document.querySelector('#hero h1.hero-title');
       if (!heading) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -94,7 +99,10 @@
             wrap.className = 'split-word-wrap';
             const word = document.createElement('span');
             word.className = 'split-word';
-            word.style.animationDelay = (BASE_DELAY + wordIndex * STEP).toFixed(3) + 's';
+            // Par posicional com o "animation:" de duas animações em .split-word
+            // (css/style.css): a primeira é a entrada, a segunda é o resgate em CSS
+            // puro, que tem que continuar com delay fixo de 7s pra toda palavra.
+            word.style.animationDelay = (BASE_DELAY + wordIndex * STEP).toFixed(3) + 's, 7s';
             word.textContent = part;
             wordIndex++;
             wrap.appendChild(word);
@@ -107,7 +115,10 @@
       }
 
       Array.from(heading.childNodes).forEach(wrapWords);
-    })();
+      })();
+    } catch (e) {
+      console.error('Falha ao separar o título em palavras:', e);
+    }
 
     // Resgate da hero. É o caso mais crítico: se ela travar, o visitante vê um
     // título pela metade e nenhum botão. A contagem começa quando o preloader

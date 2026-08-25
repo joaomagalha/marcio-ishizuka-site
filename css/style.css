@@ -90,20 +90,34 @@
       animation: pulse-slow 4s ease-in-out infinite;
     }
 
+    /* Rede de segurança em CSS puro, sem depender de nenhum JS rodar certo.
+       Motivo de existir: um navegador real (relatado em 3 aparelhos diferentes,
+       incluindo sem cache prévio) ficou com a animação de entrada presa em
+       "pausada" mesmo depois do JS remover a classe que pausava — o resgate em
+       JS (main.js) supõe que basta tirar a classe, mas isso não é garantia em
+       todo motor de navegador. Cada bloco que entra com opacity:0 ganha uma
+       SEGUNDA animação, sempre rodando (nunca pausada), que força opacity:1
+       depois de um tempo fixo. As duas andam juntas no mesmo "animation:",
+       por isso os valores de delay/duração/play-state sempre vêm em pares
+       posicionais (entrada, resgate) — nunca um valor solto. */
+    @keyframes force-visible-failsafe {
+      to { opacity: 1; transform: none; filter: none; }
+    }
+
     @keyframes float-up {
       0% { transform: translateY(20px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
     .reveal-group > * {
-      animation: float-up 1s ease-out forwards;
+      animation: float-up 1s ease-out forwards, force-visible-failsafe 0s linear 7s forwards;
       opacity: 0;
     }
-    .reveal-group > *:nth-child(1) { animation-delay: 0.1s; }
-    .reveal-group > *:nth-child(2) { animation-delay: 0.25s; }
-    .reveal-group > *:nth-child(3) { animation-delay: 0.4s; }
-    .reveal-group > *:nth-child(4) { animation-delay: 0.55s; }
-    .reveal-group > *:nth-child(5) { animation-delay: 0.7s; }
-    .reveal-group > *:nth-child(6) { animation-delay: 0.85s; }
+    .reveal-group > *:nth-child(1) { animation-delay: 0.1s, 7s; }
+    .reveal-group > *:nth-child(2) { animation-delay: 0.25s, 7s; }
+    .reveal-group > *:nth-child(3) { animation-delay: 0.4s, 7s; }
+    .reveal-group > *:nth-child(4) { animation-delay: 0.55s, 7s; }
+    .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 7s; }
+    .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 7s; }
 
     /* Scroll Reveals */
     @keyframes scroll-blur-in {
@@ -111,11 +125,11 @@
       100% { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
     .animate-on-scroll {
-      animation: scroll-blur-in 0.8s ease-out both;
-      animation-play-state: paused;
+      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 7s forwards;
+      animation-play-state: paused, running;
     }
     .animate-on-scroll.is-visible {
-      animation-play-state: running;
+      animation-play-state: running, running;
     }
 
     /* Mobile: o WebKit do iOS renderiza blur contínuo (background-position animado,
@@ -135,10 +149,12 @@
       }
       /* Mais curta que no desktop: no celular o usuário rola mais rápido e passa
          menos tempo com o bloco em tela, então 0.8s fazia o conteúdo parecer
-         atrasado em vez de elegante. */
+         atrasado em vez de elegante. animation-name/duration aqui têm 2 valores
+         (entrada, resgate) pra não derrubar o force-visible-failsafe definido
+         acima — um valor só reaplicaria "scroll-fade-in-mobile" nas duas posições. */
       .animate-on-scroll {
-        animation-name: scroll-fade-in-mobile;
-        animation-duration: .45s;
+        animation-name: scroll-fade-in-mobile, force-visible-failsafe;
+        animation-duration: .45s, 0s;
       }
     }
 
@@ -432,7 +448,10 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(110%);
-      animation: hero-word-slide-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      /* O delay de cada palavra (main.js) vem em par posicional "Xs, 7s" —
+         o segundo valor é o resgate, ver .reveal-group acima. */
+      animation: hero-word-slide-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                 force-visible-failsafe 0s linear 7s forwards;
     }
     @keyframes hero-word-slide-up {
       to { transform: translateY(0); opacity: 1; }

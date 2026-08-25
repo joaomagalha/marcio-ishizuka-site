@@ -36,9 +36,13 @@
        Reproduz o padrão antigo sem atropelar quem tem tamanho explícito. */
     .icon:not([width]) { width: 1em; height: 1em; }
 
-    /* Segura a entrada da hero enquanto o preloader está na frente */
+    /* Segura a entrada da hero enquanto o preloader está na frente. Os dois valores
+       de animation-play-state pareiam por posição com os dois "animation:" definidos
+       em css/style.css (entrada, resgate em CSS puro) — só a entrada pausa, o
+       resgate corre sempre, então mesmo se o JS falhar em tirar essa classe, o
+       conteúdo aparece sozinho depois de alguns segundos. */
     html.is-preloading .reveal-group > *,
-    html.is-preloading .split-word { animation-play-state: paused; }
+    html.is-preloading .split-word { animation-play-state: paused, running; }
 
     /* Rede de segurança: nenhum texto pode ficar preso invisível porque uma
        animação não terminou. Se o motor do navegador suspender as animações no
@@ -203,7 +207,7 @@
 
   <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
   <script src="js/preloader.js?v=20260825f" defer></script>
-  <script src="js/main.js?v=20260825f" defer></script>
+  <script src="js/main.js?v=20260825g" defer></script>
 
   <!-- Fontes servidas pelo próprio site (assets/fonts/). Antes vinham do
        fonts.googleapis.com + fonts.gstatic.com, duas conexões a terceiros no
@@ -218,7 +222,7 @@
   <link rel="stylesheet" href="css/tailwind.build.css?v=20260825f">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825f">
+  <link rel="stylesheet" href="css/style.css?v=20260825g">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
