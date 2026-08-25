@@ -95,16 +95,16 @@
       console.error('Falha ao separar o título em palavras:', e);
     }
 
-    // Resgate de toda a página (hero + demais seções). Todo o conteúdo agora anima
-    // direto no carregamento, escondido atrás do preloader — não existe mais
-    // "revelar ao rolar" nem IntersectionObserver (ver css/style.css "Entrada do
-    // conteúdo abaixo da hero"). A contagem começa quando o preloader libera as
-    // animações (antes disso elas estão pausadas de propósito na hero — as demais
-    // seções nem chegam a existir pausadas, só a hero usa esse mecanismo).
+    // Resgate da hero. É a única parte do site que ainda anima a entrada (nasce
+    // pausada, o preloader libera) — o resto da página (.animate-on-scroll) não
+    // usa mais opacity:0/animação nenhuma, ver css/style.css: no WebKit, conteúdo
+    // que já esteve fora da tela pode ter a pintura da animação adiada mesmo com
+    // ela "rodando" (filmado acontecendo em 24/08), então virou risco demais pra
+    // manter em qualquer lugar que não seja a hero, que nunca sai da tela inicial.
     (function () {
       function resgatarConteudo() {
         document
-          .querySelectorAll('#hero .reveal-group > *, #hero .split-word, .animate-on-scroll')
+          .querySelectorAll('#hero .reveal-group > *, #hero .split-word')
           .forEach((el) => resgatarSeInvisivel(el, 3000));
       }
 

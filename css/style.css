@@ -119,46 +119,21 @@
     .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 4s; }
     .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 4s; }
 
-    /* Entrada do conteúdo abaixo da hero. Não é mais "revelar ao rolar": depois de
-       três rodadas tentando consertar o gatilho por scroll (pausar/resumir, depois
-       animação nova via IntersectionObserver, depois resgate mais rápido) e o
-       problema persistir em uso real, a decisão foi tirar o scroll da equação de
-       vez. Agora todo o conteúdo da página anima direto no carregamento — igual a
-       hero (.reveal-group) já fazia — escondido atrás do preloader opaco. Quando o
-       preloader sai, a página inteira já está pronta, não só a hero: sem gatilho de
-       scroll, sem IntersectionObserver, sem nada que dependa de retomar animação.
-       O preço é a página não "revelar" mais progressivamente enquanto rola — troca
-       aceita: velocidade e confiabilidade valem mais que esse efeito. */
-    @keyframes scroll-blur-in {
-      0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
-      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-    }
+    /* Conteúdo abaixo da hero: SEM animação de entrada, ponto final. Histórico
+       (ver git log deste bloco): 1) revelar ao rolar com pausar/resumir, 2)
+       animação nova via IntersectionObserver, 3) resgate mais rápido, 4) animar
+       tudo no carregamento escondido atrás do preloader. Cada uma quebrou de um
+       jeito diferente em uso real. A última (nº4) foi filmada quebrando: a seção
+       "Presente exclusivo" ficava em branco por ~1,5s bem depois do preloader já
+       ter saído — não é mais pausar/resumir, é o WebKit adiando a pintura de
+       conteúdo fora da tela (otimização de bateria/memória, mais agressiva em
+       navegação privada) mesmo com a animação tecnicamente "rodando". A hero nunca
+       teve esse problema por estar sempre na tela inicial; tudo abaixo dela já
+       esteve fora da tela em algum momento. Não existe timer confiável contra
+       isso, então a única correção real é não ter timer nenhum: o bloco nasce
+       visível, sem opacity:0, sem animation. */
     .animate-on-scroll {
-      opacity: 0;
-      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 4s forwards;
-    }
-
-    /* Mobile: o WebKit do iOS renderiza blur contínuo (background-position animado,
-       filter: blur() na transição de entrada) muito pior que desktop. Com 7 seções
-       cada uma com seu próprio grid + blob sempre animando, o scroll fica pesado.
-       Congela o fundo decorativo e tira o blur da entrada só até o breakpoint lg,
-       mantendo o efeito completo em telas maiores. */
-    @media (max-width: 1023px) {
-      .animated-grid-bg,
-      .animate-blob {
-        animation: none;
-      }
-
-      @keyframes scroll-fade-in-mobile {
-        0% { opacity: 0; transform: translateY(30px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-      /* Mais curta que no desktop: sem blur, mais barata de renderizar no carregamento
-         (várias seções animando ao mesmo tempo, escondidas atrás do preloader). */
-      .animate-on-scroll {
-        animation-name: scroll-fade-in-mobile, force-visible-failsafe;
-        animation-duration: .45s, 0s;
-      }
+      opacity: 1;
     }
 
     /* Conic spin for Premium CTA */
