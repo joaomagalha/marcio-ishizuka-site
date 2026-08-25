@@ -18,9 +18,15 @@
   const phraseEl = el.querySelector('.preloader-phrase');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Tempo mínimo em tela: evita o "flash" feio quando tudo já está em cache e o
-  // carregamento leva 200ms. Sem isso a tela pisca e parece bug.
-  const MIN_MS = reduced ? 0 : 900;
+  // Tempo mínimo em tela. Não é só pra evitar o "flash" de quando tudo já está em
+  // cache — é a garantia de que TODO o conteúdo da página (hero + demais seções)
+  // já terminou de animar por trás do preloader antes dele soltar a cortina. Essas
+  // animações começam a contar do carregamento da página, não de quando o
+  // preloader sai, então se ele saísse cedo demais (conexão rápida, tudo em cache)
+  // o visitante veria o título da hero ainda se completando palavra por palavra
+  // em vez de já pronto. 2200ms cobre o pior caso: a última palavra do título
+  // (26 palavras, ~0.045s de intervalo cada) termina de entrar em ~2.125s.
+  const MIN_MS = reduced ? 0 : 2200;
   // Trava de segurança: se algum recurso externo travar (CDN fora do ar, rede ruim),
   // o site abre assim mesmo. Fica abaixo do failsafe de 8s que está no CSS.
   const HARD_MS = 7500;

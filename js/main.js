@@ -44,31 +44,6 @@
       }, prazoMs);
     }
 
-    // IntersectionObserver: Triggers animations when blocks are within viewport
-    if ('IntersectionObserver' in window) {
-      const motionObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            motionObserver.unobserve(entry.target);
-            resgatarSeInvisivel(entry.target, 1500);
-          }
-        });
-      }, {
-        // threshold 0.2 exigia que 20% do bloco já estivesse na tela pra só então
-        // começar a animação: somado à duração dela, o conteúdo levava mais de 1s
-        // pra aparecer depois de entrar no campo de visão. Agora dispara assim que
-        // encosta na viewport, e o rootMargin adianta um pouco mais, então o bloco
-        // já chega animado em vez de animar na frente do usuário.
-        threshold: 0,
-        rootMargin: '0px 0px 15% 0px'
-      });
-
-      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-        motionObserver.observe(el);
-      });
-    }
-
     // Título da Hero: separa em palavras e aplica entrada escalonada (efeito exclusivo
     // desse título — ver css/style.css .split-word). Preserva o <span class="text-gold">
     // aninhado (as palavras dentro dele saem coloridas, herdando o estilo do pai).
@@ -120,25 +95,28 @@
       console.error('Falha ao separar o título em palavras:', e);
     }
 
-    // Resgate da hero. É o caso mais crítico: se ela travar, o visitante vê um
-    // título pela metade e nenhum botão. A contagem começa quando o preloader
-    // libera as animações (antes disso elas estão pausadas de propósito).
+    // Resgate de toda a página (hero + demais seções). Todo o conteúdo agora anima
+    // direto no carregamento, escondido atrás do preloader — não existe mais
+    // "revelar ao rolar" nem IntersectionObserver (ver css/style.css "Entrada do
+    // conteúdo abaixo da hero"). A contagem começa quando o preloader libera as
+    // animações (antes disso elas estão pausadas de propósito na hero — as demais
+    // seções nem chegam a existir pausadas, só a hero usa esse mecanismo).
     (function () {
-      function resgatarHero() {
+      function resgatarConteudo() {
         document
-          .querySelectorAll('#hero .reveal-group > *, #hero .split-word')
+          .querySelectorAll('#hero .reveal-group > *, #hero .split-word, .animate-on-scroll')
           .forEach((el) => resgatarSeInvisivel(el, 3000));
       }
 
       const root = document.documentElement;
       if (!root.classList.contains('is-preloading')) {
-        resgatarHero();
+        resgatarConteudo();
         return;
       }
       const obs = new MutationObserver(() => {
         if (!root.classList.contains('is-preloading')) {
           obs.disconnect();
-          resgatarHero();
+          resgatarConteudo();
         }
       });
       obs.observe(root, { attributes: true, attributeFilter: ['class'] });
