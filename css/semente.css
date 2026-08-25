@@ -1,0 +1,155 @@
+/* ===================================================================
+   CSS exclusivo da página "semente" (produto de entrada, tom impulso).
+   Não mexe em style.css (página prime/Academy) — as duas convivem no
+   mesmo site sem se afetar. Reaproveita as animações/utilitários de
+   style.css (marquee, blob, glass-panel, cronograma, split-word etc.),
+   só define aqui o que é EXCLUSIVO do tom novo: cor de acento (ember em
+   vez de gold), tipografia sem serifa nos títulos, e os componentes que
+   não existem na página atual (faixa de urgência, cards de dor "Eu sei",
+   bloco "duas opções").
+   =================================================================== */
+
+:root {
+  --ember: #F0E6D2;
+  --ember-dark: #D8C7A3;
+}
+
+/* Título em Inter bold/extra-bold, sem serifa — de propósito, pra não
+   repetir o gesto editorial da Playfair Display da página prime. */
+.font-impact {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Foco de teclado na cor nova */
+.semente a:focus-visible,
+.semente button:focus-visible,
+.semente summary:focus-visible {
+  outline: 2px solid rgba(240, 230, 210, 0.8);
+  outline-offset: 3px;
+}
+
+/* Cards com borda sólida, sem glassmorphism/blur — mais "cru" e direto,
+   no lugar do .glass-panel elegante da página prime. */
+.hard-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===================================================================
+   FAIXA DE URGÊNCIA — marquee fixo no topo, fundo sólido de acento.
+   Referência de mecânica: imersaoiavideo.com.br (faixa rodando em loop).
+   Cor própria (ember), não copiada da referência.
+   =================================================================== */
+.urgency-bar {
+  position: relative;
+  z-index: 60;
+  background: var(--ember);
+  color: #0a0500;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.urgency-track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .urgency-track {
+    animation: none;
+  }
+}
+
+/* ===================================================================
+   BLOCO "EU SEI..." — agitação de dor, frases literais em formato de
+   balão/pill. Referência de mecânica: lutlab.com.br.
+   =================================================================== */
+.pain-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--ember);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===================================================================
+   BLOCO "DUAS OPÇÕES" — comparação direta, sem meio-termo.
+   =================================================================== */
+.option-card {
+  border-radius: 1rem;
+  padding: 1.75rem;
+  height: 100%;
+}
+.option-card--stay {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.option-card--go {
+  background: linear-gradient(180deg, rgba(240, 230, 210, 0.12), rgba(240, 230, 210, 0.02));
+  border: 1px solid rgba(240, 230, 210, 0.4);
+}
+
+/* Botão sólido de acento (sem o anel cônico giratório da página prime —
+   mais direto, "aperta e pronto"). */
+.btn-ember {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--ember);
+  color: #0a0500;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.btn-ember:hover {
+  background: #F7F0E1;
+  transform: scale(1.03);
+}
+.btn-ember:active {
+  transform: scale(0.97);
+}
+
+/* Cronograma da página semente: mesmo componente de style.css, só troca
+   a cor da linha/nó de gold pra ember. */
+.semente .cronograma-line-fill {
+  background: linear-gradient(180deg, var(--ember), var(--ember-dark));
+}
+.semente .cronograma-node {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+.semente .cronograma-step[data-state="active"] .cronograma-node {
+  background: rgba(240, 230, 210, 0.12);
+  border-color: var(--ember);
+  color: var(--ember);
+  box-shadow: 0 0 0 6px #020202, 0 0 0 11px rgba(240, 230, 210, 0.2);
+}
+.semente .cronograma-step[data-state="done"] .cronograma-node {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: #0a0500;
+}
+.semente .cronograma-section:not(.is-ready) .cronograma-node {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: #0a0500;
+}
+
+/* FAQ desta página: borda de destaque em ember no item aberto */
+.semente #faq details[open] {
+  border-color: rgba(240, 230, 210, 0.4) !important;
+}
+.semente #faq details:not([open]):hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
