@@ -118,6 +118,26 @@
       animation-play-state: running;
     }
 
+    /* Mobile: o WebKit do iOS renderiza blur contínuo (background-position animado,
+       filter: blur() na transição de entrada) muito pior que desktop. Com 7 seções
+       cada uma com seu próprio grid + blob sempre animando, o scroll fica pesado.
+       Congela o fundo decorativo e tira o blur da entrada só até o breakpoint lg,
+       mantendo o efeito completo em telas maiores. */
+    @media (max-width: 1023px) {
+      .animated-grid-bg,
+      .animate-blob {
+        animation: none;
+      }
+
+      @keyframes scroll-fade-in-mobile {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-on-scroll {
+        animation-name: scroll-fade-in-mobile;
+      }
+    }
+
     /* Conic spin for Premium CTA */
     @keyframes conic-spin {
       to { transform: rotate(360deg); }
