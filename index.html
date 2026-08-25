@@ -208,7 +208,7 @@
   <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
 
   <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
-  <script src="js/preloader.js?v=20260825k" defer></script>
+  <script src="js/preloader.js?v=20260825l" defer></script>
   <script src="js/main.js?v=20260825l" defer></script>
 
   <!-- Fontes servidas pelo próprio site (assets/fonts/). Antes vinham do
@@ -224,7 +224,7 @@
   <link rel="stylesheet" href="css/tailwind.build.css?v=20260825f">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825n">
+  <link rel="stylesheet" href="css/style.css?v=20260825o">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
@@ -378,7 +378,7 @@
           </div>
 
           <!-- Main Editorial Title -->
-          <h1 class="hero-title font-display text-xl sm:text-3xl md:text-[2.15rem] lg:text-[2.4rem] text-white leading-[1.35] tracking-tight mb-6 max-w-xl">
+          <h1 class="hero-title font-display text-[1.45rem] sm:text-3xl md:text-[2.15rem] lg:text-[2.4rem] text-white leading-[1.35] tracking-tight mb-6 max-w-xl">
             Em 1 aula ao vivo e gratuita, vou te ensinar a gravar <span class="text-gold italic">fotos e vídeos profissionais</span> usando só o celular que você já tem no bolso.
           </h1>
 
@@ -420,6 +420,14 @@
             </a>
           </div>
 
+          <!-- Data da aula visível no mobile: no desktop essa informação vive no badge
+               flutuante da coluna direita, que o mobile não tem — sem isso o visitante
+               de celular só descobre a data lá na terceira dobra. -->
+          <p class="lg:hidden flex items-center gap-2 -mt-5 mb-10 text-xs text-neutral-300 font-light">
+            <svg width="14" height="14" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
+            Próxima aula: 10 de setembro · 21h (Cuiabá)
+          </p>
+
           <!-- Metadados / Specs Row -->
           <div class="grid grid-cols-3 gap-4 py-6 border-t border-white/5 text-neutral-400 max-w-xl">
             <div class="flex items-center gap-2">
@@ -455,8 +463,8 @@
               <svg width="16" height="16" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             </div>
             <div>
-              <p class="text-[7px] uppercase tracking-widest text-neutral-500 leading-none">Próxima Aula Ao Vivo</p>
-              <p class="text-[9px] text-white font-light mt-0.5">10 de Setembro · 21h (Cuiabá)</p>
+              <p class="text-[8px] uppercase tracking-widest text-neutral-500 leading-none">Próxima Aula Ao Vivo</p>
+              <p class="text-[10px] text-white font-light mt-0.5">10 de Setembro · 21h (Cuiabá)</p>
             </div>
           </div>
         </div>
@@ -464,8 +472,8 @@
       </div>
 
       <!-- Scrolling indicator (Indicator of continuation) -->
-      <div class="absolute bottom-8 left-6 hidden lg:flex items-center gap-3 text-neutral-600 z-10 pointer-events-none select-none">
-        <span class="w-px h-10 bg-gradient-to-b from-neutral-600 to-transparent"></span>
+      <div class="absolute bottom-8 left-6 hidden lg:flex items-center gap-3 text-neutral-500 z-10 pointer-events-none select-none">
+        <span class="w-px h-10 bg-gradient-to-b from-neutral-500 to-transparent"></span>
         <span class="text-[9px] uppercase tracking-[0.25em] font-light">Deslizar</span>
       </div>
     </section>
@@ -537,7 +545,7 @@
             <div class="glass-panel rounded-2xl border border-gold/20 flex items-stretch overflow-hidden max-w-md mb-6">
               <div class="flex-1 px-5 py-4 border-r border-white/10">
                 <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Valor deste checklist</p>
-                <p class="text-lg text-neutral-500 font-light line-through decoration-red-400/60">De R$47</p>
+                <p class="text-lg text-neutral-500 font-light line-through decoration-neutral-500">De R$47</p>
               </div>
               <div class="flex-1 px-5 py-4">
                 <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Por participar da aula</p>
@@ -603,7 +611,7 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-camera-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Câmera Pelo Celular</h3>
+            <h3 class="font-display text-lg text-white mb-2">Câmera Pelo Celular</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como segurar, configurar e enquadrar sem precisar de equipamento caro.</p>
           </div>
 
@@ -611,7 +619,7 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Luz e Enquadramento</h3>
+            <h3 class="font-display text-lg text-white mb-2">Luz e Enquadramento</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Aproveitar a luz que você já tem em casa, sem comprar nenhum equipamento.</p>
           </div>
 
@@ -619,7 +627,7 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Roteiro e Direção</h3>
+            <h3 class="font-display text-lg text-white mb-2">Roteiro e Direção</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena com naturalidade, sem travar na frente da câmera.</p>
           </div>
 
@@ -627,7 +635,7 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Edição Simples</h3>
+            <h3 class="font-display text-lg text-white mb-2">Edição Simples</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Cortes e ajustes rápidos, sem precisar dominar um app complicado.</p>
           </div>
 
@@ -635,7 +643,7 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Conteúdo Que Vende</h3>
+            <h3 class="font-display text-lg text-white mb-2">Conteúdo Que Vende</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
           </div>
 
@@ -643,12 +651,12 @@
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-eye-linear"></use></svg>
             </div>
-            <h3 class="font-display text-base text-white mb-2">Fotos Que Impressionam</h3>
+            <h3 class="font-display text-lg text-white mb-2">Fotos Que Impressionam</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Retratos e still simples que parecem produção profissional, só com o que você já tem.</p>
           </div>
         </div>
 
-        <p class="text-center text-xs text-neutral-500 font-light mt-10 mb-8">
+        <p class="text-center text-xs text-neutral-500 font-light mt-10 mb-8 max-w-2xl mx-auto">
           Depois desse primeiro passo, tem caminho pra quem quiser ir além (câmera profissional, formação avançada), mas isso é assunto pra depois. Hoje é só sobre o que você já tem no bolso.
         </p>
 
@@ -688,7 +696,7 @@
         <div class="cronograma-stage">
           <div class="cronograma-inner max-w-2xl mx-auto px-6 relative z-10 w-full">
             <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
                 <span>Como vai funcionar</span>
               </div>
               <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Uma aula com começo, meio e fim. Sem enrolação.</h2>
@@ -791,7 +799,7 @@
 
       <div class="max-w-4xl mx-auto px-6 relative z-10">
         <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
             <span>Pra quem é essa aula</span>
           </div>
           <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Você pode ser excelente no que faz. Se ninguém vê, o mercado não percebe.</h2>
@@ -851,7 +859,7 @@
 
       <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
             <span>Quem é o Márcio</span>
           </div>
           <p class="text-xs uppercase tracking-[0.25em] text-gold/80 font-light">Fotógrafo · Mentor · Palestrante</p>
@@ -903,15 +911,15 @@
 
             <div class="grid grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/5">
               <div>
-                <p class="font-display text-xl sm:text-3xl text-gold">15+</p>
+                <p class="font-display text-2xl sm:text-3xl text-gold">15+</p>
                 <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Anos de Mercado</p>
               </div>
               <div>
-                <p class="font-display text-xl sm:text-3xl text-gold">99%</p>
+                <p class="font-display text-2xl sm:text-3xl text-gold">99%</p>
                 <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Clientes via Agência</p>
               </div>
               <div>
-                <p class="font-display text-xl sm:text-3xl text-gold">9</p>
+                <p class="font-display text-2xl sm:text-3xl text-gold">9</p>
                 <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Trabalhos em Outdoor</p>
               </div>
             </div>
@@ -947,7 +955,7 @@
 
       <div class="max-w-3xl mx-auto px-6 relative z-10">
         <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
             <span>Perguntas frequentes</span>
           </div>
           <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Antes de entrar, tira suas dúvidas.</h2>
@@ -1053,7 +1061,7 @@
     <div class="max-w-7xl mx-auto px-6">
 
       <div class="p-8 lg:p-16 glass-panel border border-white/10 rounded-3xl">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 
           <!-- Marca -->
           <div>
@@ -1105,9 +1113,9 @@
         </div>
       </div>
 
-      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[8px] sm:text-[10px] uppercase tracking-normal sm:tracking-[0.2em] text-neutral-500 font-light">
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-normal sm:tracking-[0.2em] text-neutral-500 font-light">
         <span class="whitespace-nowrap">Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
-        <span class="text-neutral-600">Cuiabá, Mato Grosso.</span>
+        <span>Cuiabá, Mato Grosso.</span>
       </div>
 
     </div>

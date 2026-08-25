@@ -26,7 +26,13 @@
   // o visitante veria o título da hero ainda se completando palavra por palavra
   // em vez de já pronto. 2200ms cobre o pior caso: a última palavra do título
   // (26 palavras, ~0.045s de intervalo cada) termina de entrar em ~2.125s.
-  const MIN_MS = reduced ? 0 : 2200;
+  // Revisita na mesma sessão (voltou do WhatsApp, atualizou a página): a
+  // coreografia completa de 2200ms já cumpriu o papel na primeira vez — repetir
+  // vira só espera. Encurta pra um fade rápido. try/catch porque sessionStorage
+  // pode lançar em navegação privada de alguns navegadores.
+  let jaViu = false;
+  try { jaViu = sessionStorage.getItem('mi-preloader') === '1'; } catch (e) {}
+  const MIN_MS = reduced ? 0 : (jaViu ? 400 : 2200);
   // Trava de segurança: se algum recurso externo travar (CDN fora do ar, rede ruim),
   // o site abre assim mesmo. Fica abaixo do failsafe de 8s que está no CSS.
   const HARD_MS = 7500;
@@ -81,6 +87,7 @@
     if (finished) return;
     finished = true;
 
+    try { sessionStorage.setItem('mi-preloader', '1'); } catch (e) {}
     clearInterval(phraseTimer);
     fill.style.transform = 'scaleX(1)';
     pctEl.textContent = '100%';

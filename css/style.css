@@ -18,6 +18,29 @@
       font-family: 'Playfair Display', serif;
     }
 
+    /* Linhas de título balanceadas: evita viúva de uma palavra na última linha
+       dos títulos de seção. Progressivo — navegador sem suporte ignora. */
+    h2, blockquote {
+      text-wrap: balance;
+    }
+
+    /* Foco visível pra navegação por teclado, no idioma da marca (anel dourado).
+       Sem isso o site fica com o anel padrão do navegador — azul sobre preto,
+       fora do sistema — ou invisível, dependendo do motor. Só em :focus-visible,
+       então clique/toque não ganha anel. */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid rgba(212, 175, 55, 0.7);
+      outline-offset: 3px;
+    }
+
+    /* FAQ: affordance de hover antes do clique — o item fechado responde ao
+       mouse, sinalizando que abre. O aberto já tem a borda dourada. */
+    #faq details:not([open]):hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
     /* Scrollbar Styling */
     ::-webkit-scrollbar {
       width: 8px;
@@ -410,6 +433,19 @@
       .cronograma-content,
       .cronograma-node {
         transition: none;
+      }
+      /* Animações infinitas param quando o visitante pediu menos movimento.
+         O marquee congela mostrando o primeiro conjunto (o conteúdo continua
+         legível); os fundos decorativos ficam estáticos. */
+      .animate-marquee,
+      .animate-conic-spin,
+      .animate-shimmer-sweep,
+      .animate-ping,
+      .animated-grid-bg,
+      .animate-blob,
+      .animate-ghost-drift,
+      .animate-pulse-slow {
+        animation: none;
       }
     }
 
