@@ -36,13 +36,15 @@
        Reproduz o padrão antigo sem atropelar quem tem tamanho explícito. */
     .icon:not([width]) { width: 1em; height: 1em; }
 
-    /* Segura a entrada da hero enquanto o preloader está na frente. Os dois valores
-       de animation-play-state pareiam por posição com os dois "animation:" definidos
-       em css/style.css (entrada, resgate em CSS puro) — só a entrada pausa, o
-       resgate corre sempre, então mesmo se o JS falhar em tirar essa classe, o
-       conteúdo aparece sozinho depois de alguns segundos. */
-    html.is-preloading .reveal-group > *,
-    html.is-preloading .split-word { animation-play-state: paused, running; }
+    /* A entrada da hero NÃO fica pausada esperando o preloader sair (era assim antes:
+       ver histórico do commit). Motivo da mudança: pausar uma animação em CSS e
+       confiar que ela retoma sozinha quando a classe que pausa é removida é exatamente
+       o tipo de coisa que o WebKit do iPhone não garante — em 3 aparelhos diferentes
+       (nenhum com cache prévio, incluindo depois de trocar de GitHub Pages pra Vercel)
+       a animação simplesmente nunca retomava, e todo mundo caía no resgate de 7s como
+       se fosse o caminho normal. Agora a entrada roda direto desde o carregamento da
+       página, escondida atrás do preloader (que é opaco e cobre a tela toda) — quando
+       ele sai, o conteúdo já está pronto, sem depender de retomar animação nenhuma. */
 
     /* Rede de segurança: nenhum texto pode ficar preso invisível porque uma
        animação não terminou. Se o motor do navegador suspender as animações no
@@ -207,7 +209,7 @@
 
   <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
   <script src="js/preloader.js?v=20260825f" defer></script>
-  <script src="js/main.js?v=20260825g" defer></script>
+  <script src="js/main.js?v=20260825h" defer></script>
 
   <!-- Fontes servidas pelo próprio site (assets/fonts/). Antes vinham do
        fonts.googleapis.com + fonts.gstatic.com, duas conexões a terceiros no
@@ -222,7 +224,7 @@
   <link rel="stylesheet" href="css/tailwind.build.css?v=20260825f">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825g">
+  <link rel="stylesheet" href="css/style.css?v=20260825h">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
@@ -591,13 +593,13 @@
           <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
             Tudo isso, ao vivo, numa aula só.
           </h2>
-          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.1s">
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.1s,4s">
             Você não precisa de uma câmera profissional pra começar. Primeiro o Márcio te ensina a enxergar e dominar aquilo que já está na sua mão. É por ele que vamos começar.
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.1s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.1s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-camera-linear"></use></svg>
             </div>
@@ -605,7 +607,7 @@
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como segurar, configurar e enquadrar sem precisar de equipamento caro.</p>
           </div>
 
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.2s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.2s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>
             </div>
@@ -613,7 +615,7 @@
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Aproveitar a luz que você já tem em casa, sem comprar nenhum equipamento.</p>
           </div>
 
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.3s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.3s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>
             </div>
@@ -621,7 +623,7 @@
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena com naturalidade, sem travar na frente da câmera.</p>
           </div>
 
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.4s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.4s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>
             </div>
@@ -629,7 +631,7 @@
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Cortes e ajustes rápidos, sem precisar dominar um app complicado.</p>
           </div>
 
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.5s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.5s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>
             </div>
@@ -637,7 +639,7 @@
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
           </div>
 
-          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.6s">
+          <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.6s,4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
               <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-eye-linear"></use></svg>
             </div>
@@ -646,11 +648,11 @@
           </div>
         </div>
 
-        <p class="animate-on-scroll text-center text-xs text-neutral-500 font-light mt-10 mb-8" style="animation-delay:0.7s">
+        <p class="animate-on-scroll text-center text-xs text-neutral-500 font-light mt-10 mb-8" style="animation-delay:0.7s,4s">
           Depois desse primeiro passo, tem caminho pra quem quiser ir além (câmera profissional, formação avançada), mas isso é assunto pra depois. Hoje é só sobre o que você já tem no bolso.
         </p>
 
-        <div class="animate-on-scroll flex flex-col items-center gap-3 mb-6" style="animation-delay:0.75s">
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mb-6" style="animation-delay:0.75s,4s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
             <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
@@ -660,7 +662,7 @@
           </p>
         </div>
 
-        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.85s">
+        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.85s,4s">
           <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
             <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
             <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
@@ -689,8 +691,8 @@
               <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
                 <span>Como vai funcionar</span>
               </div>
-              <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Uma aula com começo, meio e fim. Sem enrolação.</h2>
-              <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">Direto ao ponto, do início ao fim da aula ao vivo.</p>
+              <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s,4s">Uma aula com começo, meio e fim. Sem enrolação.</h2>
+              <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s,4s">Direto ao ponto, do início ao fim da aula ao vivo.</p>
             </div>
 
             <div class="cronograma-viewport">
@@ -792,12 +794,12 @@
           <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
             <span>Pra quem é essa aula</span>
           </div>
-          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Você pode ser excelente no que faz. Se ninguém vê, o mercado não percebe.</h2>
-          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">Antes de entrar no grupo, vê se essa aula é mesmo pra você.</p>
+          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s,4s">Você pode ser excelente no que faz. Se ninguém vê, o mercado não percebe.</h2>
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s,4s">Antes de entrar no grupo, vê se essa aula é mesmo pra você.</p>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
-          <div class="animate-on-scroll glass-panel rounded-2xl border border-gold/20 p-6 sm:p-7" style="animation-delay:0.1s">
+          <div class="animate-on-scroll glass-panel rounded-2xl border border-gold/20 p-6 sm:p-7" style="animation-delay:0.1s,4s">
             <p class="text-[10px] uppercase tracking-widest text-gold mb-5">É pra você se</p>
             <ul class="space-y-4">
               <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
@@ -819,7 +821,7 @@
             </ul>
           </div>
 
-          <div class="animate-on-scroll glass-panel rounded-2xl border border-white/5 p-6 sm:p-7" style="animation-delay:0.2s">
+          <div class="animate-on-scroll glass-panel rounded-2xl border border-white/5 p-6 sm:p-7" style="animation-delay:0.2s,4s">
             <p class="text-[10px] uppercase tracking-widest text-neutral-500 mb-5">Não é pra você se</p>
             <ul class="space-y-4">
               <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
@@ -852,13 +854,13 @@
           <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
             <span>Quem é o Márcio</span>
           </div>
-          <p class="animate-on-scroll text-xs uppercase tracking-[0.25em] text-gold/80 font-light" style="animation-delay:0.1s">Fotógrafo · Mentor · Palestrante</p>
+          <p class="animate-on-scroll text-xs uppercase tracking-[0.25em] text-gold/80 font-light" style="animation-delay:0.1s,4s">Fotógrafo · Mentor · Palestrante</p>
         </div>
 
         <div class="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-12 lg:gap-16 items-start">
 
           <!-- Coluna da foto -->
-          <div class="animate-on-scroll relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[320px]" style="animation-delay:0.15s">
+          <div class="animate-on-scroll relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[320px]" style="animation-delay:0.15s,4s">
             <div class="hidden sm:block absolute -top-3 -left-3 w-10 h-10 border-t border-l border-gold/40 pointer-events-none" aria-hidden="true"></div>
             <div class="hidden sm:block absolute -bottom-3 -right-3 w-10 h-10 border-b border-r border-gold/40 pointer-events-none" aria-hidden="true"></div>
             <div class="relative rounded-2xl overflow-hidden border border-white/10">
@@ -872,7 +874,7 @@
           </div>
 
           <!-- Coluna de texto -->
-          <div class="animate-on-scroll" style="animation-delay:0.25s">
+          <div class="animate-on-scroll" style="animation-delay:0.25s,4s">
             <blockquote class="font-display text-xl sm:text-3xl text-white leading-[1.35] tracking-tight mb-6">
               "Não era a câmera que precisava melhorar. <span class="text-gold italic">Era eu.</span>"
             </blockquote>
@@ -917,7 +919,7 @@
 
         </div>
 
-        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-16 pt-8 sm:pt-14 border-t border-white/5" style="animation-delay:0.35s">
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-16 pt-8 sm:pt-14 border-t border-white/5" style="animation-delay:0.35s,4s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
             <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
@@ -948,13 +950,13 @@
           <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-5 w-fit mx-auto cursor-default">
             <span>Perguntas frequentes</span>
           </div>
-          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s">Antes de entrar, tira suas dúvidas.</h2>
-          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s">As perguntas que mais aparecem quando alguém pensa em participar.</p>
+          <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5" style="animation-delay:0.1s,4s">Antes de entrar, tira suas dúvidas.</h2>
+          <p class="animate-on-scroll text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto" style="animation-delay:0.15s,4s">As perguntas que mais aparecem quando alguém pensa em participar.</p>
         </div>
 
         <div class="space-y-3">
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.1s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.1s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Não tenho facilidade com tecnologia, ainda assim consigo acompanhar?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -962,7 +964,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal achar isso quando a maioria dos tutoriais parece ter sido feita por quem já nasceu usando aplicativo. Mas o problema nunca foi a idade, foi a forma como ensinaram até hoje. Na aula, o passo a passo começa do absoluto zero.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.15s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.15s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Não sei se vou ter tempo, será que vale a pena entrar?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -970,7 +972,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A rotina cheia é real, não é desculpa. Por isso a aula é só uma vez, com hora marcada (21h) e sem enrolação: você separa esse horário, participa ao vivo, e sai com o passo a passo pronto, sem precisar voltar todo dia num curso longo.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.2s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.2s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Meu celular não é bom, dá pra fazer mesmo assim?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -978,7 +980,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Dá. A promessa da aula já parte disso: usar o celular que você já tem no bolso, sem comprar câmera nem equipamento caro. E quem participar ainda sai com o checklist de itens baratos pra melhorar o resultado, se quiser.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.25s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.25s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Já tentei aprender sozinho antes e não consegui. Vai ser diferente dessa vez?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -986,7 +988,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A maioria dos tutoriais parte do princípio que você já sabe onde estão os botões. Aqui não. Não precisa aprender o aplicativo inteiro, só um punhado de funções essenciais já resolve a maior parte do que você vai gravar e editar.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.3s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.3s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Tenho vergonha de aparecer em vídeo, isso é um problema?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -994,7 +996,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal se sentir exposto numa ferramenta nova, ainda mais aparecendo em vídeo. Mas quem assiste quer o seu conhecimento, não perfeição técnica. O foco da aula é te dar segurança pra gravar, não te transformar em ator.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.35s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.35s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Meu filho ou funcionário já cuida disso pra mim. Por que aprender eu mesmo?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -1002,7 +1004,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Delegar parece mais fácil até depender de terceiro pra tudo travar sua velocidade e o controle sobre a sua própria imagem. Ter autonomia pra gravar e ajustar na hora que precisar, sem esperar ninguém, sai mais rápido no fim.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.4s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.4s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">A aula é paga?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -1010,7 +1012,7 @@
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. A aula ao vivo é 100% gratuita. Você só precisa entrar no grupo do WhatsApp pra receber o link de acesso e os avisos antes do dia 10 de setembro.</p>
           </details>
 
-          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.45s">
+          <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.45s,4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Vai ter gravação disponível depois?</span>
               <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
@@ -1020,7 +1022,7 @@
 
         </div>
 
-        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-14 mb-6" style="animation-delay:0.5s">
+        <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-14 mb-6" style="animation-delay:0.5s,4s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
             <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
@@ -1030,7 +1032,7 @@
           </p>
         </div>
 
-        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.6s">
+        <div class="animate-on-scroll flex justify-center" style="animation-delay:0.6s,4s">
           <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
             <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
             <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">

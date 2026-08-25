@@ -101,8 +101,8 @@
             word.className = 'split-word';
             // Par posicional com o "animation:" de duas animações em .split-word
             // (css/style.css): a primeira é a entrada, a segunda é o resgate em CSS
-            // puro, que tem que continuar com delay fixo de 7s pra toda palavra.
-            word.style.animationDelay = (BASE_DELAY + wordIndex * STEP).toFixed(3) + 's, 7s';
+            // puro, que tem que continuar com delay fixo de 4s pra toda palavra.
+            word.style.animationDelay = (BASE_DELAY + wordIndex * STEP).toFixed(3) + 's, 4s';
             word.textContent = part;
             wordIndex++;
             wrap.appendChild(word);

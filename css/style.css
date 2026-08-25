@@ -109,15 +109,15 @@
       100% { transform: translateY(0); opacity: 1; }
     }
     .reveal-group > * {
-      animation: float-up 1s ease-out forwards, force-visible-failsafe 0s linear 7s forwards;
+      animation: float-up 1s ease-out forwards, force-visible-failsafe 0s linear 4s forwards;
       opacity: 0;
     }
-    .reveal-group > *:nth-child(1) { animation-delay: 0.1s, 7s; }
-    .reveal-group > *:nth-child(2) { animation-delay: 0.25s, 7s; }
-    .reveal-group > *:nth-child(3) { animation-delay: 0.4s, 7s; }
-    .reveal-group > *:nth-child(4) { animation-delay: 0.55s, 7s; }
-    .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 7s; }
-    .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 7s; }
+    .reveal-group > *:nth-child(1) { animation-delay: 0.1s, 4s; }
+    .reveal-group > *:nth-child(2) { animation-delay: 0.25s, 4s; }
+    .reveal-group > *:nth-child(3) { animation-delay: 0.4s, 4s; }
+    .reveal-group > *:nth-child(4) { animation-delay: 0.55s, 4s; }
+    .reveal-group > *:nth-child(5) { animation-delay: 0.7s, 4s; }
+    .reveal-group > *:nth-child(6) { animation-delay: 0.85s, 4s; }
 
     /* Scroll Reveals */
     @keyframes scroll-blur-in {
@@ -125,7 +125,7 @@
       100% { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
     .animate-on-scroll {
-      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 7s forwards;
+      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 4s forwards;
       animation-play-state: paused, running;
     }
     .animate-on-scroll.is-visible {
@@ -448,10 +448,10 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(110%);
-      /* O delay de cada palavra (main.js) vem em par posicional "Xs, 7s" —
+      /* O delay de cada palavra (main.js) vem em par posicional "Xs, 4s" —
          o segundo valor é o resgate, ver .reveal-group acima. */
       animation: hero-word-slide-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-                 force-visible-failsafe 0s linear 7s forwards;
+                 force-visible-failsafe 0s linear 4s forwards;
     }
     @keyframes hero-word-slide-up {
       to { transform: translateY(0); opacity: 1; }
