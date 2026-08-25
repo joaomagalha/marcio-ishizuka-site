@@ -136,11 +136,18 @@
       opacity: 0;
       /* Só o resgate aqui, sempre correndo: garante que o bloco aparece sozinho mesmo
          se o IntersectionObserver nunca rodar (JS quebrado, IntersectionObserver
-         indisponível etc.), sem depender de .is-visible chegar. */
-      animation: force-visible-failsafe 0s linear 4s forwards;
+         indisponível etc.), sem depender de .is-visible chegar. 1.1s (não 4s como no
+         resto do site): mesmo com a correção anterior (animação nova em vez de
+         retomada), o padrão de ~5s persistiu em uso real — sinal de que ainda tem
+         algo fazendo a entrada normal falhar nessas seções especificamente, e não dá
+         pra depurar mais fundo sem acesso ao aparelho. Então o resgate vira a rede
+         de segurança de verdade: rápido o suficiente pra ninguém perceber a espera,
+         e ainda folgado o bastante (a entrada legítima dura no máximo 0.8s) pra não
+         cortar a animação de quem ela funciona normal. */
+      animation: force-visible-failsafe 0s linear 1.1s forwards;
     }
     .animate-on-scroll.is-visible {
-      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 4s forwards;
+      animation: scroll-blur-in 0.8s ease-out both, force-visible-failsafe 0s linear 1.1s forwards;
     }
 
     /* Mobile: o WebKit do iOS renderiza blur contínuo (background-position animado,
