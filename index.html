@@ -28,6 +28,9 @@
   <meta name="twitter:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
   <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
 
+  <!-- Site scripts primeiro na ordem de defer, pra não esperar CDN externa (iconify/gsap) antes de rodar -->
+  <script src="js/main.js?v=20260825a" defer></script>
+
   <!-- Iconify Icons / GSAP: não bloqueiam o parser (defer), executam em ordem antes do DOMContentLoaded -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
   <!-- GSAP + ScrollTrigger (timeline interativa pinada da seção Cronograma, só desktop) -->
@@ -42,10 +45,10 @@
   <!-- Tailwind CSS pré-compilado (build local via tailwind.config.js — ver package.json "build:css").
        Substitui o cdn.tailwindcss.com: aquele script baixa e roda o compilador JIT inteiro no navegador
        a cada carregamento, o que no celular segurava o resto da página por vários segundos. -->
-  <link rel="stylesheet" href="css/tailwind.build.css">
+  <link rel="stylesheet" href="css/tailwind.build.css?v=20260825a">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260825a">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
@@ -880,11 +883,9 @@
   </footer>
 
   <!-- ================================================================= -->
-  <!-- 5. INTERACTION & ANIMATION SCRIPTS                                -->
+  <!-- 5. INTERACTION & ANIMATION SCRIPTS (main.js está no <head>, ver topo do arquivo) -->
   <!-- ================================================================= -->
-  <script src="js/main.js" defer></script>
-
   <!-- Timeline interativa da seção Cronograma (GSAP ScrollTrigger, mesma técnica do site do Luminae) -->
-  <script src="js/cronograma.js" defer></script>
+  <script src="js/cronograma.js?v=20260825a" defer></script>
 </body>
 </html>
