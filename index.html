@@ -27,9 +27,29 @@
   <style>
     html { background: #030303; }
 
+    /* Sprite de ícones: nunca aparece, só guarda os <symbol>. Fica no CSS crítico
+       porque um <svg> sem dimensão ocuparia 300x150 e empurraria o layout até o
+       css principal chegar. */
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .icon { display: inline-block; vertical-align: -0.125em; }
+    /* Sem atributo width, um <svg> assume 300x150 (o <iconify-icon> assumia 1em).
+       Reproduz o padrão antigo sem atropelar quem tem tamanho explícito. */
+    .icon:not([width]) { width: 1em; height: 1em; }
+
     /* Segura a entrada da hero enquanto o preloader está na frente */
     html.is-preloading .reveal-group > *,
     html.is-preloading .split-word { animation-play-state: paused; }
+
+    /* Rede de segurança: nenhum texto pode ficar preso invisível porque uma
+       animação não terminou. Se o motor do navegador suspender as animações no
+       meio (acontece em navegador embutido de app e em modo de baixo consumo),
+       o conteúdo aparece assim mesmo. Aplicada por JS só no que ficou travado. */
+    .motion-forced {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
 
     #preloader {
       position: fixed;
@@ -181,37 +201,53 @@
   <meta name="twitter:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
   <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
 
-  <!-- Site scripts primeiro na ordem de defer, pra não esperar CDN externa (iconify/gsap) antes de rodar -->
-  <script src="js/preloader.js?v=20260825e" defer></script>
-  <script src="js/main.js?v=20260825d" defer></script>
+  <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
+  <script src="js/preloader.js?v=20260825f" defer></script>
+  <script src="js/main.js?v=20260825f" defer></script>
 
-  <!-- Iconify Icons / GSAP: não bloqueiam o parser (defer), executam em ordem antes do DOMContentLoaded -->
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
-  <!-- GSAP + ScrollTrigger (timeline interativa pinada da seção Cronograma, só desktop) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-
-  <!-- Abre DNS/TLS com as CDNs externas antes de precisar delas. Como a tela de
-       carregamento só sai quando tudo termina, cada handshake economizado aqui
-       encurta direto o tempo que ela fica em tela. -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://code.iconify.design" crossorigin>
-  <link rel="preconnect" href="https://api.iconify.design" crossorigin>
-
-  <!-- Google Fonts: Playfair Display + Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fontes servidas pelo próprio site (assets/fonts/). Antes vinham do
+       fonts.googleapis.com + fonts.gstatic.com, duas conexões a terceiros no
+       caminho crítico da renderização. -->
+  <link rel="stylesheet" href="css/fonts.css?v=20260825f">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-normal-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/playfair-display-normal-latin.woff2" crossorigin>
 
   <!-- Tailwind CSS pré-compilado (build local via tailwind.config.js — ver package.json "build:css").
        Substitui o cdn.tailwindcss.com: aquele script baixa e roda o compilador JIT inteiro no navegador
        a cada carregamento, o que no celular segurava o resto da página por vários segundos. -->
-  <link rel="stylesheet" href="css/tailwind.build.css?v=20260825a">
+  <link rel="stylesheet" href="css/tailwind.build.css?v=20260825f">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825d">
+  <link rel="stylesheet" href="css/style.css?v=20260825f">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Sprite de ícones local. Substitui o runtime do Iconify (script externo +
+       chamada à api.iconify.design a cada carregamento): agora os ícones já vêm
+       no HTML, sem depender de nenhum servidor de terceiro pra aparecer. -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></symbol>
+    <symbol id="i-alt-arrow-down-linear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></symbol>
+    <symbol id="i-arrow-right-linear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12H20M14 18L20 12L14 6"/></symbol>
+    <symbol id="i-calendar-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12Z"/><path stroke-linecap="round" d="M7 4V2.5"/><path stroke-linecap="round" d="M17 4V2.5"/><path stroke-linecap="round" d="M2.5 9H21.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 13H17.0001"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 13H12.0001"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 13H7.0001"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 17.0234H17.0001"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 17.0234H12.0001"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 17.0234H7.0001"/></g></symbol>
+    <symbol id="i-camera-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="13" r="3"/><path d="M9.77778 21H14.2222C17.3433 21 18.9038 21 20.0248 20.2646C20.51 19.9462 20.9267 19.5371 21.251 19.0607C22 17.9601 22 16.4279 22 13.3636C22 10.2994 22 8.76721 21.251 7.6666C20.9267 7.19014 20.51 6.78104 20.0248 6.46268C19.3044 5.99013 18.4027 5.82123 17.022 5.76086C16.3631 5.76086 15.7959 5.27068 15.6667 4.63636C15.4728 3.68489 14.6219 3 13.6337 3H10.3663C9.37805 3 8.52715 3.68489 8.33333 4.63636C8.20412 5.27068 7.63685 5.76086 6.978 5.76086C5.59733 5.82123 4.69555 5.99013 3.97524 6.46268C3.48995 6.78104 3.07328 7.19014 2.74902 7.6666C2 8.76721 2 10.2994 2 13.3636C2 16.4279 2 17.9601 2.74902 19.0607C3.07328 19.5371 3.48995 19.9462 3.97524 20.2646C5.09624 21 6.65675 21 9.77778 21Z"/><path stroke-linecap="round" d="M19 10H18"/></g></symbol>
+    <symbol id="i-chart-2-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 22H21"/><path d="M3 11C3 10.0572 3 9.58579 3.29289 9.29289C3.58579 9 4.05719 9 5 9C5.94281 9 6.41421 9 6.70711 9.29289C7 9.58579 7 10.0572 7 11V17C7 17.9428 7 18.4142 6.70711 18.7071C6.41421 19 5.94281 19 5 19C4.05719 19 3.58579 19 3.29289 18.7071C3 18.4142 3 17.9428 3 17V11Z"/><path d="M10 7C10 6.05719 10 5.58579 10.2929 5.29289C10.5858 5 11.0572 5 12 5C12.9428 5 13.4142 5 13.7071 5.29289C14 5.58579 14 6.05719 14 7V17C14 17.9428 14 18.4142 13.7071 18.7071C13.4142 19 12.9428 19 12 19C11.0572 19 10.5858 19 10.2929 18.7071C10 18.4142 10 17.9428 10 17V7Z"/><path d="M17 4C17 3.05719 17 2.58579 17.2929 2.29289C17.5858 2 18.0572 2 19 2C19.9428 2 20.4142 2 20.7071 2.29289C21 2.58579 21 3.05719 21 4V17C21 17.9428 21 18.4142 20.7071 18.7071C20.4142 19 19.9428 19 19 19C18.0572 19 17.5858 19 17.2929 18.7071C17 18.4142 17 17.9428 17 17V4Z"/></g></symbol>
+    <symbol id="i-chat-round-dots-bold" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C10.4003 22 8.88867 21.6239 7.54785 20.9561C7.19153 20.7786 6.78396 20.7204 6.39941 20.8232L4.17383 21.4189C3.20749 21.6775 2.3225 20.7925 2.58105 19.8262L3.17676 17.6006C3.27965 17.216 3.22142 16.8085 3.04395 16.4521C2.37612 15.1113 2 13.5997 2 12C2 6.47715 6.47715 2 12 2ZM7.99121 11C7.43893 11 6.99121 11.4477 6.99121 12C6.99121 12.5523 7.43893 13 7.99121 13C8.54327 12.9997 8.99121 12.5521 8.99121 12C8.99121 11.4479 8.54327 11.0003 7.99121 11ZM12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11ZM16.0088 11C15.4565 11 15.0088 11.4477 15.0088 12C15.0088 12.5523 15.4565 13 16.0088 13C16.5611 13 17.0088 12.5523 17.0088 12C17.0088 11.4477 16.5611 11 16.0088 11Z" clip-rule="evenodd"/></symbol>
+    <symbol id="i-check-circle-bold" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM16.0303 8.96967C16.3232 9.26256 16.3232 9.73744 16.0303 10.0303L11.0303 15.0303C10.7374 15.3232 10.2626 15.3232 9.96967 15.0303L7.96967 13.0303C7.67678 12.7374 7.67678 12.2626 7.96967 11.9697C8.26256 11.6768 8.73744 11.6768 9.03033 11.9697L10.5 13.4393L12.7348 11.2045L14.9697 8.96967C15.2626 8.67678 15.7374 8.67678 16.0303 8.96967Z" clip-rule="evenodd"/></symbol>
+    <symbol id="i-check-read-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M4 12.9L7.14286 16.5L15 7.5"/><path d="M20 7.5625L11.4283 16.5625L11 16"/></g></symbol>
+    <symbol id="i-checklist-minimalistic-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 15.8L7.14286 17L10 14"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 8.8L7.14286 10L10 7"/><path stroke-linecap="round" d="M13 9L18 9"/><path stroke-linecap="round" d="M13 16L18 16"/></g></symbol>
+    <symbol id="i-clapperboard-open-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11H16C17.8856 11 18.8284 11 19.4142 11.5858C20 12.1716 20 13.1144 20 15V16C20 18.8284 20 20.2426 19.1213 21.1213C18.2426 22 16.8284 22 14 22H10C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16V11Z"/><path d="M4.00128 10.9997C3.51749 9.19412 3.27559 8.29135 3.48364 7.51489C3.61994 7.00622 3.88773 6.5424 4.2601 6.17003C4.82851 5.60162 5.73128 5.35973 7.53682 4.87593L14.5398 2.99949C15.213 2.8191 15.5496 2.72891 15.8445 2.70958C17.0553 2.63022 18.1946 3.28804 18.7313 4.37629C18.862 4.64129 18.9522 4.97791 19.1326 5.65114C19.1927 5.87556 19.2228 5.98776 19.2292 6.08604C19.2557 6.48964 19.0364 6.86943 18.6736 7.04832C18.5853 7.09188 18.4731 7.12195 18.2487 7.18208L4.00128 10.9997Z"/><path stroke-linecap="round" d="M14.7004 2.94135L14.0627 8.28861"/><path stroke-linecap="round" d="M8.42209 4.62396L7.78433 9.97123"/></g></symbol>
+    <symbol id="i-close-circle-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5"/></g></symbol>
+    <symbol id="i-eye-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C4.97196 6.49956 7.81811 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957Z"/><path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"/></g></symbol>
+    <symbol id="i-global-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 10.6868 2.25866 9.38642 2.76121 8.17316C3.26375 6.95991 4.00035 5.85752 4.92893 4.92893C5.85752 4.00035 6.95991 3.26375 8.17317 2.7612C9.38642 2.25866 10.6868 2 12 2C13.3132 2 14.6136 2.25866 15.8268 2.76121C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12L22 12Z"/><path d="M16 12C16 13.3132 15.8965 14.6136 15.6955 15.8268C15.4945 17.0401 15.1999 18.1425 14.8284 19.0711C14.457 19.9997 14.016 20.7362 13.5307 21.2388C13.0454 21.7413 12.5253 22 12 22C11.4747 22 10.9546 21.7413 10.4693 21.2388C9.98396 20.7362 9.54301 19.9997 9.17157 19.0711C8.80014 18.1425 8.5055 17.0401 8.30448 15.8268C8.10346 14.6136 8 13.3132 8 12C8 10.6868 8.10346 9.38642 8.30448 8.17316C8.5055 6.95991 8.80014 5.85752 9.17157 4.92893C9.54301 4.00035 9.98396 3.26375 10.4693 2.7612C10.9546 2.25866 11.4747 2 12 2C12.5253 2 13.0454 2.25866 13.5307 2.76121C14.016 3.26375 14.457 4.00035 14.8284 4.92893C15.1999 5.85752 15.4945 6.95991 15.6955 8.17317C15.8965 9.38642 16 10.6868 16 12L16 12Z"/><path stroke-linecap="round" d="M2 12H22"/></g></symbol>
+    <symbol id="i-layers-minimalistic-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.97883 9.68508C2.99294 8.89073 2 8.49355 2 8C2 7.50645 2.99294 7.10927 4.97883 6.31492L7.7873 5.19153C9.77318 4.39718 10.7661 4 12 4C13.2339 4 14.2268 4.39718 16.2127 5.19153L19.0212 6.31492C21.0071 7.10927 22 7.50645 22 8C22 8.49355 21.0071 8.89073 19.0212 9.68508L16.2127 10.8085C14.2268 11.6028 13.2339 12 12 12C10.7661 12 9.77318 11.6028 7.7873 10.8085L4.97883 9.68508Z"/><path stroke-linecap="round" d="M22 12C22 12 21.0071 12.8907 19.0212 13.6851L16.2127 14.8085C14.2268 15.6028 13.2339 16 12 16C10.7661 16 9.77318 15.6028 7.7873 14.8085L4.97883 13.6851C2.99294 12.8907 2 12 2 12"/><path stroke-linecap="round" d="M22 16C22 16 21.0071 16.8907 19.0212 17.6851L16.2127 18.8085C14.2268 19.6028 13.2339 20 12 20C10.7661 20 9.77318 19.6028 7.7873 18.8085L4.97883 17.6851C2.99294 16.8907 2 16 2 16"/></g></symbol>
+    <symbol id="i-map-point-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10.1433C4 5.64588 7.58172 2 12 2C16.4183 2 20 5.64588 20 10.1433C20 14.6055 17.4467 19.8124 13.4629 21.6744C12.5343 22.1085 11.4657 22.1085 10.5371 21.6744C6.55332 19.8124 4 14.6055 4 10.1433Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+    <symbol id="i-star-fall-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path stroke-linecap="round" stroke-width="1.5" d="M7.44645 7.24078C5.11144 8.94872 3.32371 12.2154 4.24844 18C5.06701 15.5887 7.53446 13.6575 10.2908 12.7279M11.1852 4.22083C11.7062 2.80412 11.9667 2.09577 12.5116 2.00845C13.0564 1.92112 13.5247 2.51266 14.4614 3.69574L14.7037 4.00181C14.9699 4.338 15.103 4.5061 15.2839 4.60208C15.4649 4.69807 15.6732 4.71107 16.0898 4.73708L16.4692 4.76076C17.9354 4.85229 18.6685 4.89806 18.9229 5.40935C19.1774 5.92063 18.7846 6.55883 17.999 7.83522L17.7958 8.16544C17.5725 8.52815 17.4609 8.70951 17.4308 8.91657C17.4006 9.12364 17.4553 9.33297 17.5648 9.75163L17.6644 10.1328C18.0496 11.6061 18.2421 12.3427 17.8545 12.746C17.4669 13.1493 16.7558 12.9522 15.3337 12.558L14.9658 12.456C14.5616 12.344 14.3596 12.288 14.16 12.32C13.9604 12.3519 13.7859 12.4683 13.4369 12.701L13.1191 12.9129C11.8909 13.7319 11.2768 14.1414 10.7828 13.8794C10.2889 13.6174 10.2422 12.8574 10.1488 11.3373L10.1247 10.9441C10.0981 10.5121 10.0849 10.2962 9.99166 10.1089C9.89846 9.92158 9.73589 9.78417 9.41074 9.50935L9.11472 9.25915C7.97052 8.29204 7.39841 7.80849 7.48073 7.24324C7.56305 6.67798 8.24527 6.40538 9.60971 5.86016L9.96271 5.71911C10.3504 5.56417 10.5443 5.48671 10.6863 5.33897C10.8283 5.19122 10.9023 4.98993 11.0504 4.58735L11.1852 4.22083Z"/><path d="M10.2808 16C10.2808 16 10.9135 17.3908 11.6935 17.8692C12.4735 18.3475 14 18.2808 14 18.2808C14 18.2808 12.6092 18.9135 12.1308 19.6935C11.6525 20.4735 11.7192 22 11.7192 22C11.7192 22 11.0865 20.6092 10.3065 20.1308C9.52652 19.6525 8 19.7192 8 19.7192C8 19.7192 9.39082 19.0865 9.86916 18.3065C10.3475 17.5265 10.2808 16 10.2808 16Z"/><path d="M18.4795 15C18.4795 15 18.0577 15.9272 17.5377 16.2461C17.0177 16.565 16 16.5205 16 16.5205C16 16.5205 16.9272 16.9423 17.2461 17.4623C17.565 17.9823 17.5205 19 17.5205 19C17.5205 19 17.9423 18.0728 18.4623 17.7539C18.9823 17.435 20 17.4795 20 17.4795C20 17.4795 19.0728 17.0577 18.7539 16.5377C18.435 16.0177 18.4795 15 18.4795 15Z"/></g></symbol>
+    <symbol id="i-sun-2-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 2V4"/><path stroke-linecap="round" d="M12 20V22"/><path stroke-linecap="round" d="M4 12L2 12"/><path stroke-linecap="round" d="M22 12L20 12"/><path stroke-linecap="round" d="M19.7778 4.22266L17.5558 6.25424"/><path stroke-linecap="round" d="M4.22217 4.22266L6.44418 6.25424"/><path stroke-linecap="round" d="M6.44434 17.5557L4.22211 19.7779"/><path stroke-linecap="round" d="M19.7778 19.7773L17.5558 17.5551"/></g></symbol>
+    <symbol id="i-videocamera-record-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 9.50019L17.6584 9.17101C19.6042 8.19807 20.5772 7.7116 21.2886 8.15127C22 8.59094 22 9.67872 22 11.8543V12.1461C22 14.3217 22 15.4094 21.2886 15.8491C20.5772 16.2888 19.6042 15.8023 17.6584 14.8294L17 14.5002V9.50019Z"/><path d="M13.5607 7.43934C14.1464 8.02513 14.1464 8.97487 13.5607 9.56066C12.9749 10.1464 12.0251 10.1464 11.4393 9.56066C10.8536 8.97487 10.8536 8.02513 11.4393 7.43934C12.0251 6.85355 12.9749 6.85355 13.5607 7.43934Z"/><path d="M2 11.5C2 8.21252 2 6.56878 2.90796 5.46243C3.07418 5.25989 3.25989 5.07418 3.46243 4.90796C4.56878 4 6.21252 4 9.5 4C12.7875 4 14.4312 4 15.5376 4.90796C15.7401 5.07418 15.9258 5.25989 16.092 5.46243C17 6.56878 17 8.21252 17 11.5V12.5C17 15.7875 17 17.4312 16.092 18.5376C15.9258 18.7401 15.7401 18.9258 15.5376 19.092C14.4312 20 12.7875 20 9.5 20C6.21252 20 4.56878 20 3.46243 19.092C3.25989 18.9258 3.07418 18.7401 2.90796 18.5376C2 17.4312 2 15.7875 2 12.5V11.5Z"/></g></symbol>
+  </svg>
+
 
   <!-- ================================================================= -->
   <!-- 0. TELA DE CARREGAMENTO — ver js/preloader.js -->
@@ -343,15 +379,15 @@
           <!-- O que você vai aprender / promessas-chave -->
           <ul class="flex flex-col gap-3 max-w-xl mb-10">
             <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
               Passo a passo do zero
             </li>
             <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
               Sem comprar nenhum equipamento
             </li>
             <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <iconify-icon icon="solar:check-circle-bold" width="20" class="text-gold shrink-0"></iconify-icon>
+              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
               Resultado prático ainda durante a aula
             </li>
           </ul>
@@ -365,9 +401,9 @@
                 <span class="absolute inset-0 overflow-hidden rounded-full">
                   <span class="animate-shimmer-sweep absolute top-0 left-0 h-full w-full -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 group-hover:opacity-100"></span>
                 </span>
-                <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+                <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
                 <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-                <iconify-icon icon="solar:arrow-right-linear" width="14" class="relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300"></iconify-icon>
+                <svg width="14" height="14" class="icon relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg>
               </span>
             </a>
 
@@ -381,21 +417,21 @@
           <!-- Metadados / Specs Row -->
           <div class="grid grid-cols-3 gap-4 py-6 border-t border-white/5 text-neutral-400 max-w-xl">
             <div class="flex items-center gap-2">
-              <iconify-icon icon="solar:map-point-linear" width="16" class="text-gold/80"></iconify-icon>
+              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-map-point-linear"></use></svg>
               <div class="text-left">
                 <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Presença</p>
                 <p class="text-xs text-white mt-1 font-light">Cuiabá, MT</p>
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <iconify-icon icon="solar:global-linear" width="16" class="text-gold/80"></iconify-icon>
+              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-global-linear"></use></svg>
               <div class="text-left">
                 <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Herança</p>
                 <p class="text-xs text-white mt-1 font-light">Cultura Japonesa</p>
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <iconify-icon icon="solar:star-fall-linear" width="16" class="text-gold/80"></iconify-icon>
+              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-star-fall-linear"></use></svg>
               <div class="text-left">
                 <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Trajetória</p>
                 <p class="text-xs text-white mt-1 font-light">15+ Anos de Arte</p>
@@ -410,7 +446,7 @@
           <!-- Editorial Pill Badge Overlay (próxima aula ao vivo) -->
           <div class="glass-panel rounded-full px-5 py-3 border border-white/10 backdrop-blur-md flex items-center gap-3 pointer-events-auto select-none">
             <div class="flex items-center justify-center w-9 h-9 rounded-full border border-gold/30 bg-gold/5 shrink-0">
-              <iconify-icon icon="solar:calendar-linear" width="16" class="text-gold"></iconify-icon>
+              <svg width="16" height="16" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             </div>
             <div>
               <p class="text-[7px] uppercase tracking-widest text-neutral-500 leading-none">Próxima Aula Ao Vivo</p>
@@ -441,18 +477,18 @@
         <div class="flex w-max animate-marquee gap-16 whitespace-nowrap text-[10px] font-light uppercase tracking-[0.25em] text-neutral-500 select-none">
           <!-- Duplicated set for seamless loop -->
           <div class="flex gap-16 items-center">
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:camera-linear" class="text-gold/60"></iconify-icon>Câmera Pelo Celular</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:sun-2-linear" class="text-gold/60"></iconify-icon>Luz e Enquadramento</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:clapperboard-open-linear" class="text-gold/60"></iconify-icon>Roteiro e Direção</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:layers-minimalistic-linear" class="text-gold/60"></iconify-icon>Edição Simples</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:chart-2-linear" class="text-gold/60"></iconify-icon>Conteúdo Que Vende</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-camera-linear"></use></svg>Câmera Pelo Celular</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>Luz e Enquadramento</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>Roteiro e Direção</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>Edição Simples</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>Conteúdo Que Vende</span>
           </div>
           <div class="flex gap-16 items-center" aria-hidden="true">
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:camera-linear" class="text-gold/60"></iconify-icon>Câmera Pelo Celular</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:sun-2-linear" class="text-gold/60"></iconify-icon>Luz e Enquadramento</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:clapperboard-open-linear" class="text-gold/60"></iconify-icon>Roteiro e Direção</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:layers-minimalistic-linear" class="text-gold/60"></iconify-icon>Edição Simples</span>
-            <span class="flex items-center gap-2"><iconify-icon icon="solar:chart-2-linear" class="text-gold/60"></iconify-icon>Conteúdo Que Vende</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-camera-linear"></use></svg>Câmera Pelo Celular</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>Luz e Enquadramento</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>Roteiro e Direção</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>Edição Simples</span>
+            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>Conteúdo Que Vende</span>
           </div>
         </div>
       </div>
@@ -507,7 +543,7 @@
             <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
               <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
               <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-                <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+                <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
                 <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
               </span>
             </a>
@@ -523,7 +559,7 @@
     <section id="urgencia" class="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#020202] border-t border-white/5">
       <div class="max-w-2xl mx-auto px-6 relative z-10 text-center">
         <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-          <iconify-icon icon="solar:videocamera-record-linear" width="14" class="text-gold/80"></iconify-icon>
+          <svg width="14" height="14" class="icon text-gold/80" aria-hidden="true"><use href="#i-videocamera-record-linear"></use></svg>
           <span>Por que agora</span>
         </div>
         <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
@@ -545,7 +581,7 @@
       <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="max-w-2xl mx-auto text-center mb-10 sm:mb-14 lg:mb-16">
           <div class="animate-on-scroll inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-            <iconify-icon icon="solar:playlist-check-linear" width="14" class="text-gold/80"></iconify-icon>
+            <svg width="14" height="14" class="icon text-gold/80" aria-hidden="true"><use href="#i-checklist-minimalistic-linear"></use></svg>
             <span>O que você vai aprender</span>
           </div>
           <h2 class="animate-on-scroll font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
@@ -559,7 +595,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.1s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:camera-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-camera-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Câmera Pelo Celular</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como segurar, configurar e enquadrar sem precisar de equipamento caro.</p>
@@ -567,7 +603,7 @@
 
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.2s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:sun-2-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Luz e Enquadramento</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Aproveitar a luz que você já tem em casa, sem comprar nenhum equipamento.</p>
@@ -575,7 +611,7 @@
 
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.3s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:clapperboard-open-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Roteiro e Direção</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena com naturalidade, sem travar na frente da câmera.</p>
@@ -583,7 +619,7 @@
 
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.4s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:layers-minimalistic-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Edição Simples</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Cortes e ajustes rápidos, sem precisar dominar um app complicado.</p>
@@ -591,7 +627,7 @@
 
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.5s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:chart-2-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Conteúdo Que Vende</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
@@ -599,7 +635,7 @@
 
           <div class="animate-on-scroll flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1" style="animation-delay:0.6s">
             <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <iconify-icon icon="solar:eye-linear" width="22" class="text-gold/80"></iconify-icon>
+              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-eye-linear"></use></svg>
             </div>
             <h3 class="font-display text-base text-white mb-2">Fotos Que Impressionam</h3>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Retratos e still simples que parecem produção profissional, só com o que você já tem.</p>
@@ -612,7 +648,7 @@
 
         <div class="animate-on-scroll flex flex-col items-center gap-3 mb-6" style="animation-delay:0.75s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
-            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
           </p>
           <p class="text-sm sm:text-base text-gold font-medium">
@@ -624,7 +660,7 @@
           <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
             <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
             <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
               <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
             </span>
           </a>
@@ -664,7 +700,7 @@
                   <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">01</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">21h00</p>
@@ -676,7 +712,7 @@
                 <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">02</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">21h10</p>
@@ -688,7 +724,7 @@
                 <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">03</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">21h30</p>
@@ -700,7 +736,7 @@
                 <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">04</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">21h50</p>
@@ -712,7 +748,7 @@
                 <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">05</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">22h10</p>
@@ -724,7 +760,7 @@
                 <li class="cronograma-step" data-state="idle">
                   <div class="cronograma-node" aria-hidden="true">
                     <span class="cronograma-node-num">06</span>
-                    <iconify-icon class="cronograma-node-check" icon="solar:check-read-linear"></iconify-icon>
+                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
                   </div>
                   <div class="cronograma-content">
                     <p class="text-xs uppercase tracking-widest text-gold mb-1">22h20</p>
@@ -761,19 +797,19 @@
             <p class="text-[10px] uppercase tracking-widest text-gold mb-5">É pra você se</p>
             <ul class="space-y-4">
               <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Você já domina o que faz (médico, advogado, consultor, palestrante, dono de negócio, prestador de serviço) mas nunca conseguiu gravar um vídeo decente de si mesmo
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Sente que tem valor pra mostrar, mas trava na hora de aparecer, gravar ou editar
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Nunca gravou um vídeo com o próprio celular, ou já tentou e não gostou do resultado
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Quer aprender do absoluto zero, sem comprar equipamento nenhum
               </li>
             </ul>
@@ -783,15 +819,15 @@
             <p class="text-[10px] uppercase tracking-widest text-neutral-500 mb-5">Não é pra você se</p>
             <ul class="space-y-4">
               <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
                 Você já grava e edita seus próprios vídeos com tranquilidade, esse conteúdo vai parecer básico
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
                 Está procurando virar fotógrafo profissional ou prestador de serviço de fotografia, esse é outro caminho, não é o desta aula
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <iconify-icon icon="solar:close-circle-linear" width="18" class="text-neutral-500 shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
                 Quer direto câmera profissional, luz de estúdio e formação avançada, isso existe no caminho do Márcio, mas é assunto pra depois, não desta aula
               </li>
             </ul>
@@ -846,15 +882,15 @@
 
             <ul class="space-y-3 mb-10">
               <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Nome consolidado no mercado publicitário de Cuiabá, mesmo sendo desconhecido do público geral
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Passou por 9 trabalhos veiculados em outdoor pela cidade sem que a própria família soubesse que eram dele
               </li>
               <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <iconify-icon icon="solar:check-circle-bold" width="18" class="text-gold shrink-0 mt-0.5"></iconify-icon>
+                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
                 Raízes na cultura japonesa e no budô, base da disciplina que aplica atrás das câmeras
               </li>
             </ul>
@@ -879,7 +915,7 @@
 
         <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-16 pt-8 sm:pt-14 border-t border-white/5" style="animation-delay:0.35s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
-            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
           </p>
           <p class="text-sm sm:text-base text-gold font-medium mb-3">
@@ -888,7 +924,7 @@
           <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
             <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
             <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
               <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
             </span>
           </a>
@@ -917,7 +953,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.1s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Não tenho facilidade com tecnologia, ainda assim consigo acompanhar?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal achar isso quando a maioria dos tutoriais parece ter sido feita por quem já nasceu usando aplicativo. Mas o problema nunca foi a idade, foi a forma como ensinaram até hoje. Na aula, o passo a passo começa do absoluto zero.</p>
           </details>
@@ -925,7 +961,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.15s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Não sei se vou ter tempo, será que vale a pena entrar?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A rotina cheia é real, não é desculpa. Por isso a aula é só uma vez, com hora marcada (21h) e sem enrolação: você separa esse horário, participa ao vivo, e sai com o passo a passo pronto, sem precisar voltar todo dia num curso longo.</p>
           </details>
@@ -933,7 +969,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.2s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Meu celular não é bom, dá pra fazer mesmo assim?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Dá. A promessa da aula já parte disso: usar o celular que você já tem no bolso, sem comprar câmera nem equipamento caro. E quem participar ainda sai com o checklist de itens baratos pra melhorar o resultado, se quiser.</p>
           </details>
@@ -941,7 +977,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.25s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Já tentei aprender sozinho antes e não consegui. Vai ser diferente dessa vez?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A maioria dos tutoriais parte do princípio que você já sabe onde estão os botões. Aqui não. Não precisa aprender o aplicativo inteiro, só um punhado de funções essenciais já resolve a maior parte do que você vai gravar e editar.</p>
           </details>
@@ -949,7 +985,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.3s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Tenho vergonha de aparecer em vídeo, isso é um problema?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal se sentir exposto numa ferramenta nova, ainda mais aparecendo em vídeo. Mas quem assiste quer o seu conhecimento, não perfeição técnica. O foco da aula é te dar segurança pra gravar, não te transformar em ator.</p>
           </details>
@@ -957,7 +993,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.35s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Meu filho ou funcionário já cuida disso pra mim. Por que aprender eu mesmo?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Delegar parece mais fácil até depender de terceiro pra tudo travar sua velocidade e o controle sobre a sua própria imagem. Ter autonomia pra gravar e ajustar na hora que precisar, sem esperar ninguém, sai mais rápido no fim.</p>
           </details>
@@ -965,7 +1001,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.4s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">A aula é paga?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. A aula ao vivo é 100% gratuita. Você só precisa entrar no grupo do WhatsApp pra receber o link de acesso e os avisos antes do dia 10 de setembro.</p>
           </details>
@@ -973,7 +1009,7 @@
           <details name="faq" class="animate-on-scroll glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300" style="animation-delay:0.45s">
             <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
               <span class="text-sm sm:text-base text-white font-light">Vai ter gravação disponível depois?</span>
-              <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-gold shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
             </summary>
             <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. É só ao vivo, sem replay depois. Se der pra você estar lá no dia 10 de setembro às 21h, é a única forma de acompanhar.</p>
           </details>
@@ -982,7 +1018,7 @@
 
         <div class="animate-on-scroll flex flex-col items-center gap-3 mt-10 sm:mt-14 mb-6" style="animation-delay:0.5s">
           <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
-            <iconify-icon icon="solar:calendar-linear" width="18" class="text-gold"></iconify-icon>
+            <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
             10 de setembro, ao vivo, às 21h
           </p>
           <p class="text-sm sm:text-base text-gold font-medium">
@@ -994,7 +1030,7 @@
           <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
             <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
             <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-              <iconify-icon icon="solar:chat-round-dots-bold" width="16" class="relative z-10 text-gold"></iconify-icon>
+              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
               <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
             </span>
           </a>
@@ -1031,10 +1067,10 @@
             </p>
             <div class="flex items-center gap-4">
               <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
-                <iconify-icon icon="mdi:whatsapp" width="18" class="text-white"></iconify-icon>
+                <svg width="18" height="18" class="icon text-white" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
               </a>
               <a href="https://instagram.com/ninjadafoto" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
-                <iconify-icon icon="mdi:instagram" width="18" class="text-white"></iconify-icon>
+                <svg width="18" height="18" class="icon text-white" aria-hidden="true"><use href="#i-instagram"></use></svg>
               </a>
             </div>
           </div>
@@ -1074,7 +1110,28 @@
   <!-- ================================================================= -->
   <!-- 5. INTERACTION & ANIMATION SCRIPTS (main.js está no <head>, ver topo do arquivo) -->
   <!-- ================================================================= -->
-  <!-- Timeline interativa da seção Cronograma (GSAP ScrollTrigger, mesma técnica do site do Luminae) -->
-  <script src="js/cronograma.js?v=20260825a" defer></script>
+  <!-- Timeline interativa da seção Cronograma (GSAP ScrollTrigger, mesma técnica do site do Luminae).
+       O pin só existe em desktop (>=1024px): no celular o cronograma usa o fallback
+       estático em CSS. Por isso GSAP e ScrollTrigger só são baixados em desktop,
+       em vez de virem sempre e ficarem sem uso no celular, que é onde a conexão
+       costuma ser pior. Carregamento em sequência, porque ScrollTrigger depende
+       do GSAP e cronograma.js depende dos dois. -->
+  <script>
+    (function () {
+      if (!window.matchMedia('(min-width: 1024px)').matches) return;
+      var srcs = [
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+        'js/cronograma.js?v=20260825f'
+      ];
+      (function next(i) {
+        if (i >= srcs.length) return;
+        var s = document.createElement('script');
+        s.src = srcs[i];
+        s.onload = s.onerror = function () { next(i + 1); };
+        document.body.appendChild(s);
+      })(0);
+    })();
+  </script>
 </body>
 </html>

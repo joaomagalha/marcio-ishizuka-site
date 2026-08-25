@@ -30,6 +30,20 @@
       });
     });
 
+    // Rede de segurança contra conteúdo preso invisível.
+    // Os blocos começam em opacity: 0 e só aparecem quando a animação de entrada
+    // roda. Se o navegador suspender essa animação no meio — acontece em navegador
+    // embutido de app e em modo de baixo consumo — o texto simplesmente nunca
+    // aparece. Aqui, se algum bloco continuar invisível depois do prazo, ele é
+    // forçado a aparecer. Só age em quem travou: quem animou normal não é tocado.
+    function resgatarSeInvisivel(el, prazoMs) {
+      setTimeout(() => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.9) {
+          el.classList.add('motion-forced');
+        }
+      }, prazoMs);
+    }
+
     // IntersectionObserver: Triggers animations when blocks are within viewport
     if ('IntersectionObserver' in window) {
       const motionObserver = new IntersectionObserver((entries) => {
@@ -37,6 +51,7 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
             motionObserver.unobserve(entry.target);
+            resgatarSeInvisivel(entry.target, 1500);
           }
         });
       }, {
@@ -92,4 +107,28 @@
       }
 
       Array.from(heading.childNodes).forEach(wrapWords);
+    })();
+
+    // Resgate da hero. É o caso mais crítico: se ela travar, o visitante vê um
+    // título pela metade e nenhum botão. A contagem começa quando o preloader
+    // libera as animações (antes disso elas estão pausadas de propósito).
+    (function () {
+      function resgatarHero() {
+        document
+          .querySelectorAll('#hero .reveal-group > *, #hero .split-word')
+          .forEach((el) => resgatarSeInvisivel(el, 3000));
+      }
+
+      const root = document.documentElement;
+      if (!root.classList.contains('is-preloading')) {
+        resgatarHero();
+        return;
+      }
+      const obs = new MutationObserver(() => {
+        if (!root.classList.contains('is-preloading')) {
+          obs.disconnect();
+          resgatarHero();
+        }
+      });
+      obs.observe(root, { attributes: true, attributeFilter: ['class'] });
     })();
