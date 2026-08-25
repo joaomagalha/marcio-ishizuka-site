@@ -248,47 +248,20 @@
       padding-top: 3.5rem;
       padding-bottom: 3.5rem;
     }
-    /* Modo pinado (GSAP ScrollTrigger, só desktop ≥1024px, ver script no fim do body).
-       height (não min-height): o conteúdo (cabeçalho + 6 passos) é mais alto que uma
-       tela, então precisa travar o stage em exatamente 100vh pra o overflow:hidden
-       cortar de verdade e o scroll interno da timeline (JS) ter efeito. */
-    .cronograma-section.is-ready .cronograma-stage {
-      height: 100vh;
-      padding-top: 88px;
-      padding-bottom: 3rem;
-      align-items: stretch;
-    }
-    /* Janela própria da timeline: cabeçalho fica FORA daqui, então nunca é
-       sobreposto pelo conteúdo da timeline quando ela "rola" internamente. */
-    .cronograma-section.is-ready .cronograma-inner {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+    /* NÃO REINTRODUZIR PIN AQUI. O modo pinado (GSAP ScrollTrigger travando a
+       seção na tela) foi removido em 25/08/2026: o pin vira position:fixed +
+       spacer e no WebKit a seção "flutuava" por cima da seção anterior — mesmo
+       padrão de todas as animações de scroll que já quebraram neste site.
+       Hoje a seção fica no fluxo normal e o js/cronograma.js só atualiza
+       --progress e data-state ao rolar. */
     .cronograma-viewport {
       position: relative;
-    }
-    .cronograma-section.is-ready .cronograma-viewport {
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow: hidden;
-      /* respiro horizontal + vertical pro anel/brilho do nó ativo não ser cortado pelo overflow:hidden
-         (o nó 01 nasce colado no topo da janela, mesmo problema que o das laterais) —
-         margem negativa cancela o deslocamento visual em ambos os eixos */
-      padding: 20px;
-      margin: -20px;
-    }
-    @supports (height: 100svh) {
-      .cronograma-section.is-ready .cronograma-stage {
-        height: 100svh;
-      }
     }
 
     .cronograma-timeline {
       position: relative;
       --progress: 0;
       --node-size: 52px;
-      will-change: transform;
     }
     /* Linha contínua (do centro do 1º nó ao centro do último), preenchimento por cima */
     .cronograma-line {
@@ -383,17 +356,15 @@
       transform: scale(1);
     }
 
-    /* Só no modo pinado: passos futuros ficam recuados/suaves */
+    /* Passos ainda não alcançados ficam suaves — só opacidade (sem translate
+       nem blur: pintura barata, e o conteúdo continua legível se o leitor
+       parar de rolar no meio). */
     .cronograma-section.is-ready .cronograma-step[data-state="idle"] .cronograma-content {
-      opacity: 0.28;
-      transform: translateY(14px);
-      filter: blur(1.5px);
+      opacity: 0.45;
     }
     .cronograma-section.is-ready .cronograma-step[data-state="active"] .cronograma-content,
     .cronograma-section.is-ready .cronograma-step[data-state="done"] .cronograma-content {
       opacity: 1;
-      transform: none;
-      filter: none;
     }
 
     /* Fallback estático (mobile/tablet, sem JS, ou "reduzir movimento"): tudo legível de uma vez */
@@ -490,6 +461,12 @@
       display: inline-block;
       overflow: hidden;
       vertical-align: bottom;
+      /* Respiro pro descendente (j, ç, p, g): a janela de recorte de cada
+         palavra termina na altura da linha, e com leading justo o descendente
+         era cortado. Padding estende o recorte pra baixo e a margem negativa
+         devolve o espaço, sem mexer no layout. */
+      padding-bottom: 0.15em;
+      margin-bottom: -0.15em;
     }
     .split-word {
       display: inline-block;

@@ -1,100 +1,70 @@
-    (function () {
-      'use strict';
+/* Timeline do Cronograma — progresso ligado ao scroll, SEM pin.
+   Versão anterior usava GSAP ScrollTrigger com pin (seção travada na tela
+   enquanto a timeline rolava por dentro). Quebrou em uso real: o pin vira
+   position:fixed + spacer, e no WebKit o atraso do evento de scroll fazia a
+   seção "flutuar" por cima da seção anterior — mesmo problema de sempre neste
+   site com truque de scroll sofisticado (ver histórico no css/style.css).
+   Agora: a seção fica no fluxo normal da página e só duas coisas mudam ao
+   rolar, a altura da linha dourada (--progress) e o estado de cada passo
+   (idle/active/done). Sem fixed, sem spacer, sem CDN — impossível sobrepor.
+   Funciona igual em desktop e mobile; sem JS ou com "reduzir movimento",
+   o CSS mostra tudo concluído e legível (.cronograma-section:not(.is-ready)). */
+(function () {
+  'use strict';
 
-      const section = document.getElementById('cronograma');
-      if (!section) return;
+  const section = document.getElementById('cronograma');
+  if (!section) return;
 
-      const timeline = section.querySelector('[data-cronograma]');
-      const stage = section.querySelector('.cronograma-stage');
-      const viewport = section.querySelector('.cronograma-viewport');
-      const steps = Array.prototype.slice.call(section.querySelectorAll('.cronograma-step'));
-      if (!timeline || !stage || !viewport || !steps.length) return;
+  const timeline = section.querySelector('[data-cronograma]');
+  const steps = Array.prototype.slice.call(section.querySelectorAll('.cronograma-step'));
+  const nodes = steps.map(function (s) { return s.querySelector('.cronograma-node'); });
+  if (!timeline || !steps.length || nodes.indexOf(null) !== -1) return;
 
-      const total = steps.length;
-      let maxScroll = 0;
-      let viewportHeight = 0;
-      let stepBottoms = [];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      // Mede a janela visível (.cronograma-viewport, só embaixo do cabeçalho fixo) e a
-      // borda inferior de cada passo dentro da timeline. Precisa disso porque os 6 passos
-      // juntos são mais altos que uma tela — mas o passo 1 sozinho cabe tranquilo, então
-      // NÃO pode começar a rolar do zero (senão corta o topo dele à toa). Só rola o
-      // suficiente pra manter visível o que já foi "alcançado" até agora.
-      function measure() {
-        const prevTransform = timeline.style.transform;
-        timeline.style.transform = 'none';
-        const tlRect = timeline.getBoundingClientRect();
-        viewportHeight = viewport.clientHeight;
-        stepBottoms = steps.map(function (el) {
-          return el.getBoundingClientRect().bottom - tlRect.top;
-        });
-        maxScroll = Math.max(0, timeline.scrollHeight - viewportHeight);
-        timeline.style.transform = prevTransform;
-      }
+  section.classList.add('is-ready');
 
-      function render(progress) {
-        const p = Math.max(0, Math.min(1, progress));
-        timeline.style.setProperty('--progress', p.toFixed(4));
+  let ticking = false;
 
-        const segment = p * (total - 1);
-        const idx = Math.min(total - 1, Math.floor(segment + 1e-4));
-        const nextIdx = Math.min(total - 1, idx + 1);
-        const frac = segment - idx;
-        const bottom0 = stepBottoms[idx] || 0;
-        const bottom1 = stepBottoms[nextIdx] || bottom0;
-        const neededBottom = bottom0 + (bottom1 - bottom0) * frac;
-        const targetY = Math.max(0, Math.min(maxScroll, neededBottom - viewportHeight));
-        timeline.style.transform = 'translateY(' + (-targetY).toFixed(1) + 'px)';
+  function update() {
+    ticking = false;
 
-        const reached = idx;
-        const complete = p > 0.995;
+    // Linha de foco: um passo "acende" quando o centro do nó dele cruza 62%
+    // da altura da tela (um pouco abaixo do meio: o leitor foca ali).
+    const focus = window.innerHeight * 0.62;
 
-        for (let i = 0; i < total; i++) {
-          steps[i].dataset.state =
-            complete ? 'done' :
-            i < reached ? 'done' :
-            i === reached ? 'active' : 'idle';
-        }
-      }
+    let reached = -1;
+    const centers = nodes.map(function (n) {
+      const r = n.getBoundingClientRect();
+      return r.top + r.height / 2;
+    });
+    for (let i = 0; i < centers.length; i++) {
+      if (centers[i] <= focus) reached = i;
+    }
 
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const hasGSAP = window.gsap && window.ScrollTrigger;
+    // Progresso contínuo da linha: interpola entre o centro do primeiro e do
+    // último nó, pra linha acompanhar o scroll sem saltos.
+    const first = centers[0];
+    const last = centers[centers.length - 1];
+    const p = last === first ? 1 : Math.max(0, Math.min(1, (focus - first) / (last - first)));
+    timeline.style.setProperty('--progress', p.toFixed(4));
 
-      // Fallback estático (mobile/tablet, sem GSAP, ou "reduzir movimento"): o CSS
-      // (.cronograma-section:not(.is-ready)) já mostra a timeline completa e legível.
-      if (prefersReduced || !hasGSAP) return;
+    const complete = reached === steps.length - 1;
+    for (let i = 0; i < steps.length; i++) {
+      steps[i].dataset.state =
+        complete ? 'done' :
+        i < reached ? 'done' :
+        i === reached ? 'active' : 'idle';
+    }
+  }
 
-      gsap.registerPlugin(ScrollTrigger);
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
 
-      // Distância de scroll proporcional ao nº de passos (~70vh por passo, igual ao Luminae).
-      const distance = total * 70;
-
-      // Pin só ativo em desktop (≥1024px) — em mobile/tablet o GSAP fixaria largura no
-      // elemento pinado e causaria overflow horizontal, por isso o fallback estático ali.
-      gsap.matchMedia().add('(min-width: 1024px)', function () {
-        section.classList.add('is-ready');
-        measure();
-        render(0);
-
-        const trigger = ScrollTrigger.create({
-          trigger: section,
-          start: 'top 80px',
-          end: '+=' + distance + '%',
-          pin: stage,
-          pinSpacing: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: function (self) { render(self.progress); },
-          onRefresh: function (self) { measure(); render(self.progress); }
-        });
-
-        return function () {
-          trigger.kill();
-          section.classList.remove('is-ready');
-          // Limpa o transform inline (senão a timeline fica deslocada/sobrepondo
-          // o cabeçalho se a janela for redimensionada de desktop pra mobile).
-          timeline.style.transform = '';
-          timeline.style.removeProperty('--progress');
-        };
-      });
-    })();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
