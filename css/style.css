@@ -133,8 +133,12 @@
         0% { opacity: 0; transform: translateY(30px); }
         100% { opacity: 1; transform: translateY(0); }
       }
+      /* Mais curta que no desktop: no celular o usuário rola mais rápido e passa
+         menos tempo com o bloco em tela, então 0.8s fazia o conteúdo parecer
+         atrasado em vez de elegante. */
       .animate-on-scroll {
         animation-name: scroll-fade-in-mobile;
+        animation-duration: .45s;
       }
     }
 

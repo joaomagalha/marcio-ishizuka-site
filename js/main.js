@@ -39,7 +39,15 @@
             motionObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.2 });
+      }, {
+        // threshold 0.2 exigia que 20% do bloco já estivesse na tela pra só então
+        // começar a animação: somado à duração dela, o conteúdo levava mais de 1s
+        // pra aparecer depois de entrar no campo de visão. Agora dispara assim que
+        // encosta na viewport, e o rootMargin adianta um pouco mais, então o bloco
+        // já chega animado em vez de animar na frente do usuário.
+        threshold: 0,
+        rootMargin: '0px 0px 15% 0px'
+      });
 
       document.querySelectorAll('.animate-on-scroll').forEach((el) => {
         motionObserver.observe(el);

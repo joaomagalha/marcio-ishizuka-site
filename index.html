@@ -69,6 +69,15 @@
       z-index: 2;
       clip-path: inset(0 100% 0 0);
     }
+    /* No instante do corte o site já está aparecendo por trás. O overlay ainda fica
+       ~1s no DOM terminando a animação de saída, e nesse intervalo ele engolia o
+       primeiro toque do usuário (touch-action: none numa camada invisível que cobre
+       a tela inteira). Libera a interação já no corte. */
+    #preloader.is-cut {
+      pointer-events: none;
+      touch-action: auto;
+    }
+
     #preloader.is-cut .preloader-slash {
       animation: preloader-slash-sweep .26s cubic-bezier(.4, 0, .2, 1) forwards;
     }
@@ -211,8 +220,8 @@
   <meta name="twitter:image" content="https://academia.ninjadafoto.com.br/assets/og-image.jpg">
 
   <!-- Site scripts primeiro na ordem de defer, pra não esperar CDN externa (iconify/gsap) antes de rodar -->
-  <script src="js/preloader.js?v=20260825c" defer></script>
-  <script src="js/main.js?v=20260825a" defer></script>
+  <script src="js/preloader.js?v=20260825d" defer></script>
+  <script src="js/main.js?v=20260825d" defer></script>
 
   <!-- Iconify Icons / GSAP: não bloqueiam o parser (defer), executam em ordem antes do DOMContentLoaded -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
@@ -238,7 +247,7 @@
   <link rel="stylesheet" href="css/tailwind.build.css?v=20260825a">
 
   <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825b">
+  <link rel="stylesheet" href="css/style.css?v=20260825d">
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
