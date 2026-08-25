@@ -131,10 +131,8 @@
        teve esse problema por estar sempre na tela inicial; tudo abaixo dela já
        esteve fora da tela em algum momento. Não existe timer confiável contra
        isso, então a única correção real é não ter timer nenhum: o bloco nasce
-       visível, sem opacity:0, sem animation. */
-    .animate-on-scroll {
-      opacity: 1;
-    }
+       visível, sem opacity:0, sem animation — e a classe .animate-on-scroll foi
+       removida do HTML de vez. Não reintroduzir entrada animada fora da hero. */
 
     /* Conic spin for Premium CTA */
     @keyframes conic-spin {
