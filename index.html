@@ -225,6 +225,23 @@
 
   <!-- Custom Core Design System Styles -->
   <link rel="stylesheet" href="css/style.css?v=20260825p">
+
+  <!-- Microsoft Clarity (09/09/2026) — gravação de sessão e mapa de calor.
+       Este site NÃO tem aviso de cookies nem política de privacidade, então o
+       projeto está com o Modo de Consentimento LIGADO no painel do Clarity
+       (Settings > Setup > Cookies DESATIVADO): ele grava a navegação mas não
+       cria cookie nenhum (_clck/_clsk), e por isso não exige banner. A conta
+       é que a sessão ganha um id por página e não é costurada entre páginas.
+       Se um dia o site ganhar banner + política, dá pra ligar os cookies e
+       chamar clarity('consentv2', ...) no aceite, como está na LP
+       ninjacreators.com.br. -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yfi5c6jgfa");
+  </script>
 </head>
 <body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
