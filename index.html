@@ -208,6 +208,8 @@
   <meta name="twitter:image" content="https://ninjadafoto.com.br/assets/og-image.jpg">
 
   <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
+  <script src="js/consent.js?v=20260914optout" defer></script>
+  <script src="js/pixel.js?v=20260914optout" defer></script>
   <script src="js/preloader.js?v=20260825l" defer></script>
   <script src="js/main.js?v=20260825l" defer></script>
 
@@ -226,15 +228,45 @@
   <!-- Custom Core Design System Styles -->
   <link rel="stylesheet" href="css/style.css?v=20260825p">
 
+  <!-- Meta Pixel (14/09/2026). Pixel ID 579964108858174, o MESMO do site
+       semente: os dois alimentam o mesmo público, que é o que vai sustentar a
+       campanha de remarketing.
+
+       LGPD: opt-out. O Pixel entra LIGADO e o banner (js/consent.js) informa e
+       oferece a recusa. Motivo: no semente, em opt-in, a cobertura media 14,3%
+       (231 cliques de anúncio viraram 33 visualizações registradas), o que
+       inviabilizava remarketing. Decisão do João em 14/09.
+
+       A checagem síncrona abaixo revoga ANTES do init pra quem já recusou:
+       js/consent.js carrega com defer e rodaria tarde demais pra impedir o
+       primeiro PageView. -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    try {
+      if (localStorage.getItem('nf_consent') === 'denied') fbq('consent', 'revoke');
+    } catch (e) {}
+    fbq('init', '579964108858174');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=579964108858174&ev=PageView&noscript=1"
+    alt=""></noscript>
+
   <!-- Microsoft Clarity (09/09/2026) — gravação de sessão e mapa de calor.
-       Este site NÃO tem aviso de cookies nem política de privacidade, então o
-       projeto está com o Modo de Consentimento LIGADO no painel do Clarity
-       (Settings > Setup > Cookies DESATIVADO): ele grava a navegação mas não
-       cria cookie nenhum (_clck/_clsk), e por isso não exige banner. A conta
-       é que a sessão ganha um id por página e não é costurada entre páginas.
-       Se um dia o site ganhar banner + política, dá pra ligar os cookies e
-       chamar clarity('consentv2', ...) no aceite, como está na LP
-       ninjacreators.com.br. -->
+       ATUALIZADO 14/09/2026: o site ganhou banner de cookies e política de
+       privacidade (por causa do Meta Pixel), então a condição do comentário
+       antigo foi cumprida. O painel do Clarity SEGUE com os cookies
+       DESATIVADOS (Settings > Setup > Cookies), ou seja ele continua gravando
+       sem criar _clck/_clsk e a sessão não é costurada entre páginas.
+       js/consent.js já chama clarity('consentv2', ...) nas duas direções, então
+       pra ligar os cookies basta virar a chave no painel, sem tocar em código. -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

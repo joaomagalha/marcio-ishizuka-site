@@ -487,3 +487,79 @@
         transform: none;
       }
     }
+
+/* ---------- Aviso de cookies (LGPD), 14/09/2026 ----------
+   Opt-out: o Pixel já está medindo quando este banner aparece; ele informa e
+   oferece a recusa. Paleta do site (--gold / --ink / --paper), não a do site
+   semente, que é outra marca visual. */
+.cookie-consent {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9997;
+  margin: 0 auto;
+  max-width: 40rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
+  background: #0d0d0d;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.8);
+}
+.cookie-consent__txt {
+  flex: 1 1 15rem;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(212, 212, 212, 0.78);
+}
+.cookie-consent__txt a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-consent__acoes {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.cookie-consent__btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.cookie-consent__btn--no {
+  background: transparent;
+  border: 1px solid rgba(212, 212, 212, 0.22);
+  color: rgba(212, 212, 212, 0.72);
+}
+.cookie-consent__btn--no:hover {
+  border-color: rgba(212, 212, 212, 0.45);
+  color: #fff;
+}
+.cookie-consent__btn--yes {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--ink);
+}
+.cookie-consent__btn--yes:hover {
+  transform: scale(1.03);
+}
+@media (max-width: 480px) {
+  .cookie-consent__acoes { width: 100%; }
+  .cookie-consent__btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-consent__btn { transition: none; }
+  .cookie-consent__btn--yes:hover { transform: none; }
+}
