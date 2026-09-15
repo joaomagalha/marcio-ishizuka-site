@@ -1,0 +1,413 @@
+/* ===================================================================
+   CSS exclusivo da página "semente" (produto de entrada, tom impulso).
+   Não mexe em style.css (página prime/Academy) — as duas convivem no
+   mesmo site sem se afetar. Reaproveita as animações/utilitários de
+   style.css (marquee, blob, glass-panel, cronograma, split-word etc.),
+   só define aqui o que é EXCLUSIVO do tom novo: cor de acento (ember em
+   vez de gold), tipografia sem serifa nos títulos, e os componentes que
+   não existem na página atual (faixa de urgência, cards de dor "Eu sei",
+   bloco "duas opções").
+   =================================================================== */
+
+:root {
+  --ember: #F0E6D2;
+  --ember-dark: #D8C7A3;
+  /* 2ª cor de acento (31/08/2026) — vermelhão japonês (朱): laca/torii/carimbo.
+     Creme = calma/superfície; vermelhão = calor pontual (CTA, urgência, 1 número
+     de destaque por seção). */
+  --zhu: #E23B2E;
+  --zhu-dark: #C22E22;
+  /* Níveis de superfície escura — antes era só #030303/#020202 (diferença
+     invisível). Agora um único preto base + um degrau quente pro cronograma. */
+  --surface-0: #0A0A0A;
+  --surface-1: #141210;
+  --cream: #F0E6D2;
+  --cream-ink: #17120E;
+  --r-sm: 8px;
+  --r-md: 12px;
+}
+
+/* Título em Inter bold/extra-bold, sem serifa — de propósito, pra não
+   repetir o gesto editorial da Playfair Display da página prime. */
+.font-impact {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Glow sutil na linha de destaque do hero — reforça o contraste do
+   creme sobre o vídeo de fundo (âmbar demais pra a cor "bater o olho"
+   sozinha). */
+.hero-emphasis {
+  text-shadow: 0 0 28px rgba(240, 230, 210, 0.45), 0 0 8px rgba(240, 230, 210, 0.3);
+}
+
+/* Foco de teclado na cor nova */
+.semente a:focus-visible,
+.semente button:focus-visible,
+.semente summary:focus-visible {
+  outline: 2px solid rgba(240, 230, 210, 0.8);
+  outline-offset: 3px;
+}
+
+/* Cards com borda sólida, sem glassmorphism/blur — mais "cru" e direto,
+   no lugar do .glass-panel elegante da página prime. */
+.hard-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===================================================================
+   FAIXA DE URGÊNCIA — marquee fixo no topo, fundo sólido de acento.
+   Referência de mecânica: imersaoiavideo.com.br (faixa rodando em loop).
+   Cor própria (ember), não copiada da referência.
+   =================================================================== */
+.urgency-bar {
+  position: relative;
+  z-index: 60;
+  background: var(--zhu);
+  color: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+.urgency-track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .urgency-track {
+    animation: none;
+  }
+}
+
+/* ===================================================================
+   BLOCO "EU SEI..." — agitação de dor, frases literais em formato de
+   balão/pill. Referência de mecânica: lutlab.com.br.
+   =================================================================== */
+.pain-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--ember);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===================================================================
+   BLOCO "DUAS OPÇÕES" — comparação direta, sem meio-termo.
+   =================================================================== */
+.option-card {
+  border-radius: 1rem;
+  padding: 1.75rem;
+  height: 100%;
+}
+.option-card--stay {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.option-card--go {
+  background: linear-gradient(180deg, rgba(240, 230, 210, 0.12), rgba(240, 230, 210, 0.02));
+  border: 1px solid rgba(240, 230, 210, 0.4);
+}
+
+/* Botão sólido de acento (sem o anel cônico giratório da página prime —
+   mais direto, "aperta e pronto"). */
+.btn-ember {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--zhu);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 24px -10px rgba(226, 59, 46, 0.55);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-ember:hover {
+  background: var(--zhu-dark);
+  transform: scale(1.03);
+  box-shadow: 0 10px 28px -8px rgba(226, 59, 46, 0.6);
+}
+.btn-ember:active {
+  transform: scale(0.97);
+}
+
+/* Cronograma da página semente: mesmo componente de style.css, só troca
+   a cor da linha/nó de gold pra ember. */
+.semente .cronograma-line-fill {
+  background: linear-gradient(180deg, var(--zhu), var(--zhu-dark));
+}
+.semente .cronograma-node {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  /* Silhueta de luminária de papel (chōchin) — mais alta que larga, cantos
+     macios. Não mexe no tamanho da caixa (o JS mede o centro do nó). */
+  border-radius: 42% / 34%;
+}
+.semente .cronograma-step[data-state="active"] .cronograma-node {
+  background: rgba(226, 59, 46, 0.14);
+  border-color: var(--zhu);
+  color: var(--zhu);
+  box-shadow: 0 0 0 6px var(--surface-1), 0 0 0 11px rgba(226, 59, 46, 0.22);
+}
+.semente .cronograma-step[data-state="done"] .cronograma-node {
+  background: var(--zhu);
+  border-color: var(--zhu);
+  color: #fff;
+}
+.semente .cronograma-section:not(.is-ready) .cronograma-node {
+  background: var(--zhu);
+  border-color: var(--zhu);
+  color: #fff;
+}
+
+/* FAQ desta página: borda de destaque em ember no item aberto */
+.semente #faq details[open] {
+  border-color: rgba(240, 230, 210, 0.4) !important;
+}
+.semente #faq details:not([open]):hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Prova social: moldura do vídeo (linguagem do card-destaque) + citação + realce */
+.prova-frame {
+  border: 1px solid rgba(240, 230, 210, 0.4);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(240, 230, 210, 0.12), rgba(240, 230, 210, 0.02));
+  box-shadow: 0 0 50px rgba(240, 230, 210, 0.1);
+  padding: 6px;
+}
+.prova-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0a0a0a;
+  border-radius: 0.5rem;
+}
+.prova-quote {
+  max-width: 40rem;
+  margin: 1.75rem auto 0;
+  padding: 0.9rem 1.25rem;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--ember);
+  border-radius: 0.5rem;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+.prova-quote::before {
+  content: "\201C";
+  margin-right: 0.1em;
+  color: var(--ember);
+  font-style: normal;
+  font-weight: 700;
+}
+.prova-glow {
+  text-shadow: 0 0 22px rgba(240, 230, 210, 0.45), 0 0 8px rgba(240, 230, 210, 0.3);
+}
+
+/* ===================================================================
+   REFINO VISUAL (31/08/2026) — ritmo de seções, kicker mono + luminária,
+   textura de grão. Objetivo: tirar a cara de "preto chapado feito por IA"
+   sem ir pro tom editorial da página prime.
+   =================================================================== */
+
+/* --- Kicker: rótulo de seção em fonte mono (ficha técnica / método) --- */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.kicker .lantern {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--zhu);
+}
+.kicker .kicker-num {
+  color: var(--zhu);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Textura de grão: overlay único, fixo, estático, sobre a página toda.
+   Dá "dente" às superfícies escuras; imperceptível sobre texto a 3,5%. --- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  mix-blend-mode: overlay;
+}
+@media (max-width: 640px) {
+  .grain-overlay { opacity: 0.026; }
+}
+
+/* --- Seções invertidas: fundo creme, texto e cards near-black.
+   Aplicado em #bonus e #prova-social. Funcionam como pontuação clara. --- */
+.section-cream {
+  background: var(--cream);
+  color: var(--cream-ink);
+  position: relative;
+  isolation: isolate;
+}
+.section-cream::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+.section-cream .text-white,
+.section-cream h1,
+.section-cream h2,
+.section-cream h3 { color: var(--cream-ink); }
+.section-cream .text-neutral-300,
+.section-cream .text-neutral-400 { color: rgba(23, 18, 14, 0.7); }
+.section-cream .text-neutral-500,
+.section-cream .text-neutral-600 { color: rgba(23, 18, 14, 0.52); }
+.section-cream .text-\[\#F0E6D2\],
+.section-cream .prova-glow {
+  color: var(--zhu);
+  text-shadow: none;
+}
+.section-cream .kicker { color: rgba(23, 18, 14, 0.62); }
+.section-cream .hard-card {
+  background: var(--cream-ink);
+  border-color: rgba(23, 18, 14, 0.16);
+  color: #F4ECDD;
+}
+.section-cream .hard-card .text-white,
+.section-cream .hard-card h3 { color: #F4ECDD; }
+.section-cream .hard-card .text-neutral-500 { color: rgba(244, 236, 221, 0.55); }
+.section-cream .hard-card .border-white\/10 { border-color: rgba(244, 236, 221, 0.12); }
+.section-cream .prova-frame {
+  background: var(--cream-ink);
+  border-color: rgba(23, 18, 14, 0.22);
+  box-shadow: 0 24px 60px -24px rgba(23, 18, 14, 0.4);
+}
+.section-cream .prova-quote {
+  background: var(--cream-ink);
+  border-color: rgba(244, 236, 221, 0.14);
+  border-left-color: var(--zhu);
+  color: #F4ECDD;
+}
+.section-cream .prova-quote::before { color: var(--zhu); }
+.bonus-shadow {
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.5));
+}
+.section-cream .bonus-shadow {
+  filter: drop-shadow(0 22px 40px rgba(23, 18, 14, 0.28));
+}
+
+/* ===================================================================
+   BANNER DE CONSENTIMENTO DE COOKIES (LGPD) — 01/09/2026.
+   Fixo no rodapé, discreto, não bloqueia o conteúdo. Superfície
+   near-black da página, acento vermelhão só no "Aceitar". Montado por
+   js/consent.js só na 1ª visita (a escolha fica no localStorage).
+   =================================================================== */
+.cookie-consent {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 9997;
+  margin: 0 auto;
+  max-width: 40rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface-1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-md);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.7);
+}
+.cookie-consent__txt {
+  flex: 1 1 15rem;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.72);
+}
+.cookie-consent__txt a {
+  color: var(--ember);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-consent__acoes {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.cookie-consent__btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.cookie-consent__btn--no {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+}
+.cookie-consent__btn--no:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+.cookie-consent__btn--yes {
+  background: var(--zhu);
+  border: 1px solid var(--zhu);
+  color: #fff;
+}
+.cookie-consent__btn--yes:hover {
+  background: var(--zhu-dark);
+  transform: scale(1.03);
+}
+@media (max-width: 480px) {
+  .cookie-consent__acoes {
+    width: 100%;
+  }
+  .cookie-consent__btn {
+    flex: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-consent__btn {
+    transition: none;
+  }
+  .cookie-consent__btn--yes:hover {
+    transform: none;
+  }
+}

@@ -23,16 +23,20 @@
   // já terminou de animar por trás do preloader antes dele soltar a cortina. Essas
   // animações começam a contar do carregamento da página, não de quando o
   // preloader sai, então se ele saísse cedo demais (conexão rápida, tudo em cache)
-  // o visitante veria o título da hero ainda se completando palavra por palavra
-  // em vez de já pronto. 2200ms cobre o pior caso: a última palavra do título
-  // (26 palavras, ~0.045s de intervalo cada) termina de entrar em ~2.125s.
+  // o visitante veria o conteúdo da hero ainda entrando em vez de já pronto.
+  // 27/08/2026 (auditoria): esse número era 2200ms, calculado pro efeito de
+  // título "palavra por palavra" que existe na página prime (herdado por
+  // copiar main.js) — mas o H1 desta página não tem a classe que aquele
+  // efeito procura, então ele nunca roda aqui. A entrada real que existe
+  // (.reveal-group, ver css/style.css) termina em ~1.7s (float-up 1s, último
+  // item com delay 0.7s). 1800ms cobre isso com uma margem pequena.
   // Revisita na mesma sessão (voltou do WhatsApp, atualizou a página): a
-  // coreografia completa de 2200ms já cumpriu o papel na primeira vez — repetir
-  // vira só espera. Encurta pra um fade rápido. try/catch porque sessionStorage
+  // coreografia completa já cumpriu o papel na primeira vez — repetir vira
+  // só espera. Encurta pra um fade rápido. try/catch porque sessionStorage
   // pode lançar em navegação privada de alguns navegadores.
   let jaViu = false;
   try { jaViu = sessionStorage.getItem('mi-preloader') === '1'; } catch (e) {}
-  const MIN_MS = reduced ? 0 : (jaViu ? 400 : 2200);
+  const MIN_MS = reduced ? 0 : (jaViu ? 400 : 1800);
   // Trava de segurança: se algum recurso externo travar (CDN fora do ar, rede ruim),
   // o site abre assim mesmo. Fica abaixo do failsafe de 8s que está no CSS.
   const HARD_MS = 7500;

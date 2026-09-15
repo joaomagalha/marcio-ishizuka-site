@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
-  <title>Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular</title>
-  <meta name="theme-color" content="#030303">
+  <meta name="description" content="Ninja Creators: o curso do fotógrafo Márcio Ishizuka pra quem tem 45+ e nunca se gravou. Câmera, formato, enquadramento e luz, do zero, só com o celular. Acesso imediato, 7 dias de garantia.">
+  <title>Ninja Creators · foto e vídeo profissional com o celular · Márcio Ishizuka</title>
+  <meta name="theme-color" content="#0A0A0A">
 
-  <!-- Liga o preloader já no parse, antes da hero renderizar, pra que as animações de
-       entrada fiquem pausadas atrás da tela de carregamento em vez de rodar escondidas.
-       Fica inline de propósito: se dependesse de um arquivo externo, a hero já teria
-       começado a animar antes do script chegar. O timeout é uma segunda trava de
-       segurança, caso js/preloader.js não carregue por algum motivo. -->
+  <!-- Verificação de domínio do Business Manager do Márcio (BM "Studio
+       Marcio ishizuka", 01/09/2026) — pré-requisito pra rodar anúncio pro
+       domínio. Tem que ficar no <head> estático, não pode ser injetado
+       por JS. -->
+  <meta name="facebook-domain-verification" content="t2bompim99fx0qztqz85jsdvkwd7cn" />
+
+  <!-- Liga o preloader já no parse — mesmo mecanismo de index.html, ver o
+       comentário lá pra motivo completo (evitar animação da hero rodando
+       escondida atrás da tela de carregamento). -->
   <script>
     document.documentElement.classList.add('is-preloading');
     setTimeout(function () {
@@ -19,44 +23,19 @@
     }, 8000);
   </script>
 
-  <!-- CSS crítico da tela de carregamento.
-       Inline de propósito (única exceção no projeto, o resto do CSS está em css/):
-       precisa pintar no primeiro frame possível. Se estivesse em css/style.css, o
-       usuário veria fundo branco até o arquivo chegar, exatamente o que a tela de
-       carregamento existe pra evitar. -->
+  <!-- CSS crítico da tela de carregamento — mesmo bloco de index.html, só
+       a cor do anel/barra muda pra ember (o resto do mecanismo é idêntico). -->
   <style>
-    html { background: #030303; }
-
-    /* Sprite de ícones: nunca aparece, só guarda os <symbol>. Fica no CSS crítico
-       porque um <svg> sem dimensão ocuparia 300x150 e empurraria o layout até o
-       css principal chegar. */
+    html { background: #0A0A0A; }
     .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
     .icon { display: inline-block; vertical-align: -0.125em; }
-    /* Sem atributo width, um <svg> assume 300x150 (o <iconify-icon> assumia 1em).
-       Reproduz o padrão antigo sem atropelar quem tem tamanho explícito. */
     .icon:not([width]) { width: 1em; height: 1em; }
-
-    /* A entrada da hero NÃO fica pausada esperando o preloader sair (era assim antes:
-       ver histórico do commit). Motivo da mudança: pausar uma animação em CSS e
-       confiar que ela retoma sozinha quando a classe que pausa é removida é exatamente
-       o tipo de coisa que o WebKit do iPhone não garante — em 3 aparelhos diferentes
-       (nenhum com cache prévio, incluindo depois de trocar de GitHub Pages pra Vercel)
-       a animação simplesmente nunca retomava, e todo mundo caía no resgate de 7s como
-       se fosse o caminho normal. Agora a entrada roda direto desde o carregamento da
-       página, escondida atrás do preloader (que é opaco e cobre a tela toda) — quando
-       ele sai, o conteúdo já está pronto, sem depender de retomar animação nenhuma. */
-
-    /* Rede de segurança: nenhum texto pode ficar preso invisível porque uma
-       animação não terminou. Se o motor do navegador suspender as animações no
-       meio (acontece em navegador embutido de app e em modo de baixo consumo),
-       o conteúdo aparece assim mesmo. Aplicada por JS só no que ficou travado. */
     .motion-forced {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
       filter: none !important;
     }
-
     #preloader {
       position: fixed;
       inset: 0;
@@ -64,25 +43,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #030303;
+      background: #0A0A0A;
       touch-action: none;
       transition: opacity .45s ease;
-      /* Trava de segurança em CSS puro: se o JS falhar, a tela some sozinha */
       animation: preloader-failsafe 0s linear 8s forwards;
     }
     @keyframes preloader-failsafe {
       to { opacity: 0; visibility: hidden; pointer-events: none; }
     }
-
-    /* Saída: o preto some por opacidade e o conteúdo recua de leve.
-       pointer-events/touch-action caem já no início do fade, senão o overlay
-       (ainda no DOM até terminar a transição) engole o primeiro toque. */
     #preloader.is-leaving {
       opacity: 0;
       pointer-events: none;
       touch-action: auto;
     }
-
     .preloader-content {
       position: relative;
       display: flex;
@@ -94,8 +67,6 @@
       opacity: 0;
       transform: scale(.97);
     }
-
-    /* Marca ninja com anéis girando (leitura de shuriken, sem virar desenho animado) */
     .preloader-mark {
       position: relative;
       width: 46px;
@@ -108,7 +79,7 @@
     .preloader-mark svg {
       width: 46px;
       height: 46px;
-      color: #D4AF37;
+      color: #F0E6D2;
       animation: preloader-breathe 2.4s ease-in-out infinite;
     }
     @keyframes preloader-breathe {
@@ -122,20 +93,19 @@
     }
     .preloader-ring {
       inset: -16px;
-      border-top-color: #D4AF37;
-      border-right-color: rgba(212,175,55,.3);
+      border-top-color: #F0E6D2;
+      border-right-color: rgba(226,59,46,.35);
       animation: preloader-spin 1.1s linear infinite;
     }
     .preloader-ring-2 {
       inset: -27px;
       border-style: dashed;
-      border-color: rgba(212,175,55,.16);
+      border-color: rgba(226,59,46,.18);
       animation: preloader-spin 7s linear infinite reverse;
     }
     @keyframes preloader-spin {
       to { transform: rotate(360deg); }
     }
-
     .preloader-phrase {
       font-family: Inter, system-ui, -apple-system, sans-serif;
       font-size: 10px;
@@ -146,7 +116,6 @@
       margin-bottom: 18px;
       transition: opacity .2s ease;
     }
-
     .preloader-bar {
       position: relative;
       width: 168px;
@@ -157,12 +126,11 @@
     .preloader-bar-fill {
       position: absolute;
       inset: 0;
-      background: #D4AF37;
-      box-shadow: 0 0 8px rgba(212,175,55,.7);
+      background: #F0E6D2;
+      box-shadow: 0 0 8px rgba(226,59,46,.7);
       transform: scaleX(0);
       transform-origin: left center;
     }
-
     .preloader-pct {
       font-family: Inter, system-ui, -apple-system, sans-serif;
       font-size: 9px;
@@ -171,7 +139,6 @@
       color: rgba(255,255,255,.32);
       margin-top: 14px;
     }
-
     @media (prefers-reduced-motion: reduce) {
       .preloader-mark svg,
       .preloader-ring,
@@ -186,60 +153,57 @@
     </style>
   </noscript>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-  <!-- Open Graph / preview ao compartilhar no WhatsApp, Instagram etc. -->
-  <!-- og:url e og:image usam o domínio final ninjadafoto.com.br (comprado na Hostinger,
-       apontado pra Vercel em 25/08/2026) — funciona assim que o DNS propagar. -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
+  <!-- 27/08/2026: trocado do link .vercel.app pro domínio definitivo agora
+       que o DNS/SSL do ninjacreators.com.br estão no ar. og:image com
+       ?v=2 é cache-buster — sem isso, quem já tentou compartilhar o link
+       ANTES do domínio novo ficar pronto (SSL ainda gerando) fica preso
+       na prévia "sem imagem" que o WhatsApp cacheia por URL. -->
   <meta property="og:url" content="https://ninjadafoto.com.br/">
-  <meta property="og:title" content="Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular">
-  <meta property="og:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
-  <meta property="og:image" content="https://ninjadafoto.com.br/assets/og-image.jpg">
+  <meta property="og:title" content="Ninja Creators · foto e vídeo profissional com o celular">
+  <meta property="og:description" content="O curso do Márcio Ishizuka pra quem nunca se gravou: câmera, formato, enquadramento e luz, do zero, só com o celular. R$ 199, 7 dias de garantia.">
+  <meta property="og:image" content="https://ninjadafoto.com.br/assets/og-image.jpg?v=3">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Márcio Ishizuka · Ninja Fácil: fotos e vídeos profissionais com o celular">
-  <meta name="twitter:description" content="Aprenda a gravar fotos e vídeos profissionais usando só o celular, com o fotógrafo, mentor e palestrante Márcio Ishizuka. Sem equipamento caro, sem enrolação.">
-  <meta name="twitter:image" content="https://ninjadafoto.com.br/assets/og-image.jpg">
+  <meta name="twitter:title" content="Ninja Creators · foto e vídeo profissional com o celular">
+  <meta name="twitter:description" content="O curso do Márcio Ishizuka pra quem nunca se gravou: do zero, só com o celular. R$ 199, 7 dias de garantia.">
+  <meta name="twitter:image" content="https://ninjadafoto.com.br/assets/og-image.jpg?v=3">
 
-  <!-- Scripts do site. Nenhum depende de servidor de terceiro pra rodar. -->
-  <script src="js/consent.js?v=20260914optout" defer></script>
-  <script src="js/pixel.js?v=20260914optout" defer></script>
-  <script src="js/preloader.js?v=20260825l" defer></script>
-  <script src="js/main.js?v=20260825l" defer></script>
+  <!-- Mesmos scripts de index.html — main.js é genérico (seleciona por
+       id/classe, não tem nada específico da página prime). Cronograma
+       removido em 09/09 (decisão de 03/09 nunca tinha sido executada aqui). -->
+  <script src="js/preloader.js?v=20260915v" defer></script>
+  <script src="js/main.js?v=20260915v" defer></script>
+  <script src="js/consent.js?v=20260915v" defer></script>
+  <script src="js/pixel.js?v=20260915w" defer></script>
 
-  <!-- Fontes servidas pelo próprio site (assets/fonts/). Antes vinham do
-       fonts.googleapis.com + fonts.gstatic.com, duas conexões a terceiros no
-       caminho crítico da renderização. -->
-  <link rel="stylesheet" href="css/fonts.css?v=20260825f">
+  <link rel="stylesheet" href="css/fonts.css?v=20260915v">
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-normal-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/playfair-display-normal-latin.woff2" crossorigin>
 
-  <!-- Tailwind CSS pré-compilado (build local via tailwind.config.js — ver package.json "build:css").
-       Substitui o cdn.tailwindcss.com: aquele script baixa e roda o compilador JIT inteiro no navegador
-       a cada carregamento, o que no celular segurava o resto da página por vários segundos. -->
-  <link rel="stylesheet" href="css/tailwind.build.css?v=20260825g">
+  <link rel="stylesheet" href="css/tailwind.build.css?v=20260915v">
+  <link rel="stylesheet" href="css/style.css?v=20260915v">
+  <link rel="stylesheet" href="css/semente.css?v=20260915v">
 
-  <!-- Custom Core Design System Styles -->
-  <link rel="stylesheet" href="css/style.css?v=20260825p">
+  <!-- Vercel Web Analytics (27/08/2026) — site estático puro, então o
+       script não é injetado sozinho (isso só é automático em projeto
+       Next.js); precisa desse tag manual pra contar visitantes/pageviews. -->
+  <script defer src="/_vercel/insights/script.js"></script>
 
-  <!-- Meta Pixel (14/09/2026). Pixel ID 579964108858174, o MESMO do site
-       semente: os dois alimentam o mesmo público, que é o que vai sustentar a
-       campanha de remarketing.
-
-       LGPD: opt-out. O Pixel entra LIGADO e o banner (js/consent.js) informa e
-       oferece a recusa. Motivo: no semente, em opt-in, a cobertura media 14,3%
-       (231 cliques de anúncio viraram 33 visualizações registradas), o que
-       inviabilizava remarketing. Decisão do João em 14/09.
-
-       A checagem síncrona abaixo revoga ANTES do init pra quem já recusou:
-       js/consent.js carrega com defer e rodaria tarde demais pra impedir o
-       primeiro PageView. -->
+  <!-- Meta Pixel (01/09/2026) — ID 579964108858174, conta de anúncio do
+       Márcio (BM "Studio Marcio ishizuka"). Snippet padrão da Meta: carrega
+       o fbevents.js e dispara o PageView. O evento de conversão (Lead, no
+       clique dos CTAs "Entrar no Grupo") fica em js/pixel.js.
+       LGPD, revisto em 14/09/2026: o Pixel entra LIGADO (opt-out). O banner
+       informa e permite recusar; quem recusa dispara fbq('consent','revoke')
+       em js/consent.js e para de ser medido daquele ponto em diante.
+       Motivo da troca: em opt-in a cobertura media 14,3% (231 cliques de
+       anúncio viraram 33 visualizações registradas), o que inviabilizava
+       remarketing. Decisão do João em 14/09. -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -249,6 +213,10 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    // Quem JÁ recusou antes: revoga de forma SÍNCRONA, antes do init, pra
+    // que nem o PageView saia. js/consent.js carrega com defer e rodaria tarde
+    // demais pra impedir esse primeiro evento. Sem esta checagem, a recusa não
+    // seria respeitada de verdade nas visitas seguintes.
     try {
       if (localStorage.getItem('nf_consent') === 'denied') fbq('consent', 'revoke');
     } catch (e) {}
@@ -260,13 +228,13 @@
     alt=""></noscript>
 
   <!-- Microsoft Clarity (09/09/2026) — gravação de sessão e mapa de calor.
-       ATUALIZADO 14/09/2026: o site ganhou banner de cookies e política de
-       privacidade (por causa do Meta Pixel), então a condição do comentário
-       antigo foi cumprida. O painel do Clarity SEGUE com os cookies
-       DESATIVADOS (Settings > Setup > Cookies), ou seja ele continua gravando
-       sem criar _clck/_clsk e a sessão não é costurada entre páginas.
-       js/consent.js já chama clarity('consentv2', ...) nas duas direções, então
-       pra ligar os cookies basta virar a chave no painel, sem tocar em código. -->
+       LGPD, igual ao Pixel, revisto em 14/09/2026 pra opt-out: o projeto segue
+       com o Modo de Consentimento LIGADO (Settings > Setup > Cookies DESATIVADO
+       no painel do Clarity), mas agora js/consent.js concede na entrada, então
+       o cookie (_clck/_clsk) é criado desde o carregamento. Quem RECUSA no
+       banner dispara clarity('consentv2', denied) e volta pro modo sem cookie.
+       Quem recusa continua sendo gravado em modo sem cookie: a sessão ganha
+       um id por página e não é costurada entre páginas. -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -274,14 +242,37 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "yfi5c6jgfa");
   </script>
-</head>
-<body class="antialiased selection:bg-[#D4AF37] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
 
-  <!-- Sprite de ícones local. Substitui o runtime do Iconify (script externo +
-       chamada à api.iconify.design a cada carregamento): agora os ícones já vêm
-       no HTML, sem depender de nenhum servidor de terceiro pra aparecer. -->
+<style>
+  /* Site de vendas (15/09/2026): foto do hero fundida no preto + quadro de foco, cartão de preço. */
+  .hero-foto{position:absolute;right:0;top:0;bottom:0;width:min(62vw,820px);}
+  .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:72% top;display:block;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 26%);mask-image:linear-gradient(to right,transparent 0%,#000 26%);}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(to right,#0A0A0A 0%,#0A0A0A 30%,rgba(10,10,10,.55) 46%,rgba(10,10,10,0) 62%),linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,0) 28%)}
+  .hero-foco{position:absolute;left:39%;top:15%;width:21%;aspect-ratio:1/1.25;pointer-events:none}
+  .hero-foco span{position:absolute;width:22px;height:22px;border:2px solid rgba(240,230,210,.9)}
+  .hero-foco span:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.hero-foco span:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}.hero-foco span:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.hero-foco span:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+  .hero-foco i{position:absolute;left:0;top:-30px;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:12px;letter-spacing:.14em;color:rgba(240,230,210,.9)}
+  .hero-foco i::first-letter{color:#E23B2E}
+  @media (max-width:1023px){.hero-foto{width:100%;opacity:.45}.hero-foto img{-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 30%,transparent 95%)}.hero-foco{display:none}}
+  .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
+  .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+</style>
+</head>
+<body class="semente antialiased selection:bg-[#F0E6D2] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Grão de filme sobre a página toda — tira o "preto digital chapado" -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Sprite de ícones — idêntico ao de index.html -->
   <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
-    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/></symbol>
+    <symbol id="i-ninja-logo" viewBox="0 0 512 512">
+          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
+          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
+          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
+          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
+        </symbol>
+    <symbol id="i-shield-check-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10.417c0-3.198 0-4.797.378-5.335c.377-.537 1.88-1.052 4.887-2.081l.573-.196C10.405 2.268 11.188 2 12 2s1.595.268 3.162.805l.573.196c3.007 1.029 4.51 1.544 4.887 2.081C21 5.62 21 7.22 21 10.417v1.574c0 5.638-4.239 8.375-6.899 9.536C13.38 21.842 13.02 22 12 22s-1.38-.158-2.101-.473C7.239 20.365 3 17.63 3 11.991z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9.5 12.4l1.429 1.6L14.5 10"/></g></symbol>
+    <symbol id="i-cart-large-2-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M2 3l.265.088c1.32.44 1.98.66 2.357 1.184C5 4.796 5 5.492 5 6.883v3.05c0 3.3 0 4.95 1.025 5.975S8.7 16.933 12 16.933h8"/><path d="M7.5 18a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm9 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Z"/><path stroke-linecap="round" d="M5 6h13.45c1.727 0 2.59 0 2.973.564c.383.564.121 1.364-.4 2.965l-.395 1.207c-.47 1.437-.705 2.156-1.269 2.567c-.564.412-1.318.412-2.826.412H5"/></g></symbol>
     <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></symbol>
     <symbol id="i-alt-arrow-down-linear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></symbol>
     <symbol id="i-arrow-right-linear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12H20M14 18L20 12L14 6"/></symbol>
@@ -290,22 +281,19 @@
     <symbol id="i-chart-2-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 22H21"/><path d="M3 11C3 10.0572 3 9.58579 3.29289 9.29289C3.58579 9 4.05719 9 5 9C5.94281 9 6.41421 9 6.70711 9.29289C7 9.58579 7 10.0572 7 11V17C7 17.9428 7 18.4142 6.70711 18.7071C6.41421 19 5.94281 19 5 19C4.05719 19 3.58579 19 3.29289 18.7071C3 18.4142 3 17.9428 3 17V11Z"/><path d="M10 7C10 6.05719 10 5.58579 10.2929 5.29289C10.5858 5 11.0572 5 12 5C12.9428 5 13.4142 5 13.7071 5.29289C14 5.58579 14 6.05719 14 7V17C14 17.9428 14 18.4142 13.7071 18.7071C13.4142 19 12.9428 19 12 19C11.0572 19 10.5858 19 10.2929 18.7071C10 18.4142 10 17.9428 10 17V7Z"/><path d="M17 4C17 3.05719 17 2.58579 17.2929 2.29289C17.5858 2 18.0572 2 19 2C19.9428 2 20.4142 2 20.7071 2.29289C21 2.58579 21 3.05719 21 4V17C21 17.9428 21 18.4142 20.7071 18.7071C20.4142 19 19.9428 19 19 19C18.0572 19 17.5858 19 17.2929 18.7071C17 18.4142 17 17.9428 17 17V4Z"/></g></symbol>
     <symbol id="i-chat-round-dots-bold" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C10.4003 22 8.88867 21.6239 7.54785 20.9561C7.19153 20.7786 6.78396 20.7204 6.39941 20.8232L4.17383 21.4189C3.20749 21.6775 2.3225 20.7925 2.58105 19.8262L3.17676 17.6006C3.27965 17.216 3.22142 16.8085 3.04395 16.4521C2.37612 15.1113 2 13.5997 2 12C2 6.47715 6.47715 2 12 2ZM7.99121 11C7.43893 11 6.99121 11.4477 6.99121 12C6.99121 12.5523 7.43893 13 7.99121 13C8.54327 12.9997 8.99121 12.5521 8.99121 12C8.99121 11.4479 8.54327 11.0003 7.99121 11ZM12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11ZM16.0088 11C15.4565 11 15.0088 11.4477 15.0088 12C15.0088 12.5523 15.4565 13 16.0088 13C16.5611 13 17.0088 12.5523 17.0088 12C17.0088 11.4477 16.5611 11 16.0088 11Z" clip-rule="evenodd"/></symbol>
     <symbol id="i-check-circle-bold" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM16.0303 8.96967C16.3232 9.26256 16.3232 9.73744 16.0303 10.0303L11.0303 15.0303C10.7374 15.3232 10.2626 15.3232 9.96967 15.0303L7.96967 13.0303C7.67678 12.7374 7.67678 12.2626 7.96967 11.9697C8.26256 11.6768 8.73744 11.6768 9.03033 11.9697L10.5 13.4393L12.7348 11.2045L14.9697 8.96967C15.2626 8.67678 15.7374 8.67678 16.0303 8.96967Z" clip-rule="evenodd"/></symbol>
-    <symbol id="i-check-read-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M4 12.9L7.14286 16.5L15 7.5"/><path d="M20 7.5625L11.4283 16.5625L11 16"/></g></symbol>
-    <symbol id="i-checklist-minimalistic-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 15.8L7.14286 17L10 14"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 8.8L7.14286 10L10 7"/><path stroke-linecap="round" d="M13 9L18 9"/><path stroke-linecap="round" d="M13 16L18 16"/></g></symbol>
-    <symbol id="i-clapperboard-open-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11H16C17.8856 11 18.8284 11 19.4142 11.5858C20 12.1716 20 13.1144 20 15V16C20 18.8284 20 20.2426 19.1213 21.1213C18.2426 22 16.8284 22 14 22H10C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16V11Z"/><path d="M4.00128 10.9997C3.51749 9.19412 3.27559 8.29135 3.48364 7.51489C3.61994 7.00622 3.88773 6.5424 4.2601 6.17003C4.82851 5.60162 5.73128 5.35973 7.53682 4.87593L14.5398 2.99949C15.213 2.8191 15.5496 2.72891 15.8445 2.70958C17.0553 2.63022 18.1946 3.28804 18.7313 4.37629C18.862 4.64129 18.9522 4.97791 19.1326 5.65114C19.1927 5.87556 19.2228 5.98776 19.2292 6.08604C19.2557 6.48964 19.0364 6.86943 18.6736 7.04832C18.5853 7.09188 18.4731 7.12195 18.2487 7.18208L4.00128 10.9997Z"/><path stroke-linecap="round" d="M14.7004 2.94135L14.0627 8.28861"/><path stroke-linecap="round" d="M8.42209 4.62396L7.78433 9.97123"/></g></symbol>
     <symbol id="i-close-circle-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5"/></g></symbol>
-    <symbol id="i-eye-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C4.97196 6.49956 7.81811 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957Z"/><path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"/></g></symbol>
-    <symbol id="i-global-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 10.6868 2.25866 9.38642 2.76121 8.17316C3.26375 6.95991 4.00035 5.85752 4.92893 4.92893C5.85752 4.00035 6.95991 3.26375 8.17317 2.7612C9.38642 2.25866 10.6868 2 12 2C13.3132 2 14.6136 2.25866 15.8268 2.76121C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12L22 12Z"/><path d="M16 12C16 13.3132 15.8965 14.6136 15.6955 15.8268C15.4945 17.0401 15.1999 18.1425 14.8284 19.0711C14.457 19.9997 14.016 20.7362 13.5307 21.2388C13.0454 21.7413 12.5253 22 12 22C11.4747 22 10.9546 21.7413 10.4693 21.2388C9.98396 20.7362 9.54301 19.9997 9.17157 19.0711C8.80014 18.1425 8.5055 17.0401 8.30448 15.8268C8.10346 14.6136 8 13.3132 8 12C8 10.6868 8.10346 9.38642 8.30448 8.17316C8.5055 6.95991 8.80014 5.85752 9.17157 4.92893C9.54301 4.00035 9.98396 3.26375 10.4693 2.7612C10.9546 2.25866 11.4747 2 12 2C12.5253 2 13.0454 2.25866 13.5307 2.76121C14.016 3.26375 14.457 4.00035 14.8284 4.92893C15.1999 5.85752 15.4945 6.95991 15.6955 8.17317C15.8965 9.38642 16 10.6868 16 12L16 12Z"/><path stroke-linecap="round" d="M2 12H22"/></g></symbol>
+    <symbol id="i-clapperboard-open-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11H16C17.8856 11 18.8284 11 19.4142 11.5858C20 12.1716 20 13.1144 20 15V16C20 18.8284 20 20.2426 19.1213 21.1213C18.2426 22 16.8284 22 14 22H10C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16V11Z"/><path d="M4.00128 10.9997C3.51749 9.19412 3.27559 8.29135 3.48364 7.51489C3.61994 7.00622 3.88773 6.5424 4.2601 6.17003C4.82851 5.60162 5.73128 5.35973 7.53682 4.87593L14.5398 2.99949C15.213 2.8191 15.5496 2.72891 15.8445 2.70958C17.0553 2.63022 18.1946 3.28804 18.7313 4.37629C18.862 4.64129 18.9522 4.97791 19.1326 5.65114C19.1927 5.87556 19.2228 5.98776 19.2292 6.08604C19.2557 6.48964 19.0364 6.86943 18.6736 7.04832C18.5853 7.09188 18.4731 7.12195 18.2487 7.18208L4.00128 10.9997Z"/><path stroke-linecap="round" d="M14.7004 2.94135L14.0627 8.28861"/><path stroke-linecap="round" d="M8.42209 4.62396L7.78433 9.97123"/></g></symbol>
     <symbol id="i-layers-minimalistic-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.97883 9.68508C2.99294 8.89073 2 8.49355 2 8C2 7.50645 2.99294 7.10927 4.97883 6.31492L7.7873 5.19153C9.77318 4.39718 10.7661 4 12 4C13.2339 4 14.2268 4.39718 16.2127 5.19153L19.0212 6.31492C21.0071 7.10927 22 7.50645 22 8C22 8.49355 21.0071 8.89073 19.0212 9.68508L16.2127 10.8085C14.2268 11.6028 13.2339 12 12 12C10.7661 12 9.77318 11.6028 7.7873 10.8085L4.97883 9.68508Z"/><path stroke-linecap="round" d="M22 12C22 12 21.0071 12.8907 19.0212 13.6851L16.2127 14.8085C14.2268 15.6028 13.2339 16 12 16C10.7661 16 9.77318 15.6028 7.7873 14.8085L4.97883 13.6851C2.99294 12.8907 2 12 2 12"/><path stroke-linecap="round" d="M22 16C22 16 21.0071 16.8907 19.0212 17.6851L16.2127 18.8085C14.2268 19.6028 13.2339 20 12 20C10.7661 20 9.77318 19.6028 7.7873 18.8085L4.97883 17.6851C2.99294 16.8907 2 16 2 16"/></g></symbol>
-    <symbol id="i-map-point-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10.1433C4 5.64588 7.58172 2 12 2C16.4183 2 20 5.64588 20 10.1433C20 14.6055 17.4467 19.8124 13.4629 21.6744C12.5343 22.1085 11.4657 22.1085 10.5371 21.6744C6.55332 19.8124 4 14.6055 4 10.1433Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
     <symbol id="i-star-fall-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path stroke-linecap="round" stroke-width="1.5" d="M7.44645 7.24078C5.11144 8.94872 3.32371 12.2154 4.24844 18C5.06701 15.5887 7.53446 13.6575 10.2908 12.7279M11.1852 4.22083C11.7062 2.80412 11.9667 2.09577 12.5116 2.00845C13.0564 1.92112 13.5247 2.51266 14.4614 3.69574L14.7037 4.00181C14.9699 4.338 15.103 4.5061 15.2839 4.60208C15.4649 4.69807 15.6732 4.71107 16.0898 4.73708L16.4692 4.76076C17.9354 4.85229 18.6685 4.89806 18.9229 5.40935C19.1774 5.92063 18.7846 6.55883 17.999 7.83522L17.7958 8.16544C17.5725 8.52815 17.4609 8.70951 17.4308 8.91657C17.4006 9.12364 17.4553 9.33297 17.5648 9.75163L17.6644 10.1328C18.0496 11.6061 18.2421 12.3427 17.8545 12.746C17.4669 13.1493 16.7558 12.9522 15.3337 12.558L14.9658 12.456C14.5616 12.344 14.3596 12.288 14.16 12.32C13.9604 12.3519 13.7859 12.4683 13.4369 12.701L13.1191 12.9129C11.8909 13.7319 11.2768 14.1414 10.7828 13.8794C10.2889 13.6174 10.2422 12.8574 10.1488 11.3373L10.1247 10.9441C10.0981 10.5121 10.0849 10.2962 9.99166 10.1089C9.89846 9.92158 9.73589 9.78417 9.41074 9.50935L9.11472 9.25915C7.97052 8.29204 7.39841 7.80849 7.48073 7.24324C7.56305 6.67798 8.24527 6.40538 9.60971 5.86016L9.96271 5.71911C10.3504 5.56417 10.5443 5.48671 10.6863 5.33897C10.8283 5.19122 10.9023 4.98993 11.0504 4.58735L11.1852 4.22083Z"/><path d="M10.2808 16C10.2808 16 10.9135 17.3908 11.6935 17.8692C12.4735 18.3475 14 18.2808 14 18.2808C14 18.2808 12.6092 18.9135 12.1308 19.6935C11.6525 20.4735 11.7192 22 11.7192 22C11.7192 22 11.0865 20.6092 10.3065 20.1308C9.52652 19.6525 8 19.7192 8 19.7192C8 19.7192 9.39082 19.0865 9.86916 18.3065C10.3475 17.5265 10.2808 16 10.2808 16Z"/><path d="M18.4795 15C18.4795 15 18.0577 15.9272 17.5377 16.2461C17.0177 16.565 16 16.5205 16 16.5205C16 16.5205 16.9272 16.9423 17.2461 17.4623C17.565 17.9823 17.5205 19 17.5205 19C17.5205 19 17.9423 18.0728 18.4623 17.7539C18.9823 17.435 20 17.4795 20 17.4795C20 17.4795 19.0728 17.0577 18.7539 16.5377C18.435 16.0177 18.4795 15 18.4795 15Z"/></g></symbol>
     <symbol id="i-sun-2-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 2V4"/><path stroke-linecap="round" d="M12 20V22"/><path stroke-linecap="round" d="M4 12L2 12"/><path stroke-linecap="round" d="M22 12L20 12"/><path stroke-linecap="round" d="M19.7778 4.22266L17.5558 6.25424"/><path stroke-linecap="round" d="M4.22217 4.22266L6.44418 6.25424"/><path stroke-linecap="round" d="M6.44434 17.5557L4.22211 19.7779"/><path stroke-linecap="round" d="M19.7778 19.7773L17.5558 17.5551"/></g></symbol>
     <symbol id="i-videocamera-record-linear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 9.50019L17.6584 9.17101C19.6042 8.19807 20.5772 7.7116 21.2886 8.15127C22 8.59094 22 9.67872 22 11.8543V12.1461C22 14.3217 22 15.4094 21.2886 15.8491C20.5772 16.2888 19.6042 15.8023 17.6584 14.8294L17 14.5002V9.50019Z"/><path d="M13.5607 7.43934C14.1464 8.02513 14.1464 8.97487 13.5607 9.56066C12.9749 10.1464 12.0251 10.1464 11.4393 9.56066C10.8536 8.97487 10.8536 8.02513 11.4393 7.43934C12.0251 6.85355 12.9749 6.85355 13.5607 7.43934Z"/><path d="M2 11.5C2 8.21252 2 6.56878 2.90796 5.46243C3.07418 5.25989 3.25989 5.07418 3.46243 4.90796C4.56878 4 6.21252 4 9.5 4C12.7875 4 14.4312 4 15.5376 4.90796C15.7401 5.07418 15.9258 5.25989 16.092 5.46243C17 6.56878 17 8.21252 17 11.5V12.5C17 15.7875 17 17.4312 16.092 18.5376C15.9258 18.7401 15.7401 18.9258 15.5376 19.092C14.4312 20 12.7875 20 9.5 20C6.21252 20 4.56878 20 3.46243 19.092C3.25989 18.9258 3.07418 18.7401 2.90796 18.5376C2 17.4312 2 15.7875 2 12.5V11.5Z"/></g></symbol>
+    <!-- Luminária de papel japonesa (chōchin) — assinatura de marca reaproveitada
+         do carrossel do Márcio. Monoline, usada nos contadores de seção. -->
+    <symbol id="i-chochin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M9.5 3.2h5M10 20.8h4"/><path d="M12 3.2c-3.7 0-6.1 2.9-6.1 7.3s2.4 8.1 6.1 8.1 6.1-3.7 6.1-8.1S15.7 3.2 12 3.2Z"/><path d="M6.5 9.3h11M6.1 13.9h11.8" stroke-opacity="0.5"/></g></symbol>
   </svg>
 
-
   <!-- ================================================================= -->
-  <!-- 0. TELA DE CARREGAMENTO — ver js/preloader.js -->
+  <!-- 0. TELA DE CARREGAMENTO — idêntica à de index.html                -->
   <!-- ================================================================= -->
   <div id="preloader" role="status" aria-label="Carregando o site">
     <div class="preloader-content">
@@ -319,898 +307,254 @@
           <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
         </svg>
       </div>
-
-      <p class="preloader-phrase">Ajustando a luz</p>
-
+      <p class="preloader-phrase">Ninja Creators</p>
       <div class="preloader-bar" aria-hidden="true">
         <span class="preloader-bar-fill"></span>
       </div>
-
       <p class="preloader-pct">0%</p>
     </div>
   </div>
 
-
-  <!-- 1. NAVIGATION HEADER -->
-  <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 border-b border-transparent">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#hero" class="text-white tracking-[0.1em] sm:tracking-[0.2em] text-[10px] sm:text-xs font-light uppercase flex items-center gap-2 sm:gap-3" aria-label="Márcio Ishizuka Home">
-        <svg width="19" height="19" viewBox="0 0 512 512" fill="currentColor" class="text-gold/80 shrink-0 sm:w-[23px] sm:h-[23px]" aria-hidden="true">
-          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
-          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
-          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
-          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
-        </svg>
-        <span>Márcio Ishizuka</span>
+  <header id="main-header" class="sticky top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-surface0">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+      <a href="#hero" class="text-white tracking-tight text-sm sm:text-base font-extrabold uppercase flex items-center gap-2" aria-label="Ninja Creators">
+        <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor" class="text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-ninja-logo"></use></svg>
+        <span>Ninja Creators</span>
       </a>
-
-      <!-- Navigation links -->
-      <nav class="hidden md:flex items-center gap-10 text-[10px] uppercase tracking-[0.2em] font-light">
-        <a href="#aprendizado" class="text-neutral-400 hover:text-white transition-colors duration-300">Aula Ao Vivo</a>
-        <a href="#trajetoria" class="text-neutral-400 hover:text-white transition-colors duration-300">Quem é o Márcio</a>
-        <a href="#contato" class="text-neutral-400 hover:text-white transition-colors duration-300">Contato</a>
-      </nav>
-
-      <!-- CTA Button -->
-      <div>
-        <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 bg-white hover:bg-neutral-200 text-black rounded-full transition-all duration-300 text-[9px] sm:text-[10px] tracking-wide sm:tracking-widest uppercase font-medium overflow-hidden hover:scale-105 active:scale-95 whitespace-nowrap">
-          <span class="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-          <span class="relative z-10">Entrar no Grupo</span>
-        </a>
-      </div>
+      <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs" aria-label="Comprar o Ninja Creators na Hotmart">Quero o curso · R$ 199<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
     </div>
   </header>
 
-  <!-- MAIN CANVAS -->
   <main class="flex-grow">
 
-    <!-- ================================================================= -->
-    <!-- 2. HERO — FLAGSHIP SECTION                                        -->
-    <!-- ================================================================= -->
-    <section id="hero" class="relative lg:min-h-screen lg:h-screen flex items-center overflow-hidden pt-24 pb-14 lg:pt-24 lg:pb-0">
-      
-      <!-- BACKGROUND LAYERS -->
-      <!-- Mesh dotted structure -->
-      <div class="absolute inset-0 animated-grid-bg opacity-40 pointer-events-none z-0"></div>
-      
-      <!-- Glowing blobs: breathing gold + white -->
-      <div class="absolute top-[15%] right-[10%] w-[380px] lg:w-[480px] h-[380px] lg:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.06] rounded-full decor-blob pointer-events-none animate-blob z-0"></div>
-      <div class="absolute bottom-[5%] left-[20%] w-[280px] lg:w-[380px] h-[280px] lg:h-[380px] bg-white blur-[120px] opacity-[0.03] rounded-full decor-blob decor-blob-white pointer-events-none animate-blob z-0" style="animation-delay: -5s;"></div>
-
-      <!-- Watermark / Oversized Ghost Typography behind headline -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none z-0 animate-ghost-drift">
-        <span class="font-display ghost-text text-[22vw] leading-none whitespace-nowrap font-medium tracking-tighter uppercase select-none">ISHIZUKA</span>
+    <!-- HERO -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center bg-ink border-b border-white/5">
+      <div class="absolute inset-0 z-0">
+        <div class="hero-foto"><img src="assets/hero-marcio-retrato.webp" alt="" width="900" height="1200"><div class="hero-foco" aria-hidden="true"><span></span><span></span><span></span><span></span><i>● REC 00:12</i></div></div>
+        <div class="hero-shade" aria-hidden="true"></div>
       </div>
-
-      <!-- PORTRAIT IMAGE FULL BLEED BLENDED (Outside of rectangle) -->
-      <div class="absolute right-0 top-0 w-full lg:w-1/2 h-full z-0 overflow-hidden select-none pointer-events-none">
-        <!-- Portrait Image with smooth zoom and grayscale transition -->
-        <img src="./assets/01-head-ishizuka-bw.webp"
-             alt="Retrato de Márcio Ishizuka"
-             class="w-full h-full object-cover object-[68%_12%] lg:object-[72%_15%] premium-grayscale-transition"
-             loading="eager"
-             fetchpriority="high"
-             width="800"
-             height="1000">
-
-        <!-- Left Fade (Desktop only): Fades the image to the background dark color -->
-        <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#030303] to-transparent z-10 hidden lg:block"></div>
-        
-        <!-- Right Fade: Blends image edge if screen is very wide -->
-        <div class="absolute inset-y-0 right-0 w-1/12 bg-gradient-to-l from-[#030303] to-transparent z-10 hidden lg:block"></div>
-        
-        <!-- Top Fade: Blends with sticky header and top margin -->
-        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#030303] to-transparent z-10"></div>
-        
-        <!-- Bottom Fade: Blends with infinite marquee divider -->
-        <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent z-10"></div>
-        
-        <!-- Mobile overlays for legibility -->
-        <div class="absolute inset-0 bg-[#030303]/70 lg:hidden z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303] lg:hidden z-10"></div>
-      </div>
-
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="max-w-7xl mx-auto px-6 w-full relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
-        <!-- LEFT COLUMN: Content & Philosophy -->
-        <div class="lg:col-span-7 flex flex-col justify-center text-left reveal-group">
-          
-          <!-- Category Eyebrow Badge -->
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit cursor-default">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-60"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
-            </span>
-            <span>Aula ao vivo e gratuita · Ninja Fácil</span>
-          </div>
-
-          <!-- Main Editorial Title -->
-          <h1 class="hero-title font-display text-[1.45rem] sm:text-3xl md:text-[2.15rem] lg:text-[2.75rem] text-white leading-[1.3] tracking-tight mb-6 max-w-2xl">
-            Em 1 aula ao vivo e gratuita, vou te ensinar a gravar <span class="text-gold italic">fotos e vídeos profissionais</span> usando só o celular que você já tem no bolso.
+      <div class="max-w-6xl mx-auto px-6 relative z-10 w-full reveal-group">
+        <div class="max-w-3xl">
+          <div class="kicker px-3 py-1.5 rounded-full border border-[#F0E6D2]/30 bg-[#F0E6D2]/10 mb-6 w-fit"><span class="relative flex h-2 w-2"><span class="relative inline-flex rounded-full h-2 w-2 bg-zhu"></span></span><span>Curso online · acesso imediato</span></div>
+          <h1 class="font-impact text-white uppercase tracking-tight mb-6">
+            <span class="block text-[1.9rem] leading-[1.12] sm:text-4xl md:text-[2.75rem]">Grave como um profissional.</span>
+            <span class="hero-emphasis block italic text-ember text-[2.1rem] leading-[1.12] sm:text-[2.6rem] md:text-[3.25rem] mt-2 max-w-2xl">Só com o celular que já está no seu bolso.</span>
           </h1>
-
-          <!-- O que você vai aprender / promessas-chave -->
-          <ul class="flex flex-col gap-3 max-w-xl mb-10">
-            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-              Passo a passo do zero
-            </li>
-            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-              Sem comprar nenhum equipamento
-            </li>
-            <li class="flex items-center gap-3 text-sm sm:text-lg text-neutral-200 font-light">
-              <svg width="20" height="20" class="icon text-gold shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-              Resultado prático ainda durante a aula
-            </li>
+          <p class="text-sm sm:text-lg text-neutral-300 font-light leading-relaxed max-w-xl mb-8">Pra quem tem 45+, domina o que faz e nunca gravou um vídeo de si mesmo. Câmera, formato, enquadramento e luz, do zero, sem comprar equipamento.</p>
+          <div class="flex flex-col items-start gap-4 mb-8">
+            <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
+            <p class="flex items-center gap-2 text-xs text-neutral-400 font-light"><svg width="14" height="14" class="icon text-[#F0E6D2]" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>R$ 199 ou 12x de R$ 20,58 · Pix, cartão ou boleto · 7 dias de garantia</p>
+          </div>
+          <ul class="flex flex-wrap gap-x-6 gap-y-3 text-left max-w-xl">
+            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Assiste no celular</li>
+            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Acesso na hora</li>
+            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Do absoluto zero</li>
+            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>7 dias de garantia</li>
           </ul>
-
-          <!-- Action Buttons / CTAs -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10">
-            <!-- Premium CTA Beam: Conic border glowing ring + Shimmer inside -->
-            <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
-              <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
-              <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-8 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-                <span class="absolute inset-0 overflow-hidden rounded-full">
-                  <span class="animate-shimmer-sweep absolute top-0 left-0 h-full w-full -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 group-hover:opacity-100"></span>
-                </span>
-                <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
-                <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-                <svg width="14" height="14" class="icon relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg>
-              </span>
-            </a>
-
-            <!-- Glass Secondary CTA -->
-            <a href="#aprendizado" class="group relative inline-flex items-center gap-2 px-5 py-3 sm:px-8 sm:py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/50 text-white rounded-full transition-all duration-500 overflow-hidden text-xs tracking-widest uppercase font-light">
-              <span class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/10 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-              <span>Como Funciona a Aula</span>
-            </a>
-          </div>
-
-          <!-- Data da aula visível no mobile: no desktop essa informação vive no badge
-               flutuante da coluna direita, que o mobile não tem — sem isso o visitante
-               de celular só descobre a data lá na terceira dobra. -->
-          <p class="lg:hidden flex items-center gap-2 -mt-5 mb-10 text-xs text-neutral-300 font-light">
-            <svg width="14" height="14" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
-            Próxima aula: 10 de setembro · 21h (Cuiabá)
-          </p>
-
-          <!-- Metadados / Specs Row -->
-          <div class="grid grid-cols-3 gap-4 py-6 border-t border-white/5 text-neutral-400 max-w-xl">
-            <div class="flex items-center gap-2">
-              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-map-point-linear"></use></svg>
-              <div class="text-left">
-                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Presença</p>
-                <p class="text-xs text-white mt-1 font-light">Cuiabá, MT</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-global-linear"></use></svg>
-              <div class="text-left">
-                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Herança</p>
-                <p class="text-xs text-white mt-1 font-light">Cultura Japonesa</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg width="16" height="16" class="icon text-gold/80" aria-hidden="true"><use href="#i-star-fall-linear"></use></svg>
-              <div class="text-left">
-                <p class="text-[9px] text-neutral-500 uppercase tracking-widest leading-none">Trajetória</p>
-                <p class="text-xs text-white mt-1 font-light">15+ Anos de Arte</p>
-              </div>
-            </div>
-          </div>
-
         </div>
-
-        <!-- RIGHT COLUMN: Grid placeholder on desktop to balance text, and container for the floating badge -->
-        <div class="hidden lg:flex lg:col-span-5 relative h-full min-h-[400px] items-end justify-end pb-12 pointer-events-none">
-          <!-- Editorial Pill Badge Overlay (próxima aula ao vivo) -->
-          <div class="glass-panel rounded-full px-5 py-3 border border-white/10 backdrop-blur-md flex items-center gap-3 pointer-events-auto select-none">
-            <div class="flex items-center justify-center w-9 h-9 rounded-full border border-gold/30 bg-gold/5 shrink-0">
-              <svg width="16" height="16" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
-            </div>
-            <div>
-              <p class="text-[8px] uppercase tracking-widest text-neutral-500 leading-none">Próxima Aula Ao Vivo</p>
-              <p class="text-[10px] text-white font-light mt-0.5">10 de Setembro · 21h (Cuiabá)</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Scrolling indicator (Indicator of continuation) -->
-      <div class="absolute bottom-8 left-6 hidden lg:flex items-center gap-3 text-neutral-500 z-10 pointer-events-none select-none">
-        <span class="w-px h-10 bg-gradient-to-b from-neutral-500 to-transparent"></span>
-        <span class="text-[9px] uppercase tracking-[0.25em] font-light">Deslizar</span>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- 3. TRUST / CAPABILITY TICKER — INFINITE MARQUEE                   -->
-    <!-- ================================================================= -->
-    <section class="relative border-y border-white/5 bg-[#020202] py-8 overflow-hidden z-10">
-      <div class="glow-bg absolute inset-0 pointer-events-none"></div>
+    <!-- MARQUEE -->
+    <section class="relative border-b border-white/5 bg-surface0 py-6 overflow-hidden z-10" aria-hidden="true">
       <div class="hide-scrollbar overflow-hidden relative z-10">
-        <!-- Mask overlay on left & right borders for soft fading marquee transition -->
-        <div class="absolute left-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-r from-[#030303] to-transparent"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-16 z-20 bg-gradient-to-l from-[#030303] to-transparent"></div>
-
-        <div class="flex w-max animate-marquee gap-16 whitespace-nowrap text-[10px] font-light uppercase tracking-[0.25em] text-neutral-500 select-none">
-          <!-- Duplicated set for seamless loop -->
-          <div class="flex gap-16 items-center">
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-camera-linear"></use></svg>Câmera Pelo Celular</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>Luz e Enquadramento</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>Roteiro e Direção</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>Edição Simples</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>Conteúdo Que Vende</span>
-          </div>
-          <div class="flex gap-16 items-center" aria-hidden="true">
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-camera-linear"></use></svg>Câmera Pelo Celular</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>Luz e Enquadramento</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>Roteiro e Direção</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>Edição Simples</span>
-            <span class="flex items-center gap-2"><svg class="icon text-gold/60" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>Conteúdo Que Vende</span>
-          </div>
+        <div class="flex w-max animate-marquee gap-12 whitespace-nowrap text-[10px] sm:text-xs font-bold uppercase tracking-widest text-neutral-400 select-none">
+          <div class="flex gap-12 items-center"><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-camera-linear"></use></svg>Câmera pelo celular</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-layers-minimalistic-linear"></use></svg>Resolução e formato</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-clapperboard-open-linear"></use></svg>Enquadramento de cinema</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-sun-2-linear"></use></svg>Luz sem comprar nada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-videocamera-record-linear"></use></svg>Aula ao vivo gravada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia</span></div><div class="flex gap-12 items-center"><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-camera-linear"></use></svg>Câmera pelo celular</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-layers-minimalistic-linear"></use></svg>Resolução e formato</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-clapperboard-open-linear"></use></svg>Enquadramento de cinema</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-sun-2-linear"></use></svg>Luz sem comprar nada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-videocamera-record-linear"></use></svg>Aula ao vivo gravada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- 3. BÔNUS EXCLUSIVO — presente pra quem entra no grupo             -->
-    <!-- ================================================================= -->
-    <section id="bonus" class="relative py-14 sm:py-20 lg:py-28 overflow-hidden bg-[#030303] border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] bg-[#D4AF37] blur-[150px] opacity-[0.05] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
-
-      <div class="max-w-5xl mx-auto px-6 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          <!-- Coluna visual: mockup real do checklist -->
-          <div class="flex justify-center order-2 lg:order-1">
-            <div class="relative w-full max-w-[260px] sm:max-w-[300px]">
-              <!-- Luz ambiente sutil atrás do objeto, no idioma do design system (radial suave, sem bloom saturado) -->
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-[#D4AF37] blur-[55px] opacity-[0.18] rounded-full decor-blob pointer-events-none" aria-hidden="true"></div>
-              <img src="./assets/checklist-ninja-facil-mockup-pdf.webp" alt="Mockup do PDF Checklist Ninja Fácil: equipamentos baratos pra começar" class="relative z-10 w-full h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.5)]" loading="lazy">
-              <!-- Sombra de contato no chão, pra ancorar o objeto -->
-              <div class="absolute bottom-2 inset-x-8 h-4 bg-black/60 blur-lg rounded-[100%] pointer-events-none" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <!-- Coluna de texto -->
-          <div class="order-1 lg:order-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit cursor-default">
-              <span>Presente exclusivo pra quem participar</span>
-            </div>
-            <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
-              Antes mesmo da aula começar, você já sai ganhando.
-            </h2>
-            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-6 max-w-md">
-              Todo mundo que participar da aula ao vivo recebe o <span class="text-white">Checklist Ninja Fácil</span>: o que vale (e o que não vale) comprar pra gravar seus primeiros vídeos, lapela, luz e indicação de celular, mais um desconto de um parceiro do Márcio pra quem precisar trocar de aparelho.
-            </p>
-
-            <!-- Badge de valor (ancoragem) -->
-            <div class="glass-panel rounded-2xl border border-gold/20 flex items-stretch overflow-hidden max-w-md mb-6">
-              <div class="flex-1 px-5 py-4 border-r border-white/10">
-                <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Valor deste checklist</p>
-                <p class="text-lg text-neutral-500 font-light line-through decoration-neutral-500">De R$47</p>
-              </div>
-              <div class="flex-1 px-5 py-4">
-                <p class="text-[9px] uppercase tracking-widest text-neutral-500 mb-1">Por participar da aula</p>
-                <p class="font-display text-2xl text-gold">Grátis</p>
-              </div>
-            </div>
-
-            <p class="text-xs text-neutral-500 font-light mb-8">Liberado durante a aula ao vivo, dia 10 de setembro. Só rola pra quem estiver lá.</p>
-            <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
-              <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
-              <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-                <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
-                <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-              </span>
-            </a>
-          </div>
-
+    <!-- 01 PRA QUEM -->
+    <section id="pra-quem" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="max-w-2xl mx-auto text-center mb-10 sm:mb-14">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">01</span> · Pra quem é</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Excelente no que faz. Invisível pra quem não te conhece.</h2>
+          <p class="text-sm sm:text-base text-neutral-400 font-light">Antes de comprar, vê se esse curso é mesmo pra você.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 4. URGÊNCIA — por que é agora ou nunca (real, não fabricada)      -->
-    <!-- ================================================================= -->
-    <section id="urgencia" class="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#020202] border-t border-white/5">
-      <div class="max-w-3xl mx-auto px-6 relative z-10">
-        <!-- Painel de destaque: essa é A mensagem de escassez do site (transmissão
-             única), então ganha moldura própria em vez de texto solto na página. -->
-        <div class="glass-panel rounded-3xl border border-gold/20 px-6 py-10 sm:px-12 sm:py-12 text-center relative overflow-hidden">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-[#D4AF37] blur-[150px] opacity-[0.05] rounded-full decor-blob pointer-events-none" aria-hidden="true"></div>
-          <div class="relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-60"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
-              </span>
-              <span>Transmissão única · Sem replay</span>
-            </div>
-            <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
-              Essa aula é só ao vivo, sem gravação depois.
-            </h2>
-            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-xl mx-auto">
-              Se der pra você entrar no grupo e estar lá no dia 10 de setembro às 21h, é a única forma de acompanhar. Não fica um replay guardado pra assistir depois.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 5. O QUE VOCÊ VAI APRENDER — Nível 1 da esteira (câmera pelo celular) -->
-    <!-- ================================================================= -->
-    <section id="aprendizado" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.12] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
-
-      <div class="max-w-6xl mx-auto px-6 relative z-10">
-        <div class="max-w-2xl mx-auto text-center mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-            <svg width="14" height="14" class="icon text-gold/80" aria-hidden="true"><use href="#i-checklist-minimalistic-linear"></use></svg>
-            <span>O que você vai aprender</span>
-          </div>
-          <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">
-            Tudo isso, ao vivo, numa aula só.
-          </h2>
-          <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto">
-            Você não precisa de uma câmera profissional pra começar. Primeiro o Márcio te ensina a enxergar e dominar aquilo que já está na sua mão. É por ele que vamos começar.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-camera-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Câmera Pelo Celular</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Como segurar, configurar e enquadrar sem precisar de equipamento caro.</p>
-          </div>
-
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-sun-2-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Luz e Enquadramento</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Aproveitar a luz que você já tem em casa, sem comprar nenhum equipamento.</p>
-          </div>
-
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-clapperboard-open-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Roteiro e Direção</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena com naturalidade, sem travar na frente da câmera.</p>
-          </div>
-
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-layers-minimalistic-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Edição Simples</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Cortes e ajustes rápidos, sem precisar dominar um app complicado.</p>
-          </div>
-
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-chart-2-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Conteúdo Que Vende</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
-          </div>
-
-          <div class="flashlight-card group relative bg-[#0a0a0a] border border-white/5 hover:border-gold/50 rounded-2xl p-6 overflow-hidden transition-all duration-500 hover:-translate-y-1">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:border-gold/30 group-hover:bg-gold/5 transition-all duration-500">
-              <svg width="22" height="22" class="icon text-gold/80" aria-hidden="true"><use href="#i-eye-linear"></use></svg>
-            </div>
-            <h3 class="font-display text-lg text-white mb-2">Fotos Que Impressionam</h3>
-            <p class="text-xs text-neutral-400 font-light leading-relaxed">Retratos e still simples que parecem produção profissional, só com o que você já tem.</p>
-          </div>
-        </div>
-
-        <p class="text-center text-xs text-neutral-500 font-light mt-10 mb-8 max-w-2xl mx-auto">
-          Depois desse primeiro passo, tem caminho pra quem quiser ir além (câmera profissional, formação avançada), mas isso é assunto pra depois. Hoje é só sobre o que você já tem no bolso.
-        </p>
-
-        <div class="flex flex-col items-center gap-3 mb-6">
-          <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
-            <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
-            10 de setembro, ao vivo, às 21h
-          </p>
-          <p class="text-sm sm:text-base text-gold font-medium">
-            Vagas limitadas no grupo do WhatsApp
-          </p>
-        </div>
-
-        <div class="flex justify-center">
-          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
-            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
-            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
-              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 5.5 CRONOGRAMA DA AULA — PROVISÓRIO, horários fictícios pra dar    -->
-    <!-- estrutura visual. Validar com o Márcio em 25/08/2026 e substituir -->
-    <!-- pelos horários reais (tarefa criada no Notion). Os blocos de      -->
-    <!-- conteúdo em si (câmera, luz, roteiro, edição, conteúdo, fotos)    -->
-    <!-- são reais, só a divisão de tempo entre eles é um rascunho.        -->
-    <!-- ================================================================= -->
-    <section id="cronograma" class="cronograma-section relative overflow-hidden bg-[#020202] border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
-
-      <div class="cronograma-track">
-        <div class="cronograma-stage">
-          <div class="cronograma-inner max-w-2xl mx-auto px-6 relative z-10 w-full">
-            <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-                <span>Como vai funcionar</span>
-              </div>
-              <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Uma aula com começo, meio e fim. Sem enrolação.</h2>
-              <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto">Direto ao ponto, do início ao fim da aula ao vivo.</p>
-            </div>
-
-            <div class="cronograma-viewport">
-              <div class="cronograma-timeline" data-cronograma>
-                <div class="cronograma-line" aria-hidden="true">
-                  <div class="cronograma-line-fill"></div>
-                </div>
-
-                <ol class="cronograma-steps">
-
-                  <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">01</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h00</p>
-                    <h3 class="font-display text-lg text-white mb-1">Abertura</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Por que isso importa agora e o que muda na forma como você vai gravar a partir de hoje.</p>
-                  </div>
-                </li>
-
-                <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">02</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h10</p>
-                    <h3 class="font-display text-lg text-white mb-1">Câmera pelo celular, luz e enquadramento</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Como segurar, configurar e aproveitar a luz que você já tem, sem comprar equipamento.</p>
-                  </div>
-                </li>
-
-                <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">03</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h30</p>
-                    <h3 class="font-display text-lg text-white mb-1">Roteiro, direção e edição simples</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Como se posicionar e conduzir a cena, e os cortes e ajustes rápidos que fazem a diferença.</p>
-                  </div>
-                </li>
-
-                <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">04</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">21h50</p>
-                    <h3 class="font-display text-lg text-white mb-1">Conteúdo que vende e fotos que impressionam</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Transformar o que você grava em algo que atrai cliente de verdade.</p>
-                  </div>
-                </li>
-
-                <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">05</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">22h10</p>
-                    <h3 class="font-display text-lg text-white mb-1">Checklist liberado</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">O bônus (PDF com os itens baratos pra começar) é liberado pra quem estiver na aula.</p>
-                  </div>
-                </li>
-
-                <li class="cronograma-step" data-state="idle">
-                  <div class="cronograma-node" aria-hidden="true">
-                    <span class="cronograma-node-num">06</span>
-                    <svg class="icon cronograma-node-check" aria-hidden="true"><use href="#i-check-read-linear"></use></svg>
-                  </div>
-                  <div class="cronograma-content">
-                    <p class="text-xs uppercase tracking-widest text-gold mb-1">22h20</p>
-                    <h3 class="font-display text-lg text-white mb-1">Perguntas e encerramento</h3>
-                    <p class="text-sm text-neutral-400 font-light leading-relaxed">Espaço aberto pra tirar dúvidas antes de fechar a noite.</p>
-                  </div>
-                </li>
-
-              </ol>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 6.5 PRA QUEM É — autosseleção do avatar real                       -->
-    <!-- ================================================================= -->
-    <section id="pra-quem" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-[#020202] border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
-
-      <div class="max-w-4xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-            <span>Pra quem é essa aula</span>
-          </div>
-          <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Você pode ser excelente no que faz. Se ninguém vê, o mercado não percebe.</h2>
-          <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto">Antes de entrar no grupo, vê se essa aula é mesmo pra você.</p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
-          <div class="glass-panel rounded-2xl border border-gold/20 p-6 sm:p-7">
-            <p class="text-[10px] uppercase tracking-widest text-gold mb-5">É pra você se</p>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Você já domina o que faz (médico, advogado, consultor, palestrante, dono de negócio, prestador de serviço) mas nunca conseguiu gravar um vídeo decente de si mesmo
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Sente que tem valor pra mostrar, mas trava na hora de aparecer, gravar ou editar
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Nunca gravou um vídeo com o próprio celular, ou já tentou e não gostou do resultado
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-200 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Quer aprender do absoluto zero, sem comprar equipamento nenhum
-              </li>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="hard-card rounded-xl p-6">
+            <p class="kicker mb-4"><span class="kicker-num">É pra você se</span></p>
+            <ul class="space-y-3 text-sm text-neutral-300 font-light">
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Você já domina o que faz (médico, advogado, consultor, dono de negócio, prestador de serviço) mas nunca conseguiu gravar um vídeo decente de si mesmo</li>
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Sente que tem valor pra mostrar, mas trava na hora de aparecer, gravar ou editar</li>
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Nunca gravou com o próprio celular, ou já tentou e não gostou do resultado</li>
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Quer aprender do zero, sem comprar equipamento nenhum</li>
             </ul>
           </div>
-
-          <div class="glass-panel rounded-2xl border border-white/5 p-6 sm:p-7">
-            <p class="text-[10px] uppercase tracking-widest text-neutral-500 mb-5">Não é pra você se</p>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
-                Você já grava e edita seus próprios vídeos com tranquilidade, esse conteúdo vai parecer básico
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
-                Está procurando virar fotógrafo profissional ou prestador de serviço de fotografia, esse é outro caminho, não é o desta aula
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-400 font-light">
-                <svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>
-                Quer direto câmera profissional, luz de estúdio e formação avançada, isso existe no caminho do Márcio, mas é assunto pra depois, não desta aula
-              </li>
+          <div class="hard-card rounded-xl p-6">
+            <p class="kicker mb-4"><span class="text-neutral-500">Não é pra você se</span></p>
+            <ul class="space-y-3 text-sm text-neutral-400 font-light">
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>Você já grava e edita seus vídeos com tranquilidade: esse conteúdo vai parecer básico</li>
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>Quer virar fotógrafo profissional ou prestador de serviço de fotografia: é outro caminho</li>
+              <li class="flex gap-3"><svg width="18" height="18" class="icon text-neutral-500 shrink-0 mt-0.5" aria-hidden="true"><use href="#i-close-circle-linear"></use></svg>Quer direto câmera profissional, luz de estúdio e formação avançada: isso existe no caminho do Márcio, mas é assunto pra depois</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- 7. QUEM É O MÁRCIO — autoridade como história pessoal, sem números fabricados -->
-    <!-- ================================================================= -->
-    <section id="trajetoria" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-[#020202] border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.1] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-[10%] right-[8%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] bg-[#D4AF37] blur-[150px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
-
-      <div class="max-w-6xl mx-auto px-6 relative z-10">
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-            <span>Quem é o Márcio</span>
-          </div>
-          <p class="text-xs uppercase tracking-[0.25em] text-gold/80 font-light">Fotógrafo · Mentor · Palestrante</p>
+    <!-- 02 O QUE VOCÊ RECEBE -->
+    <section id="entrega" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">02</span> · O que você recebe</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Módulo 1: Despertando o Olhar Ninja</h2>
+          <p class="text-sm sm:text-base text-neutral-400 font-light">Seis aulas curtas, na ordem certa, e a aula ao vivo inteira gravada. Tudo na sua área de alunos, pra assistir no celular, no seu tempo.</p>
         </div>
-
-        <div class="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-12 lg:gap-16 items-start">
-
-          <!-- Coluna da foto -->
-          <div class="relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[320px]">
-            <div class="hidden sm:block absolute -top-3 -left-3 w-10 h-10 border-t border-l border-gold/40 pointer-events-none" aria-hidden="true"></div>
-            <div class="hidden sm:block absolute -bottom-3 -right-3 w-10 h-10 border-b border-r border-gold/40 pointer-events-none" aria-hidden="true"></div>
-            <div class="relative rounded-2xl overflow-hidden border border-white/10">
-              <img src="./assets/marcio-retrato.webp" alt="Retrato de Márcio Ishizuka, fotógrafo, mentor e palestrante" class="w-full h-auto object-cover" loading="lazy">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" aria-hidden="true"></div>
-              <div class="absolute bottom-4 left-4 right-4">
-                <p class="text-white text-sm font-medium">Márcio Ishizuka</p>
-                <p class="text-[10px] text-gold uppercase tracking-widest mt-0.5">15+ Anos de Mercado</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Coluna de texto -->
-          <div>
-            <blockquote class="font-display text-xl sm:text-3xl text-white leading-[1.35] tracking-tight mb-6">
-              "Não era a câmera que precisava melhorar. <span class="text-gold italic">Era eu.</span>"
-            </blockquote>
-
-            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-4">
-              Há mais de 15 anos o Márcio é fotógrafo profissional em Cuiabá. 99% dos clientes chegam por agências de publicidade, não por procura direta do público. É um nome forte no mercado B2B, mas praticamente desconhecido de quem não trabalha com propaganda.
-            </p>
-            <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed mb-8">
-              A trajetória pessoal dele é o maior diferencial. Foi no Japão que entendeu, pela primeira vez, que equipamento sozinho não bastava. De volta ao Brasil, com muito pouco dinheiro no bolso, teve que provar pra si mesmo que aquilo que tinha aprendido era suficiente pra recomeçar do zero. Ele conta essa história inteira, pela primeira vez, na aula ao vivo do dia 10 de setembro.
-            </p>
-
-            <ul class="space-y-3 mb-10">
-              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Nome consolidado no mercado publicitário de Cuiabá, mesmo sendo desconhecido do público geral
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Passou por 9 trabalhos veiculados em outdoor pela cidade sem que a própria família soubesse que eram dele
-              </li>
-              <li class="flex items-start gap-3 text-sm text-neutral-300 font-light">
-                <svg width="18" height="18" class="icon text-gold shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>
-                Raízes na cultura japonesa e no budô, base da disciplina que aplica atrás das câmeras
-              </li>
-            </ul>
-
-            <div class="grid grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/5">
-              <div class="border-l-2 border-gold/30 pl-3 sm:pl-4">
-                <p class="font-display text-2xl sm:text-3xl text-gold">15+</p>
-                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Anos de Mercado</p>
-              </div>
-              <div class="border-l-2 border-gold/30 pl-3 sm:pl-4">
-                <p class="font-display text-2xl sm:text-3xl text-gold">99%</p>
-                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Clientes via Agência</p>
-              </div>
-              <div class="border-l-2 border-gold/30 pl-3 sm:pl-4">
-                <p class="font-display text-2xl sm:text-3xl text-gold">9</p>
-                <p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Trabalhos em Outdoor</p>
-              </div>
-            </div>
-          </div>
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">01</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Boas-vindas: por que vídeo começa pela fotografia</h3><p class="text-xs text-neutral-400 font-light">Você entra com a chave certa na cabeça: vídeo é uma sequência de fotos, e fotografar é escrever com luz.</p></div>
+</div><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">02</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Resolução: a diferença real entre HD, Full HD e 4K</h3><p class="text-xs text-neutral-400 font-light">Você escolhe a resolução sabendo o que ganha e o que perde, e para de comprar aparelho por número de pixel.</p></div>
+</div><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">03</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Formatos e aspectos: o quadro certo pra cada rede</h3><p class="text-xs text-neutral-400 font-light">Você decide o formato antes de gravar e nunca mais espreme ou corta o vídeo na edição.</p></div>
+</div><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">04</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Planos: os enquadramentos do cinema no celular</h3><p class="text-xs text-neutral-400 font-light">Regra dos terços, plano geral, americano, close. Você troca de plano na gravação em vez de cortar depois.</p></div>
+</div><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">05</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Iluminação de 3 pontos: a mesma luz com R$ 300 ou R$ 1.000</h3><p class="text-xs text-neutral-400 font-light">Você desliga a luz do teto que faz olheira e monta recorte, principal e preenchimento na frente da câmera.</p></div>
+</div><div class="hard-card rounded-xl p-5 flex gap-4">
+  <span class="kicker-num font-impact text-xl shrink-0 w-8">06</span>
+  <div><h3 class="font-impact text-white text-base mb-1">Luz dura e luz suave: qual usar em cada situação</h3><p class="text-xs text-neutral-400 font-light">Você reconhece o sol de meio-dia e o dia nublado na sua luz, e suaviza com difusor, até improvisado.</p></div>
+</div></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-videocamera-record-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Aula ao vivo gravada</h3><p class="text-xs text-neutral-400 font-light">1h27 da aula de 10 de setembro, completa, dentro da área de alunos.</p></div>
+          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-camera-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Área de alunos da Hotmart</h3><p class="text-xs text-neutral-400 font-light">No celular ou no computador, quantas vezes quiser.</p></div>
+          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Certificado de conclusão</h3><p class="text-xs text-neutral-400 font-light">Emitido pela plataforma ao terminar as aulas.</p></div>
         </div>
+        <!-- CALL: próximos módulos. Só entra aqui depois que a call de abertura cravar número e data. -->
+        <div class="flex justify-center mt-10"><a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-6 py-3.5 text-xs sm:text-sm" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a></div>
+      </div>
+    </section>
 
-        <div class="flex flex-col items-center gap-3 mt-10 sm:mt-16 pt-8 sm:pt-14 border-t border-white/5">
-          <p class="flex items-center gap-2 text-sm sm:text-base text-white font-light">
-            <svg width="18" height="18" class="icon text-gold" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
-            10 de setembro, ao vivo, às 21h
-          </p>
-          <p class="text-sm sm:text-base text-gold font-medium mb-3">
-            Vagas limitadas no grupo do WhatsApp
-          </p>
-          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
-            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
-            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-5 py-2.5 sm:px-7 sm:py-3.5 ring-1 ring-white/10 overflow-hidden">
-              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
-              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-            </span>
-          </a>
+    <!-- 03 COMO FUNCIONA -->
+    <section id="como-funciona" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">03</span> · Como funciona</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Simples assim</h2>
+          <p class="text-sm sm:text-base text-neutral-400 font-light">Três passos entre você e a primeira aula.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="hard-card rounded-xl p-6"><p class="kicker-num font-impact text-3xl mb-3">01</p><h3 class="font-impact text-white text-base mb-2">Você compra na Hotmart</h3><p class="text-sm text-neutral-400 font-light">Pix, cartão ou boleto, num checkout seguro. Leva um minuto.</p></div>
+          <div class="hard-card rounded-xl p-6"><p class="kicker-num font-impact text-3xl mb-3">02</p><h3 class="font-impact text-white text-base mb-2">O acesso chega no seu e-mail</h3><p class="text-sm text-neutral-400 font-light">Na hora, com o link da área de alunos e a senha.</p></div>
+          <div class="hard-card rounded-xl p-6"><p class="kicker-num font-impact text-3xl mb-3">03</p><h3 class="font-impact text-white text-base mb-2">Você assiste no seu tempo</h3><p class="text-sm text-neutral-400 font-light">No celular mesmo. Começa pela aula 1, são poucos minutos.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- 8. FAQ — objeções reais (empatia + lógica) + dúvidas logísticas    -->
-    <!-- ================================================================= -->
-    <section id="faq" class="relative py-14 sm:py-24 lg:py-32 overflow-hidden bg-ink border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.08] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute bottom-[5%] left-[10%] w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] bg-[#D4AF37] blur-[140px] opacity-[0.04] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
-
-      <div class="max-w-3xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-10 sm:mb-14 lg:mb-16">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-            <span>Perguntas frequentes</span>
+    <!-- 04 QUEM É O MÁRCIO -->
+    <section id="marcio" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5 overflow-hidden">
+      <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
+        <div class="md:col-span-2"><div class="marcio-foto rounded-2xl overflow-hidden"><img src="assets/marcio-retrato.webp" alt="Márcio Ishizuka" width="1066" height="1600" loading="lazy"></div></div>
+        <div class="md:col-span-3">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">04</span> · Quem é o Márcio</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">"Não era a câmera que precisava melhorar. Era eu."</h2>
+          <p class="text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-4">Há mais de 15 anos o Márcio Ishizuka é fotógrafo profissional em Cuiabá. Nove trabalhos dele já passaram por outdoor na cidade sem que a própria família soubesse: forte nas agências, quase desconhecido do público.</p>
+          <p class="text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">Foi no Japão que entendeu que equipamento sozinho não bastava. De volta ao Brasil, com pouco dinheiro, recomeçou do zero com o que sabia. É esse olhar que ele ensina aqui, no aparelho que você já tem.</p>
+          <div class="hard-card rounded-xl flex flex-col sm:flex-row items-stretch overflow-hidden max-w-lg">
+            <div class="flex-1 px-4 py-3 border-b sm:border-b-0 sm:border-r border-white/10 text-center"><p class="font-impact text-lg text-white">15+</p><p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">anos de mercado</p></div>
+            <div class="flex-1 px-4 py-3 border-b sm:border-b-0 sm:border-r border-white/10 text-center"><p class="font-impact text-lg text-white">99%</p><p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">clientes via agência</p></div>
+            <div class="flex-1 px-4 py-3 text-center"><p class="font-impact text-lg text-[#F0E6D2]">9</p><p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">trabalhos em outdoor</p></div>
           </div>
-          <h2 class="font-display text-xl sm:text-3xl md:text-[2.15rem] text-white leading-[1.3] tracking-tight mb-5">Antes de entrar, tira suas dúvidas.</h2>
-          <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-lg mx-auto">As perguntas que mais aparecem quando alguém pensa em participar.</p>
         </div>
-
-        <div class="space-y-3">
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Não tenho facilidade com tecnologia, ainda assim consigo acompanhar?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal achar isso quando a maioria dos tutoriais parece ter sido feita por quem já nasceu usando aplicativo. Mas o problema nunca foi a idade, foi a forma como ensinaram até hoje. Na aula, o passo a passo começa do absoluto zero.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Não sei se vou ter tempo, será que vale a pena entrar?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A rotina cheia é real, não é desculpa. Por isso a aula é só uma vez, com hora marcada (21h) e sem enrolação: você separa esse horário, participa ao vivo, e sai com o passo a passo pronto, sem precisar voltar todo dia num curso longo.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Meu celular não é bom, dá pra fazer mesmo assim?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Dá. A promessa da aula já parte disso: usar o celular que você já tem no bolso, sem comprar câmera nem equipamento caro. E quem participar ainda sai com o checklist de itens baratos pra melhorar o resultado, se quiser.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Já tentei aprender sozinho antes e não consegui. Vai ser diferente dessa vez?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">A maioria dos tutoriais parte do princípio que você já sabe onde estão os botões. Aqui não. Não precisa aprender o aplicativo inteiro, só um punhado de funções essenciais já resolve a maior parte do que você vai gravar e editar.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Tenho vergonha de aparecer em vídeo, isso é um problema?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">É normal se sentir exposto numa ferramenta nova, ainda mais aparecendo em vídeo. Mas quem assiste quer o seu conhecimento, não perfeição técnica. O foco da aula é te dar segurança pra gravar, não te transformar em ator.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Meu filho ou funcionário já cuida disso pra mim. Por que aprender eu mesmo?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Delegar parece mais fácil até depender de terceiro pra tudo travar sua velocidade e o controle sobre a sua própria imagem. Ter autonomia pra gravar e ajustar na hora que precisar, sem esperar ninguém, sai mais rápido no fim.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">A aula é paga?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. A aula ao vivo é 100% gratuita. Você só precisa entrar no grupo do WhatsApp pra receber o link de acesso e os avisos antes do dia 10 de setembro.</p>
-          </details>
-
-          <details name="faq" class="glass-panel group rounded-2xl border border-white/5 open:border-gold/30 transition-colors duration-300">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none">
-              <span class="text-sm sm:text-base text-white font-light">Vai ter gravação disponível depois?</span>
-              <svg width="18" height="18" class="icon text-gold shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg>
-            </summary>
-            <p class="px-6 pb-6 text-sm text-neutral-400 font-light leading-relaxed">Não. É só ao vivo, sem replay depois. Se der pra você estar lá no dia 10 de setembro às 21h, é a única forma de acompanhar.</p>
-          </details>
-
-        </div>
-
       </div>
     </section>
 
-    <!-- ================================================================= -->
-    <!-- 9. FECHAMENTO — última chamada, com peso de manchete               -->
-    <!-- ================================================================= -->
-    <section id="cta-final" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden bg-[#020202] border-t border-white/5">
-      <div class="absolute inset-0 animated-grid-bg opacity-[0.1] pointer-events-none z-0" aria-hidden="true"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[520px] h-[380px] sm:h-[520px] bg-[#D4AF37] blur-[150px] opacity-[0.06] rounded-full decor-blob pointer-events-none animate-blob z-0" aria-hidden="true"></div>
-      <!-- Marca d'água fantasma: fecha a página com o mesmo gesto tipográfico que a abre (ISHIZUKA no hero) -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center pointer-events-none select-none z-0" aria-hidden="true">
-        <span class="font-display ghost-text text-[26vw] sm:text-[18vw] leading-none whitespace-nowrap font-medium tracking-tighter uppercase">NINJA</span>
+    <!-- 05 PROVA -->
+    <section id="prova-social" class="relative py-14 sm:py-20 section-cream">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">05</span> · Prova real</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Quem é do ramo confia nele.</h2>
+          <p class="text-sm sm:text-base text-neutral-400 font-light">A Michelle já vive de audiovisual e mesmo assim foi o Márcio que ela procurou pra evoluir.</p>
+        </div>
+        <div class="prova-frame max-w-2xl mx-auto"><video controls playsinline preload="none" poster="assets/depoimento-michelle-moura-poster.jpg"><source src="assets/depoimento-michelle-moura.mp4" type="video/mp4">Seu navegador não suporta a reprodução de vídeo.</video></div>
+        <div class="text-center mt-4"><span class="block text-sm text-white font-medium">Michelle Moura</span><span class="block text-xs text-neutral-500 font-light">Moura Audiovisual</span></div>
+        <blockquote class="prova-quote">Busquei o Márcio pra ter essa força que eu precisava, esse profissional que eu precisava.</blockquote>
       </div>
+    </section>
 
-      <div class="max-w-3xl mx-auto px-6 relative z-10 text-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 glass-panel text-[10px] uppercase tracking-widest text-neutral-300 mb-6 w-fit mx-auto cursor-default">
-          <svg width="14" height="14" class="icon text-gold/80" aria-hidden="true"><use href="#i-calendar-linear"></use></svg>
-          <span>Aula ao vivo · 10 de setembro · 21h</span>
+    <!-- 06 INVESTIMENTO -->
+    <section id="investimento" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">06</span> · Investimento</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Menos que uma lente. Mais que qualquer câmera.</h2>
         </div>
-        <h2 class="font-display text-[1.7rem] sm:text-4xl lg:text-5xl text-white leading-[1.2] tracking-tight mb-6">
-          Pronto pra gravar como profissional, <span class="text-gold italic">só com o celular?</span>
-        </h2>
-        <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-xl mx-auto mb-10">
-          Entra no grupo do WhatsApp agora: é por lá que sai o link de acesso e os avisos antes da aula começar.
-        </p>
-
-        <div class="flex justify-center mb-6">
-          <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="group relative inline-flex items-center justify-center rounded-full p-[1.5px] overflow-hidden hover:scale-[1.03] active:scale-95 transition-all duration-300 w-fit" aria-label="Entrar no grupo do WhatsApp do Ninja Fácil">
-            <span class="absolute inset-[-1000%] animate-conic-spin bg-[conic-gradient(from_0deg,transparent_0_340deg,#D4AF37_360deg)]"></span>
-            <span class="relative flex items-center gap-2.5 rounded-full bg-black px-6 py-3 sm:px-9 sm:py-4 ring-1 ring-white/10 overflow-hidden">
-              <svg width="16" height="16" class="icon relative z-10 text-gold" aria-hidden="true"><use href="#i-chat-round-dots-bold"></use></svg>
-              <span class="relative z-10 text-[10px] sm:text-xs tracking-wide sm:tracking-widest uppercase font-medium text-white">Entrar no Grupo do WhatsApp</span>
-              <svg width="14" height="14" class="icon relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg>
-            </span>
-          </a>
+        <div class="preco-card max-w-xl mx-auto rounded-2xl p-8 sm:p-10 text-center">
+          <p class="kicker justify-center mb-4"><span>Ninja Creators · Módulo 1</span></p>
+          <p class="font-impact text-white text-6xl sm:text-7xl leading-none">R$ 199</p>
+          <p class="text-sm text-neutral-400 font-light mt-3">ou 12x de R$ 20,58 no cartão · Pix · boleto</p>
+          <!-- CALL: âncora ("de R$ X") e "o preço sobe quando entrar o próximo módulo" só entram se a call decidir. -->
+          <ul class="text-left space-y-3 text-sm text-neutral-200 font-light my-8 max-w-sm mx-auto">
+            <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Módulo 1 com as 6 aulas</li>
+            <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Aula ao vivo de 10 de setembro, gravada (1h27)</li>
+            <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Área de alunos no celular, acesso imediato</li>
+            <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Certificado de conclusão</li>
+          </ul>
+          <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
+          <p class="flex items-center justify-center gap-2 text-xs text-neutral-400 font-light mt-5"><svg width="14" height="14" class="icon text-[#F0E6D2]" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia: não gostou, pede o reembolso na Hotmart e recebe de volta.</p>
         </div>
+      </div>
+    </section>
 
-        <p class="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-light">
-          Gratuita · Sem replay · Vagas limitadas
-        </p>
+    <!-- FAQ -->
+    <section id="faq" class="relative py-14 sm:py-20 bg-surface0 border-b border-white/5">
+      <div class="max-w-2xl mx-auto px-6">
+        <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight text-center mb-10">Perguntas antes de comprar</h2>
+        <div class="space-y-3"><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Não tenho facilidade com tecnologia. Consigo acompanhar?</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">O problema nunca foi a idade, foi a forma como ensinaram até hoje. As aulas começam do absoluto zero, no seu celular, e você assiste quantas vezes quiser.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Não tenho tempo pra aprender.</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">São 6 aulas curtas, de 1 a 8 minutos cada. Dá pra ver uma por dia no café da manhã, ou tudo numa tarde.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Meu celular não é bom.</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">O curso é sobre câmera, formato, enquadramento e luz. Isso vale pra qualquer celular, iPhone ou Android. O que muda o resultado é o olhar, não o aparelho.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Já tentei aprender sozinho e não consegui.</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">A maioria dos tutoriais parte do princípio que você já sabe onde estão os botões. Aqui o Márcio mostra na mão, uma coisa de cada vez, e explica o porquê.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Tenho vergonha de aparecer.</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">Quem assiste quer o que você sabe, não perfeição técnica. Quando a foto e o vídeo ficam bem feitos, a vergonha diminui sozinha. É por isso que o curso começa pela técnica.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Meu filho ou funcionário faz isso pra mim.</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">Até o dia em que ele não está. Depender de alguém pra cada foto trava a velocidade e o controle da sua própria imagem.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">Como recebo o acesso?</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">Na hora. Depois do pagamento, a Hotmart manda o acesso pro seu e-mail e o curso fica na sua área de alunos, no celular ou no computador.</p>
+</details><details name="faq" class="hard-card group rounded-xl">
+  <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none"><span class="text-sm text-white font-medium">E se eu não gostar?</span><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 transition-transform duration-300 group-open:rotate-180" aria-hidden="true"><use href="#i-alt-arrow-down-linear"></use></svg></summary>
+  <p class="px-5 pb-5 text-sm text-neutral-400 font-light">Você tem 7 dias de garantia pela Hotmart. Pede o reembolso na plataforma e recebe de volta, sem precisar explicar.</p>
+</details></div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta-final" class="relative py-16 sm:py-24 bg-surface0 text-center">
+      <div class="max-w-2xl mx-auto px-6">
+        <p class="kicker justify-center mb-6"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg>Ninja Creators</p>
+        <h2 class="font-impact text-white text-[2rem] sm:text-[2.75rem] uppercase tracking-tight mb-5">Sua próxima foto pode ser a primeira boa.</h2>
+        <p class="text-sm sm:text-base text-neutral-400 font-light mb-8">Seis aulas, o celular que você já tem, e sete dias pra decidir se era isso.</p>
+        <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-light mt-6">R$ 199 · 12x de R$ 20,58 · 7 dias de garantia</p>
       </div>
     </section>
 
   </main>
 
-  <!-- ================================================================= -->
-  <!-- 4. FOOTER                                                          -->
-  <!-- ================================================================= -->
-  <footer id="contato" class="py-12 border-t border-white/5 bg-[#020202] z-10">
-    <div class="max-w-7xl mx-auto px-6">
-
-      <div class="p-8 lg:p-16 glass-panel border border-white/10 rounded-3xl">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-
-          <!-- Marca -->
-          <div>
-            <div class="flex items-center mb-6">
-              <span class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/5 mr-3 shrink-0">
-                <svg width="21" height="21" viewBox="0 0 512 512" fill="currentColor" class="text-gold" aria-hidden="true">
-                  <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
-                  <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
-                  <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
-                  <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
-                </svg>
-              </span>
-              <span class="font-display text-xl text-white tracking-tight">Márcio Ishizuka</span>
-            </div>
-            <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 max-w-xs">
-              Aula ao vivo e gratuita: aprenda a gravar fotos e vídeos profissionais usando só o celular que você já tem no bolso.
-            </p>
-            <div class="flex items-center gap-4">
-              <a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
-                <svg width="18" height="18" class="icon text-white" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
-              </a>
-              <a href="https://instagram.com/ninjadafoto" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 hover:border-gold/50 transition-all duration-300 hover:bg-white/5 bg-white/[0.03]">
-                <svg width="18" height="18" class="icon text-white" aria-hidden="true"><use href="#i-instagram"></use></svg>
-              </a>
-            </div>
-          </div>
-
-          <!-- Navegação -->
-          <div>
-            <h4 class="text-xs font-medium text-white mb-6 uppercase tracking-widest">Navegação</h4>
-            <ul class="space-y-4">
-              <li><a href="#aprendizado" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Aula Ao Vivo</a></li>
-              <li><a href="#pra-quem" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Pra Quem É</a></li>
-              <li><a href="#cronograma" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Como Vai Funcionar</a></li>
-              <li><a href="#trajetoria" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Quem É O Márcio</a></li>
-            </ul>
-          </div>
-
-          <!-- Ajuda -->
-          <div>
-            <h4 class="text-xs font-medium text-white mb-6 uppercase tracking-widest">Ajuda</h4>
-            <ul class="space-y-4">
-              <li><a href="#bonus" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Bônus</a></li>
-              <li><a href="#faq" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Perguntas Frequentes</a></li>
-              <li><a href="https://chat.whatsapp.com/FxddmLPwEFXIR2hLAmKQqJ?s=cl&p=i&mlu=4" target="_blank" rel="noopener" class="text-sm text-neutral-400 hover:text-white transition-colors duration-300">Entrar No Grupo</a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-normal sm:tracking-[0.2em] text-neutral-500 font-light">
-        <span class="whitespace-nowrap">Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
-        <span>Cuiabá, Mato Grosso.</span>
-      </div>
-
+  <footer class="py-10 border-t border-white/5 bg-surface0">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-2 text-center text-[10px] uppercase tracking-widest text-neutral-500 font-light">
+      <span>Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
+      <a href="/privacidade.html" class="text-neutral-500 hover:text-[#F0E6D2] underline underline-offset-2">Política de Privacidade</a>
+      <a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener" class="text-neutral-600 hover:text-[#F0E6D2]">site por @joaomagalhaes.ia</a>
     </div>
   </footer>
 
-  <!-- ================================================================= -->
-  <!-- 5. INTERACTION & ANIMATION SCRIPTS (main.js está no <head>, ver topo do arquivo) -->
-  <!-- ================================================================= -->
-  <!-- Timeline do Cronograma: progresso ligado ao scroll, sem pin e sem GSAP
-       (o pin do ScrollTrigger sobrepunha seções no WebKit — ver js/cronograma.js).
-       Roda em todo dispositivo; é só classe + variável CSS a cada frame de scroll. -->
-  <script src="js/cronograma.js?v=20260825g" defer></script>
-  <!-- Vercel Analytics (09/09/2026): contagem de visitas, sem cookie. Serve
-       pro lado "quantas pessoas"; o "o que elas fazem" e o Clarity, acima.
-       Servido pela propria Vercel, entao em localhost o 404 e esperado. -->
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

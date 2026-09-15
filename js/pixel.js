@@ -62,7 +62,7 @@
   document.querySelectorAll(CTA_WHATSAPP).forEach(function (botao) {
     botao.addEventListener('click', function () {
       disparar('Lead', 'nf_lead_enviado', {
-        content_name: 'Grupo WhatsApp Ninja Facil'
+        content_name: 'Grupo WhatsApp Ninja Creators'
       });
     });
   });
@@ -70,7 +70,7 @@
   document.querySelectorAll(CTA_CHECKOUT).forEach(function (botao) {
     botao.addEventListener('click', function () {
       disparar('InitiateCheckout', 'nf_checkout_enviado', {
-        content_name: 'Ninja Facil',
+        content_name: 'Ninja Creators',
         value: 199.0,
         currency: 'BRL'
       });
