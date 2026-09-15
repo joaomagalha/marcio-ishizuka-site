@@ -253,7 +253,15 @@
   .hero-foco span:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.hero-foco span:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}.hero-foco span:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.hero-foco span:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
   .hero-foco i{position:absolute;left:0;top:-30px;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:12px;letter-spacing:.14em;color:rgba(240,230,210,.9)}
   .hero-foco i::first-letter{color:#E23B2E}
-  @media (max-width:1023px){.hero-foto{width:100%;opacity:.45}.hero-foto img{-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 30%,transparent 95%)}.hero-foco{display:none}}
+  @media (max-width:1023px){
+    #hero{padding-top:0!important;min-height:auto}
+    .hero-foto{position:relative;width:100%;height:min(68vh,520px);opacity:1}
+    .hero-foto img{content:url("assets/hero-marcio-mobile.webp");object-position:top center;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
+    .hero-foco{display:block;left:24%;top:9%;width:52%;aspect-ratio:1/1.15}
+    .hero-shade{background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.55) 22%,rgba(10,10,10,0) 45%)}
+    #hero > .absolute.inset-0{position:relative!important;inset:auto}
+    #hero .max-w-6xl{margin-top:-140px}
+  }
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .hero-chip{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;border:1px solid rgba(240,230,210,.16);background:rgba(240,230,210,.05);min-width:112px}
