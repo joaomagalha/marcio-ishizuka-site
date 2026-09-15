@@ -256,6 +256,15 @@
   @media (max-width:1023px){.hero-foto{width:100%;opacity:.45}.hero-foto img{-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 30%,transparent 95%)}.hero-foco{display:none}}
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .hero-chip{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;border:1px solid rgba(240,230,210,.16);background:rgba(240,230,210,.05);min-width:112px}
+  .hero-chip b{font-weight:800;font-size:18px;color:#fff;line-height:1.1}
+  .hero-chip span{font-size:11px;color:rgba(240,230,210,.7);margin-top:3px}
+  .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(10,10,10,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(240,230,210,.14)}
+  .cta-bar div{display:flex;flex-direction:column;line-height:1.1}
+  .cta-bar b{font-weight:800;font-size:18px;color:#fff}
+  .cta-bar span{font-size:11px;color:rgba(240,230,210,.7)}
+  @media (max-width:1023px){body{padding-bottom:72px}.cookie-consent{bottom:80px!important}}
+  @media (min-width:1024px){.cta-bar{display:none}}
 </style>
 </head>
 <body class="semente antialiased selection:bg-[#F0E6D2] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
@@ -345,11 +354,11 @@
             <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
             <p class="flex items-center gap-2 text-xs text-neutral-400 font-light"><svg width="14" height="14" class="icon text-[#F0E6D2]" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>R$ 199 ou 12x de R$ 20,58 · Pix, cartão ou boleto · 7 dias de garantia</p>
           </div>
-          <ul class="flex flex-wrap gap-x-6 gap-y-3 text-left max-w-xl">
-            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Assiste no celular</li>
-            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Acesso na hora</li>
-            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Do absoluto zero</li>
-            <li class="flex items-center gap-2 text-xs sm:text-sm text-neutral-200 font-medium"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>7 dias de garantia</li>
+          <ul class="flex flex-wrap gap-3 text-left max-w-xl">
+            <li class="hero-chip"><b>6 aulas</b><span>26 min no total</span></li>
+            <li class="hero-chip"><b>1h27</b><span>de aula ao vivo gravada</span></li>
+            <li class="hero-chip"><b>7 dias</b><span>de garantia</span></li>
+            <li class="hero-chip"><b>Do zero</b><span>no seu celular</span></li>
           </ul>
         </div>
       </div>
@@ -400,26 +409,26 @@
         <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
           <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">02</span> · O que você recebe</p>
           <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Módulo 1: Despertando o Olhar Ninja</h2>
-          <p class="text-sm sm:text-base text-neutral-400 font-light">Seis aulas curtas, na ordem certa, e a aula ao vivo inteira gravada. Tudo na sua área de alunos, pra assistir no celular, no seu tempo.</p>
+          <p class="text-sm sm:text-base text-neutral-400 font-light">Seis aulas curtas, 26 minutos no total, na ordem certa. Mais a aula ao vivo inteira gravada. Tudo na sua área de alunos, pra assistir no celular, no seu tempo.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">01</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Boas-vindas: por que vídeo começa pela fotografia</h3><p class="text-xs text-neutral-400 font-light">Você entra com a chave certa na cabeça: vídeo é uma sequência de fotos, e fotografar é escrever com luz.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Boas-vindas: por que vídeo começa pela fotografia</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">1 min</span></div><p class="text-xs text-neutral-400 font-light">Você entra com a chave certa na cabeça: vídeo é uma sequência de fotos, e fotografar é escrever com luz.</p></div>
 </div><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">02</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Resolução: a diferença real entre HD, Full HD e 4K</h3><p class="text-xs text-neutral-400 font-light">Você escolhe a resolução sabendo o que ganha e o que perde, e para de comprar aparelho por número de pixel.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Resolução: a diferença real entre HD, Full HD e 4K</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">3 min</span></div><p class="text-xs text-neutral-400 font-light">Você escolhe a resolução sabendo o que ganha e o que perde, e para de comprar aparelho por número de pixel.</p></div>
 </div><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">03</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Formatos e aspectos: o quadro certo pra cada rede</h3><p class="text-xs text-neutral-400 font-light">Você decide o formato antes de gravar e nunca mais espreme ou corta o vídeo na edição.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Formatos e aspectos: o quadro certo pra cada rede</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">6 min</span></div><p class="text-xs text-neutral-400 font-light">Você decide o formato antes de gravar e nunca mais espreme ou corta o vídeo na edição.</p></div>
 </div><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">04</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Planos: os enquadramentos do cinema no celular</h3><p class="text-xs text-neutral-400 font-light">Regra dos terços, plano geral, americano, close. Você troca de plano na gravação em vez de cortar depois.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Planos: os enquadramentos do cinema no celular</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">8 min</span></div><p class="text-xs text-neutral-400 font-light">Regra dos terços, plano geral, americano, close. Você troca de plano na gravação em vez de cortar depois.</p></div>
 </div><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">05</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Iluminação de 3 pontos: a mesma luz com R$ 300 ou R$ 1.000</h3><p class="text-xs text-neutral-400 font-light">Você desliga a luz do teto que faz olheira e monta recorte, principal e preenchimento na frente da câmera.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Iluminação de 3 pontos: a mesma luz com R$ 300 ou R$ 1.000</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">5 min</span></div><p class="text-xs text-neutral-400 font-light">Você desliga a luz do teto que faz olheira e monta recorte, principal e preenchimento na frente da câmera.</p></div>
 </div><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">06</span>
-  <div><h3 class="font-impact text-white text-base mb-1">Luz dura e luz suave: qual usar em cada situação</h3><p class="text-xs text-neutral-400 font-light">Você reconhece o sol de meio-dia e o dia nublado na sua luz, e suaviza com difusor, até improvisado.</p></div>
+  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Luz dura e luz suave: qual usar em cada situação</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">4 min</span></div><p class="text-xs text-neutral-400 font-light">Você reconhece o sol de meio-dia e o dia nublado na sua luz, e suaviza com difusor, até improvisado.</p></div>
 </div></div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
           <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-videocamera-record-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Aula ao vivo gravada</h3><p class="text-xs text-neutral-400 font-light">1h27 da aula de 10 de setembro, completa, dentro da área de alunos.</p></div>
@@ -548,6 +557,12 @@
         <p class="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-light mt-6">R$ 199 · 12x de R$ 20,58 · 7 dias de garantia</p>
       </div>
     </section>
+
+    <!-- Barra fixa de compra no mobile (some no desktop, onde o header já leva o CTA). -->
+    <div class="cta-bar lg:hidden" role="region" aria-label="Comprar">
+      <div><b>R$ 199</b><span>ou 12x de R$ 20,58</span></div>
+      <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-5 py-3 text-xs">Quero o curso<svg width="14" height="14" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
+    </div>
 
   </main>
 
