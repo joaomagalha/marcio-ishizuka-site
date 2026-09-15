@@ -17,7 +17,7 @@
        comentário lá pra motivo completo (evitar animação da hero rodando
        escondida atrás da tela de carregamento). -->
   <script>
-    document.documentElement.classList.add('is-preloading');
+    
     setTimeout(function () {
       document.documentElement.classList.remove('is-preloading');
     }, 8000);
@@ -177,9 +177,9 @@
   <!-- Mesmos scripts de index.html — main.js é genérico (seleciona por
        id/classe, não tem nada específico da página prime). Cronograma
        removido em 09/09 (decisão de 03/09 nunca tinha sido executada aqui). -->
-  <script src="js/preloader.js?v=20260915v" defer></script>
+  <script data-off src="js/_off.js?v=20260915v" defer></script>
   <script src="js/main.js?v=20260915v" defer></script>
-  <script src="js/consent.js?v=20260915v" defer></script>
+  <script data-off src="js/_off2.js?v=20260915v" defer></script>
   <script src="js/pixel.js?v=20260915w" defer></script>
 
   <link rel="stylesheet" href="css/fonts.css?v=20260915v">
@@ -264,7 +264,6 @@
   .cta-bar b{font-weight:800;font-size:18px;color:#fff}
   .cta-bar span{font-size:11px;color:rgba(240,230,210,.7)}
   @media (max-width:1023px){body{padding-bottom:72px}.cookie-consent{bottom:80px!important}}
-  @media (min-width:1024px){.cta-bar{display:none}}
 </style>
 </head>
 <body class="semente antialiased selection:bg-[#F0E6D2] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
@@ -304,26 +303,6 @@
   <!-- ================================================================= -->
   <!-- 0. TELA DE CARREGAMENTO — idêntica à de index.html                -->
   <!-- ================================================================= -->
-  <div id="preloader" role="status" aria-label="Carregando o site">
-    <div class="preloader-content">
-      <div class="preloader-mark">
-        <span class="preloader-ring" aria-hidden="true"></span>
-        <span class="preloader-ring-2" aria-hidden="true"></span>
-        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
-          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
-          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
-          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
-          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
-        </svg>
-      </div>
-      <p class="preloader-phrase">Ninja Creators</p>
-      <div class="preloader-bar" aria-hidden="true">
-        <span class="preloader-bar-fill"></span>
-      </div>
-      <p class="preloader-pct">0%</p>
-    </div>
-  </div>
-
   <header id="main-header" class="sticky top-0 left-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-surface0">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
       <a href="#hero" class="text-white tracking-tight text-sm sm:text-base font-extrabold uppercase flex items-center gap-2" aria-label="Ninja Creators">
@@ -337,7 +316,7 @@
   <main class="flex-grow">
 
     <!-- HERO -->
-    <section id="hero" class="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center bg-ink border-b border-white/5">
+    <section id="hero" class="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 lg:py-0 lg:py-24 lg:flex lg:items-center bg-ink border-b border-white/5">
       <div class="absolute inset-0 z-0">
         <div class="hero-foto"><img src="assets/hero-marcio-retrato.webp" alt="" width="900" height="1200"><div class="hero-foco" aria-hidden="true"><span></span><span></span><span></span><span></span><i>● REC 00:12</i></div></div>
         <div class="hero-shade" aria-hidden="true"></div>
@@ -410,21 +389,6 @@
           <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">02</span> · O que você recebe</p>
           <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Módulo 1: Despertando o Olhar Ninja</h2>
           <p class="text-sm sm:text-base text-neutral-400 font-light">Seis aulas curtas, 26 minutos no total, na ordem certa. Mais a aula ao vivo inteira gravada. Tudo na sua área de alunos, pra assistir no celular, no seu tempo.</p>
-        </div>
-        <!-- Amostra real: a aula 1 inteira. É o produto, não um trailer. -->
-        <div class="amostra max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div class="flex items-center justify-between gap-4 mb-4">
-            <p class="kicker"><span class="relative flex h-2 w-2"><span class="relative inline-flex rounded-full h-2 w-2 bg-zhu"></span></span><span>Assista a aula 1 inteira, agora</span></p>
-            <span class="text-[10px] uppercase tracking-widest text-neutral-500">1 min · sem cadastro</span>
-          </div>
-          <div class="prova-frame">
-            <video controls playsinline preload="none" poster="assets/aula-01-boas-vindas-poster.jpg" crossorigin="anonymous">
-              <source src="assets/aula-01-boas-vindas.mp4" type="video/mp4">
-              <track kind="subtitles" srclang="pt" label="Português" src="assets/aula-01-boas-vindas.vtt" default>
-              Seu navegador não suporta a reprodução de vídeo.
-            </video>
-          </div>
-          <p class="text-xs text-neutral-500 font-light text-center mt-3">É a primeira aula do curso, do jeito que está na área de alunos. As outras cinco seguem esse ritmo.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="hard-card rounded-xl p-5 flex gap-4">
   <span class="kicker-num font-impact text-xl shrink-0 w-8">01</span>
