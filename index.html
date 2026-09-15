@@ -272,6 +272,13 @@
   .cta-bar b{font-weight:800;font-size:18px;color:#fff}
   .cta-bar span{font-size:11px;color:rgba(240,230,210,.7)}
   @media (max-width:1023px){body{padding-bottom:72px}.cookie-consent{bottom:80px!important}}
+  .selo{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(240,230,210,.18);background:rgba(240,230,210,.05);font-size:11px;font-weight:500;letter-spacing:.04em;color:rgba(240,230,210,.85)}
+  .selo .icon{color:var(--ember)}
+  .selo-7{width:190px;height:190px;border-radius:50%;background:var(--cream-ink);color:#F4ECDD;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 30px 70px rgba(23,18,14,.35);border:6px solid rgba(23,18,14,.08);outline:1px dashed rgba(23,18,14,.35);outline-offset:8px}
+  .selo-7 .n{font-weight:800;font-size:84px;line-height:.9;letter-spacing:-.04em;color:var(--zhu)}
+  .selo-7 .t{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-align:center;margin-top:8px;line-height:1.4}
+  .portfolio-foto{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#141210}
+  .portfolio-foto img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
   @media (min-width:1024px){.cta-bar{display:none}}
 </style>
 </head>
@@ -488,6 +495,10 @@
           <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">"Não era a câmera que precisava melhorar. Era eu."</h2>
           <p class="text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-4">Há mais de 15 anos o Márcio Ishizuka é fotógrafo profissional em Cuiabá. Nove trabalhos dele já passaram por outdoor na cidade sem que a própria família soubesse: forte nas agências, quase desconhecido do público.</p>
           <p class="text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">Foi no Japão que entendeu que equipamento sozinho não bastava. De volta ao Brasil, com pouco dinheiro, recomeçou do zero com o que sabia. É esse olhar que ele ensina aqui, no aparelho que você já tem.</p>
+          <div class="grid grid-cols-2 gap-3 max-w-lg mb-6">
+            <figure class="portfolio-foto"><img src="assets/estudio-01.webp" alt="Márcio Ishizuka fotografando em estúdio" width="800" height="1000" loading="lazy"></figure>
+            <figure class="portfolio-foto"><img src="assets/estudio-02.webp" alt="Márcio Ishizuka com a câmera, retrato de estúdio" width="800" height="1000" loading="lazy"></figure>
+          </div>
           <div class="hard-card rounded-xl flex flex-col sm:flex-row items-stretch overflow-hidden max-w-lg">
             <div class="flex-1 px-4 py-3 border-b sm:border-b-0 sm:border-r border-white/10 text-center"><p class="font-impact text-lg text-white">15+</p><p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">anos de mercado</p></div>
             <div class="flex-1 px-4 py-3 border-b sm:border-b-0 sm:border-r border-white/10 text-center"><p class="font-impact text-lg text-white">99%</p><p class="text-[10px] uppercase tracking-widest text-neutral-500 mt-1">clientes via agência</p></div>
@@ -516,7 +527,7 @@
       <div class="max-w-5xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
           <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">06</span> · Investimento</p>
-          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Menos que uma lente. Mais que qualquer câmera.</h2>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">R$ 199, uma vez. Acesso na hora.</h2>
         </div>
         <div class="preco-card max-w-xl mx-auto rounded-2xl p-8 sm:p-10 text-center">
           <p class="kicker justify-center mb-4"><span>Ninja Creators · Módulo 1</span></p>
@@ -530,7 +541,25 @@
             <li class="flex gap-3"><svg width="18" height="18" class="icon text-[#F0E6D2] shrink-0 mt-0.5" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Certificado de conclusão</li>
           </ul>
           <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
-          <p class="flex items-center justify-center gap-2 text-xs text-neutral-400 font-light mt-5"><svg width="14" height="14" class="icon text-[#F0E6D2]" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia: não gostou, pede o reembolso na Hotmart e recebe de volta.</p>
+          <div class="flex flex-wrap justify-center gap-2 mt-6">
+            <span class="selo"><svg width="14" height="14" class="icon" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>Compra segura pela Hotmart</span>
+            <span class="selo"><svg width="14" height="14" class="icon" aria-hidden="true"><use href="#i-check-circle-bold"></use></svg>Acesso imediato por e-mail</span>
+            <span class="selo"><svg width="14" height="14" class="icon" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTIA (bloco creme: quebra o ritmo escuro exatamente onde a pessoa hesita) -->
+    <section id="garantia" class="relative py-14 sm:py-20 section-cream">
+      <div class="max-w-4xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+        <div class="md:col-span-2 flex justify-center">
+          <div class="selo-7"><span class="n">7</span><span class="t">dias de<br>garantia</span></div>
+        </div>
+        <div class="md:col-span-3">
+          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg>Sem risco</p>
+          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Assiste tudo. Não serviu, pede o dinheiro de volta.</h2>
+          <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed">Você tem 7 dias, contados da compra, pra ver as seis aulas e a aula ao vivo. Se não for o que você esperava, pede o reembolso dentro da Hotmart, sem precisar falar com ninguém e sem explicar o motivo. A plataforma devolve o valor pelo mesmo meio que você pagou.</p>
         </div>
       </div>
     </section>
