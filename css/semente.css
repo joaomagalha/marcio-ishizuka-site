@@ -411,3 +411,59 @@
     transform: none;
   }
 }
+
+/* ===================================================================
+   AJUSTES /ui-ux (16/09/2026), medidos no ar contra o método do curso
+   Intuitive Pixel. Cada bloco cita a aula. Sobrepõe utilitários do
+   Tailwind sem rebuild (seletor com 2 níveis vence classe única).
+   =================================================================== */
+
+/* Botão de compra: 40 a 56 de altura, 48 ideal; 64 é "muito grande".
+   Padding lateral = 2x vertical; fonte igual ao body. [04-04] [04-09] [11-03] */
+a.btn-ember.btn-cta { min-height: 56px; padding: 16px 32px; font-size: 16px; white-space: nowrap; }
+/* Sombra diluída: Y 12, blur 20, no máximo 20% de opacidade. [04-05] */
+a.btn-ember { box-shadow: 0 12px 20px -8px rgba(226, 59, 46, 0.2); }
+a.btn-ember:hover { box-shadow: 0 12px 24px -6px rgba(226, 59, 46, 0.25); }
+/* Header: nunca abaixo de 40; no celular a área de toque é 44. [04-04] */
+a.btn-ember.btn-mini { min-height: 40px; padding: 10px 20px; font-size: 12px; }
+@media (max-width: 639px) {
+  a.btn-ember.btn-cta { min-height: 52px; padding: 14px 28px; font-size: 15px; width: 100%; max-width: 360px; }
+  a.btn-ember.btn-mini { min-height: 44px; padding: 12px 20px; font-size: 13px; }
+}
+
+/* Títulos: headline 105 a 130%, título 120 a 140%, nunca a mesma
+   porcentagem do parágrafo; escala arredondada, sem fração. [02-03] [02-01] [15-03] */
+html .hero2-h1 { line-height: 1.1; }
+html .hero2-h1 .l1 { font-size: 56px; }
+html .hero2-h1 .l2 { font-size: 48px; }
+html .hero2-sub { font-size: 16px; line-height: 1.5; }
+html .sec-h2 { line-height: 1.2; font-size: 36px; }
+html .pq-grid .sec-h2, html #como-funciona .sec-h2, html #prova-social h2, html #garantia h2 { font-size: 32px; line-height: 1.2; }
+html .cta-h2 { line-height: 1.15; font-size: 48px; }
+@media (max-width: 1023px) {
+  html .hero2-h1 .l1 { font-size: 40px; }
+  html .hero2-h1 .l2 { font-size: 36px; }
+  html .sec-h2, html .pq-grid .sec-h2, html #como-funciona .sec-h2, html #prova-social h2, html #garantia h2 { font-size: 28px; }
+  html .cta-h2 { font-size: 36px; }
+}
+@media (max-width: 639px) {
+  /* h2 em 2 ou 3 linhas no celular. [10-06] */
+  html .hero2-h1 .l1 { font-size: 32px; }
+  html .hero2-h1 .l2 { font-size: 28px; }
+  html .hero2-sub { font-size: 15px; }
+  html .sec-h2, html .pq-grid .sec-h2, html #como-funciona .sec-h2, html #prova-social h2, html #garantia h2 { font-size: 24px; }
+  html .cta-h2 { font-size: 32px; }
+}
+
+/* Nenhum texto abaixo de 12; pré-título 12 a 14; corpo 16. [10-10] [11-03] [10-06] */
+html .kicker, html .meta { font-size: 12px; }
+html .curr-item p, html .cf-steps span { font-size: 14px; }
+html footer div[class] { font-size: 12px; }
+/* Rodapé com contraste AA (era 2,5:1 e 4,2:1). [03-03] */
+html footer div[class], html footer a[class] { color: rgba(240, 230, 210, 0.6); }
+html footer a[class]:hover { color: #F0E6D2; }
+html .hero2-ficha span, html .curr-dur, html .mz-nums span { font-size: 12px; }
+html .hero2-ficha b { font-size: 32px; }
+html .mz-quote em { font-size: inherit; }
+html .prova-quote { font-size: 16px; }
+html #cta-final p[class*="text-\[10px\]"] { font-size: 12px; color: rgba(240, 230, 210, 0.6); }
