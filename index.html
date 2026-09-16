@@ -245,16 +245,16 @@
 
 <style>
   /* Site de vendas (15/09/2026, hero v2: pôster de estúdio) */
-  .hero2{position:relative;overflow:hidden;background:#0A0A0A;min-height:94svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 0}
+  .hero2{position:relative;overflow:hidden;background:#0A0A0A;min-height:94svh;max-height:1000px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 0}
   .hero2-foto{position:absolute;inset:0;z-index:1}
-  .hero2-foto img{position:absolute;right:0;top:0;height:100%;width:auto;min-width:56%;object-fit:cover;object-position:top center;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 28%);mask-image:linear-gradient(to right,transparent 0%,#000 28%)}
+  .hero2-foto img{position:absolute;right:0;top:0;height:100%;max-height:1000px;width:auto;min-width:56%;object-fit:cover;object-position:top center;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 28%);mask-image:linear-gradient(to right,transparent 0%,#000 28%)}
   .hero2-shade{position:absolute;inset:0;z-index:2;background:linear-gradient(to right,#0A0A0A 0%,#0A0A0A 26%,rgba(10,10,10,.6) 44%,rgba(10,10,10,0) 60%),linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.85) 14%,rgba(10,10,10,0) 40%),linear-gradient(to bottom,rgba(10,10,10,.5) 0%,rgba(10,10,10,0) 18%)}
   .hero2-glow{position:absolute;z-index:2;left:-10%;bottom:-20%;width:60%;height:70%;background:radial-gradient(closest-side,rgba(226,59,46,.22),rgba(226,59,46,0));pointer-events:none}
   .hero2-num{position:absolute;z-index:2;right:4%;top:8%;font-weight:800;font-size:clamp(120px,18vw,260px);line-height:1;letter-spacing:-.05em;color:rgba(240,230,210,.06);pointer-events:none}
   .hero2-inner{position:relative;z-index:3;max-width:72rem;margin:0 auto;padding:110px 24px 24px;width:100%}
-  .hero2-h1{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;color:#fff;max-width:760px}
-  .hero2-h1 .l1{display:block;font-size:clamp(2.2rem,4.4vw,3.9rem)}
-  .hero2-h1 .l2{display:block;font-size:clamp(1.9rem,3.6vw,3.15rem);font-style:italic;color:var(--ember);margin-top:.15em;text-shadow:0 0 28px rgba(240,230,210,.35)}
+  .hero2-h1{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;color:#fff;max-width:960px}
+  .hero2-h1 .l1{display:block;font-size:clamp(2.4rem,4.6vw,4.3rem);white-space:nowrap}
+  .hero2-h1 .l2{display:block;font-size:clamp(2.6rem,5.6vw,5.2rem);font-style:italic;color:var(--ember);margin-top:.15em;text-shadow:0 0 28px rgba(240,230,210,.35)}
   .hero2-sub{margin-top:28px;max-width:34rem;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.55;color:rgba(240,230,210,.82);font-weight:300}
   .hero2-cta{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:36px}
   .hero2-preco{font-size:13px;color:rgba(240,230,210,.7)}.hero2-preco b{color:#fff;font-weight:800;font-size:16px;margin-right:6px}
@@ -429,7 +429,7 @@
     <!-- HERO (v2, 15/09 noite): pôster de estúdio. Foto full-bleed, título em 2 linhas, ficha técnica na base. -->
     <section id="hero" class="hero2">
       <div class="hero2-foto" aria-hidden="true">
-        <img src="assets/hero-marcio-retrato.webp" alt="" width="900" height="1200">
+        <img src="assets/hero-marcio-retrato.webp" alt="" width="1066" height="1421">
         <div class="hero-foco"><span></span><span></span><span></span><span></span><i>● REC 00:12</i></div>
       </div>
       <div class="hero2-shade" aria-hidden="true"></div>
@@ -438,10 +438,10 @@
       <div class="hero2-inner">
         <div class="kicker mb-6"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span>Curso online · Ninja Creators</span></div>
         <h1 class="hero2-h1">
-          <span class="l1">Grave como um profissional.</span>
-          <span class="l2">Só com o celular que já está no seu bolso.</span>
+          <span class="l1">Você é bom no que faz.</span>
+          <span class="l2">Agora vão ver.</span>
         </h1>
-        <p class="hero2-sub">Pra quem tem 45+, domina o que faz e nunca gravou um vídeo de si mesmo. Câmera, formato, enquadramento e luz, do zero, sem comprar equipamento.</p>
+        <p class="hero2-sub">Grave fotos e vídeos profissionais com o celular que já está no seu bolso. Do zero, sem comprar equipamento, pra quem tem 45+ e nunca se gravou.</p>
         <div class="hero2-cta">
           <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-8 py-4 sm:px-10 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
           <span class="hero2-preco"><b>R$ 199</b> ou 12x de R$ 20,58 · Pix, cartão ou boleto</span>
