@@ -244,23 +244,42 @@
   </script>
 
 <style>
-  /* Site de vendas (15/09/2026): foto do hero fundida no preto + quadro de foco, cartão de preço. */
-  .hero-foto{position:absolute;right:0;top:0;bottom:0;width:min(62vw,820px);}
-  .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:72% top;display:block;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 26%);mask-image:linear-gradient(to right,transparent 0%,#000 26%);}
-  .hero-shade{position:absolute;inset:0;background:linear-gradient(to right,#0A0A0A 0%,#0A0A0A 30%,rgba(10,10,10,.55) 46%,rgba(10,10,10,0) 62%),linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,0) 28%)}
-  .hero-foco{position:absolute;left:39%;top:15%;width:21%;aspect-ratio:1/1.25;pointer-events:none}
+  /* Site de vendas (15/09/2026, hero v2: pôster de estúdio) */
+  .hero2{position:relative;overflow:hidden;background:#0A0A0A;min-height:94svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 0}
+  .hero2-foto{position:absolute;inset:0;z-index:1}
+  .hero2-foto img{position:absolute;right:0;top:0;height:100%;width:auto;min-width:56%;object-fit:cover;object-position:top center;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 28%);mask-image:linear-gradient(to right,transparent 0%,#000 28%)}
+  .hero2-shade{position:absolute;inset:0;z-index:2;background:linear-gradient(to right,#0A0A0A 0%,#0A0A0A 26%,rgba(10,10,10,.6) 44%,rgba(10,10,10,0) 60%),linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.85) 14%,rgba(10,10,10,0) 40%),linear-gradient(to bottom,rgba(10,10,10,.5) 0%,rgba(10,10,10,0) 18%)}
+  .hero2-glow{position:absolute;z-index:2;left:-10%;bottom:-20%;width:60%;height:70%;background:radial-gradient(closest-side,rgba(226,59,46,.22),rgba(226,59,46,0));pointer-events:none}
+  .hero2-num{position:absolute;z-index:2;right:4%;top:8%;font-weight:800;font-size:clamp(120px,18vw,260px);line-height:1;letter-spacing:-.05em;color:rgba(240,230,210,.06);pointer-events:none}
+  .hero2-inner{position:relative;z-index:3;max-width:72rem;margin:0 auto;padding:110px 24px 24px;width:100%}
+  .hero2-h1{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;color:#fff;max-width:760px}
+  .hero2-h1 .l1{display:block;font-size:clamp(2.2rem,4.4vw,3.9rem)}
+  .hero2-h1 .l2{display:block;font-size:clamp(1.9rem,3.6vw,3.15rem);font-style:italic;color:var(--ember);margin-top:.15em;text-shadow:0 0 28px rgba(240,230,210,.35)}
+  .hero2-sub{margin-top:28px;max-width:34rem;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.55;color:rgba(240,230,210,.82);font-weight:300}
+  .hero2-cta{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:36px}
+  .hero2-preco{font-size:13px;color:rgba(240,230,210,.7)}.hero2-preco b{color:#fff;font-weight:800;font-size:16px;margin-right:6px}
+  .hero2-ficha{position:relative;z-index:3;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);max-width:72rem;margin:24px auto 0;width:100%;border-top:1px solid rgba(240,230,210,.14)}
+  .hero2-ficha li{padding:22px 24px;border-right:1px solid rgba(240,230,210,.1);display:flex;flex-direction:column;gap:4px}
+  .hero2-ficha li:last-child{border-right:0}
+  .hero2-ficha b{font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);color:#fff;letter-spacing:-.02em;line-height:1}
+  .hero2-ficha span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,210,.6)}
+  .hero-foco{position:absolute;left:58%;top:13%;width:15%;aspect-ratio:1/1.3;pointer-events:none;z-index:2}
   .hero-foco span{position:absolute;width:22px;height:22px;border:2px solid rgba(240,230,210,.9)}
   .hero-foco span:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.hero-foco span:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}.hero-foco span:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.hero-foco span:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
   .hero-foco i{position:absolute;left:0;top:-30px;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:12px;letter-spacing:.14em;color:rgba(240,230,210,.9)}
   .hero-foco i::first-letter{color:#E23B2E}
   @media (max-width:1023px){
-    #hero{padding-top:0!important;min-height:auto}
-    .hero-foto{position:relative;width:100%;height:min(68vh,520px);opacity:1}
-    .hero-foto img{content:url("assets/hero-marcio-mobile.webp");object-position:top center;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
-    .hero-foco{display:block;left:24%;top:9%;width:52%;aspect-ratio:1/1.15}
-    .hero-shade{background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.55) 22%,rgba(10,10,10,0) 45%)}
-    #hero > .absolute.inset-0{position:relative!important;inset:auto}
-    #hero .max-w-6xl{margin-top:-140px}
+    .hero2{min-height:auto}
+    .hero2-foto{position:relative;height:min(64vh,520px)}
+    .hero2-foto img{content:url("assets/hero-marcio-mobile.webp");position:absolute;inset:0;width:100%;height:100%;min-width:0;object-position:top center;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
+    .hero2-shade{background:linear-gradient(to top,#0A0A0A 0%,rgba(10,10,10,.4) 30%,rgba(10,10,10,0) 55%)}
+    .hero2-num{display:none}
+    .hero-foco{left:22%;top:8%;width:56%;aspect-ratio:1/1.15}
+    .hero2-inner{padding:0 20px 8px;margin-top:-150px}
+    .hero2-h1{max-width:none}
+    .hero2-ficha{grid-template-columns:repeat(2,1fr);margin-top:28px}
+    .hero2-ficha li{padding:16px 20px;border-bottom:1px solid rgba(240,230,210,.1)}
+    .hero2-ficha li:nth-child(2n){border-right:0}
   }
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
@@ -351,32 +370,33 @@
 
   <main class="flex-grow">
 
-    <!-- HERO -->
-    <section id="hero" class="relative overflow-hidden pt-12 pb-14 sm:pt-16 sm:pb-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center bg-ink border-b border-white/5">
-      <div class="absolute inset-0 z-0">
-        <div class="hero-foto"><img src="assets/hero-marcio-retrato.webp" alt="" width="900" height="1200"><div class="hero-foco" aria-hidden="true"><span></span><span></span><span></span><span></span><i>● REC 00:12</i></div></div>
-        <div class="hero-shade" aria-hidden="true"></div>
+    <!-- HERO (v2, 15/09 noite): pôster de estúdio. Foto full-bleed, título em 2 linhas, ficha técnica na base. -->
+    <section id="hero" class="hero2">
+      <div class="hero2-foto" aria-hidden="true">
+        <img src="assets/hero-marcio-retrato.webp" alt="" width="900" height="1200">
+        <div class="hero-foco"><span></span><span></span><span></span><span></span><i>● REC 00:12</i></div>
       </div>
-      <div class="max-w-6xl mx-auto px-6 relative z-10 w-full reveal-group">
-        <div class="max-w-3xl">
-          <div class="kicker px-3 py-1.5 rounded-full border border-[#F0E6D2]/30 bg-[#F0E6D2]/10 mb-6 w-fit"><span class="relative flex h-2 w-2"><span class="relative inline-flex rounded-full h-2 w-2 bg-zhu"></span></span><span>Curso online · acesso imediato</span></div>
-          <h1 class="font-impact text-white uppercase tracking-tight mb-6">
-            <span class="block text-[1.9rem] leading-[1.12] sm:text-4xl md:text-[2.75rem]">Grave como um profissional.</span>
-            <span class="hero-emphasis block italic text-ember text-[2.1rem] leading-[1.12] sm:text-[2.6rem] md:text-[3.25rem] mt-2 max-w-2xl">Só com o celular que já está no seu bolso.</span>
-          </h1>
-          <p class="text-sm sm:text-lg text-neutral-300 font-light leading-relaxed max-w-xl mb-8">Pra quem tem 45+, domina o que faz e nunca gravou um vídeo de si mesmo. Câmera, formato, enquadramento e luz, do zero, sem comprar equipamento.</p>
-          <div class="flex flex-col items-start gap-4 mb-8">
-            <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
-            <p class="flex items-center gap-2 text-xs text-neutral-400 font-light"><svg width="14" height="14" class="icon text-[#F0E6D2]" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>R$ 199 ou 12x de R$ 20,58 · Pix, cartão ou boleto · 7 dias de garantia</p>
-          </div>
-          <ul class="flex flex-wrap gap-3 text-left max-w-xl">
-            <li class="hero-chip"><b>13 módulos</b><span>liberados por etapas</span></li>
-            <li class="hero-chip"><b>1h27</b><span>de aula ao vivo gravada</span></li>
-            <li class="hero-chip"><b>7 dias</b><span>de garantia</span></li>
-            <li class="hero-chip"><b>Do zero</b><span>no seu celular</span></li>
-          </ul>
+      <div class="hero2-shade" aria-hidden="true"></div>
+      <div class="hero2-glow" aria-hidden="true"></div>
+      <div class="hero2-num" aria-hidden="true">01</div>
+      <div class="hero2-inner">
+        <div class="kicker mb-6"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span>Curso online · Ninja Creators</span></div>
+        <h1 class="hero2-h1">
+          <span class="l1">Grave como um profissional.</span>
+          <span class="l2">Só com o celular que já está no seu bolso.</span>
+        </h1>
+        <p class="hero2-sub">Pra quem tem 45+, domina o que faz e nunca gravou um vídeo de si mesmo. Câmera, formato, enquadramento e luz, do zero, sem comprar equipamento.</p>
+        <div class="hero2-cta">
+          <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-8 py-4 sm:px-10 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
+          <span class="hero2-preco"><b>R$ 199</b> ou 12x de R$ 20,58 · Pix, cartão ou boleto</span>
         </div>
       </div>
+      <ul class="hero2-ficha" aria-label="O que está incluso">
+        <li><b>13</b><span>módulos, liberados por etapas</span></li>
+        <li><b>1h27</b><span>de aula ao vivo, gravada</span></li>
+        <li><b>7 dias</b><span>de garantia pela Hotmart</span></li>
+        <li><b>Do zero</b><span>no celular que você já tem</span></li>
+      </ul>
     </section>
 
     <!-- MARQUEE -->
