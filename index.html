@@ -298,6 +298,32 @@
   .selo-7 .t{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-align:center;margin-top:8px;line-height:1.4}
   .portfolio-foto{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#141210}
   .portfolio-foto img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
+  /* Seções v2: número gigante translúcido, cabeçalho com respiro, fundos alternados */
+  .sec{position:relative;overflow:hidden;padding:96px 0}
+  .sec-dark{background:#0A0A0A;border-bottom:1px solid rgba(255,255,255,.05)}
+  .sec-warm{background:radial-gradient(900px 600px at 100% 0%, rgba(226,59,46,.14) 0%, rgba(226,59,46,0) 60%),linear-gradient(160deg,#141110 0%,#0A0A0A 60%);border-bottom:1px solid rgba(255,255,255,.05)}
+  .sec-num{position:absolute;right:3%;top:24px;font-weight:800;font-size:clamp(120px,16vw,220px);line-height:1;letter-spacing:-.05em;color:rgba(240,230,210,.05);pointer-events:none}
+  .sec-head{max-width:46rem;margin-bottom:48px}
+  .sec-h2{font-weight:800;text-transform:uppercase;letter-spacing:-.025em;line-height:1.05;font-size:clamp(1.75rem,2.6vw,2.25rem);color:#fff}
+  .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,230,210,.55)}
+  .entrega-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:start}
+  .entrega-video-leg{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+  .mods{display:grid;grid-template-columns:repeat(13,1fr);gap:6px}
+  .mods .mod{height:10px;border-radius:3px;background:rgba(240,230,210,.12);border:1px solid rgba(240,230,210,.18)}
+  .mods .mod.on{background:var(--zhu);border-color:var(--zhu);box-shadow:0 0 14px rgba(226,59,46,.6)}
+  .mods-leg{margin-top:16px;font-size:15px;line-height:1.55;color:rgba(240,230,210,.8);font-weight:300}.mods-leg b{color:#fff;font-weight:700}
+  .inclui{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:12px}
+  .inclui li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(240,230,210,.9);padding:12px 14px;border:1px solid rgba(240,230,210,.12);border-radius:12px;background:rgba(240,230,210,.03)}
+  .inclui .icon{color:var(--ember);flex-shrink:0;margin-top:1px}
+  .curr-head-row{display:flex;justify-content:space-between;align-items:center;margin:56px 0 18px;padding-bottom:14px;border-bottom:1px solid rgba(240,230,210,.14)}
+  .curr{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+  .curr-item{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid rgba(240,230,210,.08)}
+  .curr-n{font-weight:800;font-size:34px;line-height:1;color:var(--zhu);letter-spacing:-.03em;width:44px;flex-shrink:0}
+  .curr-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .curr-item h3{font-weight:700;font-size:16px;line-height:1.3;color:#fff}
+  .curr-dur{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,210,.5);white-space:nowrap;margin-top:3px}
+  .curr-item p{margin-top:6px;font-size:13px;line-height:1.5;color:rgba(240,230,210,.62);font-weight:300}
+  @media (max-width:1023px){.sec{padding:64px 0}.entrega-grid{grid-template-columns:1fr;gap:28px}.curr{grid-template-columns:1fr}.sec-num{font-size:110px;top:12px}}
   @media (min-width:1024px){.cta-bar{display:none}}
 </style>
 </head>
@@ -438,55 +464,40 @@
       </div>
     </section>
 
-    <!-- 02 O QUE VOCÊ RECEBE -->
-    <section id="entrega" class="relative py-14 sm:py-24 bg-surface0 border-b border-white/5">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
+    <!-- 02 O QUE VOCÊ RECEBE (v2: vídeo protagonista, barra dos 13 módulos, currículo em linha do tempo) -->
+    <section id="entrega" class="sec sec-dark">
+      <div class="sec-num" aria-hidden="true">02</div>
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="sec-head">
           <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">02</span> · O que você recebe</p>
-          <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">13 módulos, liberados por etapas</h2>
-          <p class="text-sm sm:text-base text-neutral-400 font-light">O Módulo 1, "Despertando o Olhar Ninja", já está disponível com seis aulas curtas, mais a aula ao vivo inteira gravada. Os próximos entram na sua área de alunos por etapas, e você é avisado a cada liberação.</p>
+          <h2 class="sec-h2">13 módulos, liberados por etapas.<br><span class="text-ember">O primeiro já está no ar.</span></h2>
         </div>
-        <!-- Amostra real: a aula 1 inteira. É o produto, não um trailer. -->
-        <div class="amostra max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div class="flex items-center justify-between gap-4 mb-4">
-            <p class="kicker"><span class="relative flex h-2 w-2"><span class="relative inline-flex rounded-full h-2 w-2 bg-zhu"></span></span><span>Assista a aula 1 inteira, agora</span></p>
-            <span class="text-[10px] uppercase tracking-widest text-neutral-500">1 min · sem cadastro</span>
+        <div class="entrega-grid">
+          <div class="entrega-video">
+            <div class="prova-frame">
+              <video controls playsinline preload="none" poster="assets/aula-01-boas-vindas-poster.jpg" crossorigin="anonymous">
+                <source src="assets/aula-01-boas-vindas.mp4" type="video/mp4">
+                <track kind="subtitles" srclang="pt" label="Português" src="assets/aula-01-boas-vindas.vtt" default>
+                Seu navegador não suporta a reprodução de vídeo.
+              </video>
+            </div>
+            <div class="entrega-video-leg"><span class="kicker"><span class="relative flex h-2 w-2"><span class="relative inline-flex rounded-full h-2 w-2 bg-zhu"></span></span><span>Aula 1 inteira, de graça</span></span><span class="meta">1 min · sem cadastro</span></div>
           </div>
-          <div class="prova-frame">
-            <video controls playsinline preload="none" poster="assets/aula-01-boas-vindas-poster.jpg" crossorigin="anonymous">
-              <source src="assets/aula-01-boas-vindas.mp4" type="video/mp4">
-              <track kind="subtitles" srclang="pt" label="Português" src="assets/aula-01-boas-vindas.vtt" default>
-              Seu navegador não suporta a reprodução de vídeo.
-            </video>
+          <div class="entrega-mods">
+            <p class="meta mb-3">Progresso do curso</p>
+            <div class="mods"><span class="mod on" title="Módulo 1"></span><span class="mod" title="Módulo 2"></span><span class="mod" title="Módulo 3"></span><span class="mod" title="Módulo 4"></span><span class="mod" title="Módulo 5"></span><span class="mod" title="Módulo 6"></span><span class="mod" title="Módulo 7"></span><span class="mod" title="Módulo 8"></span><span class="mod" title="Módulo 9"></span><span class="mod" title="Módulo 10"></span><span class="mod" title="Módulo 11"></span><span class="mod" title="Módulo 12"></span><span class="mod" title="Módulo 13"></span></div>
+            <p class="mods-leg"><b>Módulo 1</b> disponível agora, com seis aulas curtas e a aula ao vivo gravada. Os outros doze entram na sua área de alunos por etapas, e você é avisado a cada liberação.</p>
+            <ul class="inclui">
+              <li><svg width="18" height="18" class="icon" aria-hidden="true"><use href="#i-videocamera-record-linear"></use></svg>Aula ao vivo de 10 de setembro, gravada (1h27)</li>
+              <li><svg width="18" height="18" class="icon" aria-hidden="true"><use href="#i-camera-linear"></use></svg>Área de alunos da Hotmart, no celular ou no computador</li>
+              <li><svg width="18" height="18" class="icon" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg>Certificado de conclusão</li>
+            </ul>
           </div>
-          <p class="text-xs text-neutral-500 font-light text-center mt-3">É a primeira aula do Módulo 1, do jeito que está na área de alunos. As outras seguem esse ritmo.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">01</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Boas-vindas: por que vídeo começa pela fotografia</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">1 min</span></div><p class="text-xs text-neutral-400 font-light">Você entra com a chave certa na cabeça: vídeo é uma sequência de fotos, e fotografar é escrever com luz.</p></div>
-</div><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">02</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Resolução: a diferença real entre HD, Full HD e 4K</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">3 min</span></div><p class="text-xs text-neutral-400 font-light">Você escolhe a resolução sabendo o que ganha e o que perde, e para de comprar aparelho por número de pixel.</p></div>
-</div><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">03</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Formatos e aspectos: o quadro certo pra cada rede</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">6 min</span></div><p class="text-xs text-neutral-400 font-light">Você decide o formato antes de gravar e nunca mais espreme ou corta o vídeo na edição.</p></div>
-</div><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">04</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Planos: os enquadramentos do cinema no celular</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">8 min</span></div><p class="text-xs text-neutral-400 font-light">Regra dos terços, plano geral, americano, close. Você troca de plano na gravação em vez de cortar depois.</p></div>
-</div><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">05</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Iluminação de 3 pontos: a mesma luz com R$ 300 ou R$ 1.000</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">5 min</span></div><p class="text-xs text-neutral-400 font-light">Você desliga a luz do teto que faz olheira e monta recorte, principal e preenchimento na frente da câmera.</p></div>
-</div><div class="hard-card rounded-xl p-5 flex gap-4">
-  <span class="kicker-num font-impact text-xl shrink-0 w-8">06</span>
-  <div><div class="flex items-start justify-between gap-3"><h3 class="font-impact text-white text-base mb-1">Luz dura e luz suave: qual usar em cada situação</h3><span class="kicker shrink-0 mt-0.5" style="font-size:10px;opacity:.75">4 min</span></div><p class="text-xs text-neutral-400 font-light">Você reconhece o sol de meio-dia e o dia nublado na sua luz, e suaviza com difusor, até improvisado.</p></div>
-</div></div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-videocamera-record-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Aula ao vivo gravada</h3><p class="text-xs text-neutral-400 font-light">1h27 da aula de 10 de setembro, completa, dentro da área de alunos.</p></div>
-          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-camera-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Área de alunos da Hotmart</h3><p class="text-xs text-neutral-400 font-light">No celular ou no computador, quantas vezes quiser.</p></div>
-          <div class="hard-card rounded-xl p-5"><svg width="24" height="24" class="icon text-[#F0E6D2] mb-3" aria-hidden="true"><use href="#i-shield-check-linear"></use></svg><h3 class="font-impact text-white text-base mb-1">Certificado de conclusão</h3><p class="text-xs text-neutral-400 font-light">Emitido pela plataforma ao terminar as aulas.</p></div>
-        </div>
-        <!-- CALL: número de módulos (13) definido pelo João em 15/09; data de cada liberação ainda não está escrita de propósito. -->
-        <div class="flex justify-center mt-10"><a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-6 py-3.5 text-xs sm:text-sm" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a></div>
+        <div class="curr-head-row"><p class="kicker"><span class="kicker-num">Módulo 1</span> · Despertando o Olhar Ninja</p><span class="meta">6 aulas · 26 min</span></div>
+        <ol class="curr"><li class="curr-item"><span class="curr-n">01</span><div><div class="curr-head"><h3>Boas-vindas: por que vídeo começa pela fotografia</h3><span class="curr-dur">1 min</span></div><p>Você entra com a chave certa na cabeça: vídeo é uma sequência de fotos, e fotografar é escrever com luz.</p></div></li><li class="curr-item"><span class="curr-n">02</span><div><div class="curr-head"><h3>Resolução: a diferença real entre HD, Full HD e 4K</h3><span class="curr-dur">3 min</span></div><p>Você escolhe a resolução sabendo o que ganha e o que perde, e para de comprar aparelho por número de pixel.</p></div></li><li class="curr-item"><span class="curr-n">03</span><div><div class="curr-head"><h3>Formatos e aspectos: o quadro certo pra cada rede</h3><span class="curr-dur">6 min</span></div><p>Você decide o formato antes de gravar e nunca mais espreme ou corta o vídeo na edição.</p></div></li><li class="curr-item"><span class="curr-n">04</span><div><div class="curr-head"><h3>Planos: os enquadramentos do cinema no celular</h3><span class="curr-dur">8 min</span></div><p>Regra dos terços, plano geral, americano, close. Você troca de plano na gravação em vez de cortar depois.</p></div></li><li class="curr-item"><span class="curr-n">05</span><div><div class="curr-head"><h3>Iluminação de 3 pontos: a mesma luz com R$ 300 ou R$ 1.000</h3><span class="curr-dur">5 min</span></div><p>Você desliga a luz do teto que faz olheira e monta recorte, principal e preenchimento na frente da câmera.</p></div></li><li class="curr-item"><span class="curr-n">06</span><div><div class="curr-head"><h3>Luz dura e luz suave: qual usar em cada situação</h3><span class="curr-dur">4 min</span></div><p>Você reconhece o sol de meio-dia e o dia nublado na sua luz, e suaviza com difusor, até improvisado.</p></div></li></ol>
+        <!-- CALL: número de módulos (13) definido pelo João em 15/09; data de cada liberação não está escrita de propósito. -->
+        <div class="flex justify-center mt-12"><a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember px-7 py-4 text-sm" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a></div>
       </div>
     </section>
 
