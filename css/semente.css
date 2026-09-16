@@ -467,3 +467,8 @@ html .hero2-ficha b { font-size: 32px; }
 html .mz-quote em { font-size: inherit; }
 html .prova-quote { font-size: 16px; }
 html #cta-final p[class*="text-\[10px\]"] { font-size: 12px; color: rgba(240, 230, 210, 0.6); }
+/* Botão preenchido: vermelho um tom abaixo do da marca só no fundo do
+   botão, pra o branco passar de 4,29:1 pra 4,79:1 (AA). O vermelho da
+   marca (#E23B2E) continua em texto e detalhes sobre preto, onde dá
+   4,6:1; escurecer lá pioraria. [03-03] */
+a.btn-ember, .cookie-consent__btn--yes { background: #D63428; }
