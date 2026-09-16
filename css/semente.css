@@ -493,3 +493,12 @@ a.btn-ember, .cookie-consent__btn--yes { background: #D63428; }
   /* Botão dentro de card vai até o padding. [05-03] */
   html .preco-card a.btn-ember.btn-cta { width: 100%; max-width: none; }
 }
+@media (max-width: 639px) {
+  /* Um alinhamento por grupo no celular: cabeçalhos de seção à esquerda,
+     como nas seções 01 a 04; centralizado só o card de preço e o CTA final. [05-07] */
+  html #prova-social .max-w-xl.text-center, html #investimento .max-w-xl.text-center.mb-10, html #faq h2.text-center { text-align: left; }
+  html #prova-social .kicker, html #investimento .kicker.justify-center { justify-content: flex-start; }
+  /* Um primário por tela: a barra fixa de compra já está sempre visível,
+     o botão do header vira redundância. [04-01] */
+  html header a.btn-mini { display: none; }
+}
