@@ -261,7 +261,7 @@
   .tk-head{display:flex;justify-content:space-between;align-items:center;padding:12px 22px;background:linear-gradient(90deg,#D63428 0%,#C22E22 100%);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
   .tk-body{padding:20px 22px 22px;background:#F8F2E6}
   .tk-cols{display:grid;grid-template-columns:1fr 1.25fr .8fr;gap:14px;margin:0}
-  .tk-cols dt{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,18,14,.7)}
+  .tk-cols dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,18,14,.7)}
   .tk-cols dd{margin:6px 0 0;font-weight:800;font-size:15px;line-height:1.2;color:var(--cream-ink)}
   .tk-cut{position:relative;margin:18px -22px 16px;height:0;border-top:2px dashed rgba(23,18,14,.3)}
   .tk-cut::before,.tk-cut::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:#0A0A0A}
@@ -298,6 +298,10 @@
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .hero-chip{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;border:1px solid rgba(240,230,210,.16);background:rgba(240,230,210,.05);min-width:112px}
+  /* Auditoria 17/09: área de toque e fontes mínimas no celular */
+  #main-header a[aria-label]{display:inline-flex;align-items:center;min-height:44px}
+  .cookie-consent__btn{min-height:44px}
+  @media (max-width:1023px){.animate-marquee{font-size:11px}}
   /* Pills de divisa entre seções (17/09, ref. Ladeira). Divisor de altura zero por cima da emenda, fora do overflow das seções. */
   .sec-divider{position:relative;height:0;z-index:20;display:flex;justify-content:center}
   .sec-pill{position:absolute;top:0;transform:translateY(-50%);display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;border:1px solid rgba(240,230,210,.22);background:#0A0A0A;color:#F0E6D2;box-shadow:0 8px 24px rgba(0,0,0,.45)}
