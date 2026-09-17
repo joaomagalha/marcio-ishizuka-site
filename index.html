@@ -298,6 +298,14 @@
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .hero-chip{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;border:1px solid rgba(240,230,210,.16);background:rgba(240,230,210,.05);min-width:112px}
+  .hero-creds{position:absolute;z-index:3;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;left:52%;bottom:14%}
+  .hero-creds .hero-chip{background:rgba(10,10,10,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:rgba(240,230,210,.22);box-shadow:0 14px 30px rgba(0,0,0,.45)}
+  .hero-creds .hero-chip b{font-size:20px}.hero-creds .hero-chip span{font-size:12px;color:rgba(240,230,210,.78)}
+  @media (max-width:1023px){
+    .hero-creds{position:relative;left:auto;bottom:auto;flex-direction:row;gap:8px;padding:0 20px;margin-top:-56px;z-index:4}
+    .hero-creds .hero-chip{flex:1;min-width:0;padding:10px 12px}.hero-creds .hero-chip b{font-size:17px}.hero-creds .hero-chip span{font-size:11px}
+    .hero2-inner{margin-top:16px}
+  }
   .hero-chip b{font-weight:800;font-size:18px;color:#fff;line-height:1.1}
   .hero-chip span{font-size:11px;color:rgba(240,230,210,.7);margin-top:3px}
   .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(10,10,10,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(240,230,210,.14)}
@@ -449,6 +457,10 @@
       <div class="hero2-shade" aria-hidden="true"></div>
       <div class="hero2-glow" aria-hidden="true"></div>
       <div class="hero2-num" aria-hidden="true">01</div>
+      <ul class="hero-creds" aria-label="Quem ensina">
+        <li class="hero-chip"><b>15+ anos</b><span>de fotografia profissional</span></li>
+        <li class="hero-chip"><b>Outdoors</b><span>espalhados por Cuiabá, feitos por ele</span></li>
+      </ul>
       <div class="hero2-inner">
         <div class="kicker mb-6"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span>Curso online · Ninja Creators</span></div>
         <div class="hero2-lockup">
@@ -584,12 +596,12 @@
           <div class="mz-text">
             <p class="kicker mb-5"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">04</span> · Quem é o Márcio</p>
             <blockquote class="mz-quote">"Não era a câmera que precisava melhorar. <em>Era eu.</em>"</blockquote>
-            <p class="mz-p">Há mais de 15 anos o Márcio Ishizuka é fotógrafo profissional em Cuiabá. Nove trabalhos dele já passaram por outdoor na cidade sem que a própria família soubesse: forte nas agências, quase desconhecido do público.</p>
+            <p class="mz-p">Há mais de 15 anos o Márcio Ishizuka é fotógrafo profissional em Cuiabá. Trabalhos dele já passaram por outdoor na cidade sem que a própria família soubesse: forte nas agências, quase desconhecido do público.</p>
             <p class="mz-p">Foi no Japão que entendeu que equipamento sozinho não bastava. De volta ao Brasil, com pouco dinheiro, recomeçou do zero com o que sabia. É esse olhar que ele ensina aqui, no aparelho que você já tem.</p>
             <ul class="mz-nums">
               <li><b>15+</b><span>anos de mercado</span></li>
               <li><b>99%</b><span>dos clientes via agência</span></li>
-              <li><b>9</b><span>trabalhos em outdoor</span></li>
+              <li><b>Outdoors</b><span>espalhados pela cidade</span></li>
             </ul>
           </div>
         </div>
