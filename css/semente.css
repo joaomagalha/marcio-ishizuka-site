@@ -462,8 +462,7 @@ html footer div[class] { font-size: 12px; }
 /* Rodapé com contraste AA (era 2,5:1 e 4,2:1). [03-03] */
 html footer div[class], html footer a[class] { color: rgba(240, 230, 210, 0.6); }
 html footer a[class]:hover { color: #F0E6D2; }
-html .hero2-ficha span, html .curr-dur, html .mz-nums span { font-size: 12px; }
-html .hero2-ficha b { font-size: 32px; }
+html .curr-dur, html .mz-nums span { font-size: 12px; }
 html .mz-quote em { font-size: inherit; }
 html .prova-quote { font-size: 16px; }
 html #cta-final p[class*="text-\[10px\]"] { font-size: 12px; color: rgba(240, 230, 210, 0.6); }
@@ -478,7 +477,6 @@ a.btn-ember, .cookie-consent__btn--yes { background: #D63428; }
 @media (max-width: 1023px) {
   /* Uma margem só na página inteira: 24. [05-05] */
   html .hero2-inner { padding-left: 24px; padding-right: 24px; }
-  html .hero2-ficha li { padding: 16px 24px; }
   /* Cards na escala de 8. [05-03] */
   html .pq-col { padding: 24px; }
   /* Respiro igual entre seções. [05-01] */
@@ -487,7 +485,6 @@ a.btn-ember, .cookie-consent__btn--yes { background: #D63428; }
 @media (max-width: 639px) {
   /* Display menor no celular: preço 48, números 28, citação 22. [02-01] [10-06] */
   html .preco-big { font-size: 48px; }
-  html .hero2-ficha b { font-size: 28px; }
   html .mz-nums b { font-size: 28px; }
   html .mz-quote { font-size: 22px; }
   /* Botão dentro de card vai até o padding. [05-03] */
