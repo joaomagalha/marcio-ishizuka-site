@@ -298,6 +298,11 @@
   .marcio-foto img{width:100%;height:auto;display:block;filter:saturate(.9)}
   .preco-card{background:linear-gradient(170deg,#141210 0%,#0A0A0A 100%);border:1px solid rgba(240,230,210,.14);box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .hero-chip{display:flex;flex-direction:column;padding:10px 14px;border-radius:12px;border:1px solid rgba(240,230,210,.16);background:rgba(240,230,210,.05);min-width:112px}
+  /* Pills de divisa entre seções (17/09, ref. Ladeira). Divisor de altura zero por cima da emenda, fora do overflow das seções. */
+  .sec-divider{position:relative;height:0;z-index:20;display:flex;justify-content:center}
+  .sec-pill{position:absolute;top:0;transform:translateY(-50%);display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;border:1px solid rgba(240,230,210,.22);background:#0A0A0A;color:#F0E6D2;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .sec-pill .lantern{width:14px;height:14px;color:var(--zhu)}
+  .sec-divider.cream .sec-pill{background:#F4ECDD;color:#17120E;border-color:rgba(23,18,14,.18)}
   /* Palavras marcadas (17/09, ref. Ladeira): fundo vermelhão translúcido, texto herda a cor. */
   .hl{background:rgba(226,59,46,.2);color:inherit;padding:.02em .24em;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
   .section-cream .hl,.sec-warm.section-cream .hl{background:rgba(226,59,46,.14)}
@@ -577,11 +582,11 @@
     </section>
 
     <!-- 02 O QUE VOCÊ RECEBE (v2: vídeo protagonista, barra dos 13 módulos, currículo em linha do tempo) -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>02 · O que você recebe</span></div>
     <section id="entrega" class="sec sec-dark">
       <div class="sec-num" aria-hidden="true">02</div>
       <div class="max-w-6xl mx-auto px-6">
         <div class="sec-head">
-          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">02</span> · O que você recebe</p>
           <h2 class="sec-h2">13 módulos por etapas.<br><span class="text-ember">O primeiro já está no ar.</span></h2>
         </div>
         <div class="entrega-grid">
@@ -614,10 +619,11 @@
     </section>
 
     <!-- 03 COMO FUNCIONA (v2: faixa compacta de 3 passos) -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>03 · Como funciona</span></div>
     <section id="como-funciona" class="sec sec-dark" style="padding:64px 0">
       <div class="max-w-6xl mx-auto px-6">
         <div class="cf-row">
-          <div class="cf-title"><p class="kicker mb-3"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">03</span> · Como funciona</p><h2 class="sec-h2">Três passos até a aula 1</h2></div>
+          <div class="cf-title"><h2 class="sec-h2">Três passos até a aula 1</h2></div>
           <ol class="cf-steps">
             <li><span class="cf-n">1</span><div><b>Você compra na Hotmart</b><span>Pix, cartão ou boleto. Leva um minuto.</span></div></li>
             <li><span class="cf-n">2</span><div><b>O acesso chega no e-mail</b><span>Na hora, com o link e a senha da área de alunos.</span></div></li>
@@ -628,6 +634,7 @@
     </section>
 
     <!-- 04 QUEM É O MÁRCIO (v2: citação em destaque, foto grande, portfólio real) -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>04 · Quem é o Márcio</span></div>
     <section id="marcio" class="sec sec-warm">
       <div class="sec-num" aria-hidden="true">04</div>
       <div class="max-w-6xl mx-auto px-6">
@@ -638,7 +645,6 @@
             <figure class="mz-thumb"><img src="assets/estudio-02.webp" alt="Márcio com a câmera, retrato de estúdio" width="800" height="1000" loading="lazy"></figure>
           </div>
           <div class="mz-text">
-            <p class="kicker mb-5"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">04</span> · Quem é o Márcio</p>
             <blockquote class="mz-quote">"Não era a câmera que precisava melhorar. <em>Era eu.</em>"</blockquote>
             <p class="mz-p">Há mais de 15 anos o Márcio Ishizuka é fotógrafo profissional em Cuiabá. Trabalhos dele já passaram por outdoor na cidade sem que a própria família soubesse: forte nas agências, quase desconhecido do público.</p>
             <p class="mz-p">Foi no Japão que entendeu que equipamento sozinho não bastava. De volta ao Brasil, com pouco dinheiro, <mark class="hl">recomeçou do zero com o que sabia</mark>. É esse olhar que ele ensina aqui, <mark class="hl">no aparelho que você já tem</mark>.</p>
@@ -653,11 +659,11 @@
     </section>
 
     <!-- 05 PROVA -->
+    <div class="sec-divider cream" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>05 · Prova real</span></div>
     <section id="prova-social" class="relative py-14 sm:py-24 section-cream overflow-hidden">
       <div class="sec-num" aria-hidden="true" style="color:rgba(23,18,14,.06)">05</div>
       <div class="max-w-3xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
-          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">05</span> · Prova real</p>
           <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Quem é do ramo confia nele.</h2>
           <p class="text-sm sm:text-base text-neutral-400 font-light">A Michelle já vive de audiovisual e mesmo assim foi o Márcio que ela procurou pra evoluir.</p>
         </div>
@@ -668,11 +674,11 @@
     </section>
 
     <!-- 06 INVESTIMENTO -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>06 · Investimento</span></div>
     <section id="investimento" class="sec sec-dark">
       <div class="sec-num" aria-hidden="true">06</div>
       <div class="max-w-5xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-center mb-10 sm:mb-14">
-          <p class="kicker justify-center mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg><span class="kicker-num">06</span> · Investimento</p>
           <h2 class="sec-h2">R$ 199, uma vez.<br><span class="text-ember">Acesso na hora.</span></h2>
         </div>
         <div class="preco-card max-w-xl mx-auto rounded-2xl p-8 sm:p-10 text-center">
@@ -697,13 +703,13 @@
     </section>
 
     <!-- GARANTIA (bloco creme: quebra o ritmo escuro exatamente onde a pessoa hesita) -->
+    <div class="sec-divider cream" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>Sem risco</span></div>
     <section id="garantia" class="relative py-14 sm:py-24 section-cream overflow-hidden">
       <div class="max-w-4xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
         <div class="md:col-span-2 flex justify-center">
           <div class="selo-7"><span class="n">7</span><span class="t">dias de<br>garantia</span></div>
         </div>
         <div class="md:col-span-3">
-          <p class="kicker mb-4"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg>Sem risco</p>
           <h2 class="font-impact text-white text-[1.75rem] sm:text-[2rem] uppercase tracking-tight mb-4">Assiste tudo. Não serviu, dinheiro de volta.</h2>
           <p class="text-sm sm:text-base text-neutral-400 font-light leading-relaxed">Você tem <mark class="hl">7 dias, contados da compra</mark>, pra ver as seis aulas e a aula ao vivo. Se não for o que você esperava, pede o reembolso dentro da Hotmart, <mark class="hl">sem precisar falar com ninguém</mark> e sem explicar o motivo. A plataforma devolve o valor pelo mesmo meio que você pagou.</p>
         </div>
@@ -711,6 +717,7 @@
     </section>
 
     <!-- FAQ -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>FAQ</span></div>
     <section id="faq" class="sec sec-dark">
       <div class="max-w-2xl mx-auto px-6">
         <h2 class="sec-h2 text-center mb-10">Perguntas antes de comprar</h2>
@@ -746,9 +753,9 @@
     </section>
 
     <!-- CTA FINAL -->
+    <div class="sec-divider dark" aria-hidden="true"><span class="sec-pill"><svg class="lantern"><use href="#i-chochin"></use></svg>Ninja Creators</span></div>
     <section id="cta-final" class="sec sec-warm text-center" style="padding:120px 0">
       <div class="max-w-2xl mx-auto px-6">
-        <p class="kicker justify-center mb-6"><svg class="lantern" aria-hidden="true"><use href="#i-chochin"></use></svg>Ninja Creators</p>
         <h2 class="cta-h2">Sua próxima foto<br>pode ser a <span class="text-ember">primeira boa.</span></h2>
         <p class="text-sm sm:text-base text-neutral-400 font-light mb-8">Treze módulos, o celular que você já tem, e sete dias pra decidir se era isso.</p>
         <a href="https://pay.hotmart.com/K107523024U?off=od2wvm81" target="_blank" rel="noopener" class="btn-ember btn-cta px-7 py-4 sm:px-9 sm:py-5 text-sm sm:text-base" aria-label="Comprar o Ninja Creators na Hotmart">Quero o Ninja Creators<svg width="16" height="16" class="icon" aria-hidden="true"><use href="#i-arrow-right-linear"></use></svg></a>
