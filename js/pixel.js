@@ -62,7 +62,9 @@
   document.querySelectorAll(CTA_WHATSAPP).forEach(function (botao) {
     botao.addEventListener('click', function () {
       disparar('Lead', 'nf_lead_enviado', {
-        content_name: 'Grupo WhatsApp Ninja Creators'
+        content_name: 'Grupo WhatsApp Ninja Creators',
+        value: 0,
+        currency: 'BRL'
       });
     });
   });
