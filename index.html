@@ -407,6 +407,9 @@
   .cta-h2{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:1;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:22px}
   @media (max-width:1023px){.pq-grid,.cf-row,.mz-grid{grid-template-columns:1fr;gap:28px}.cf-steps{grid-template-columns:1fr;gap:18px}.mz-fotos{order:2}.mz-text{order:1}}
   @media (min-width:1024px){.cta-bar{display:none}}
+/* rodapé (01/10): Política e "site por" lado a lado, numa linha também no celular */
+.rodape-links{white-space:nowrap}
+@media (max-width:639px){.rodape-links{font-size:min(10px,2.75vw);letter-spacing:.05em;gap:8px}}
 </style>
 </head>
 <body class="semente antialiased selection:bg-[#F0E6D2] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
@@ -790,8 +793,7 @@
     <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-2 text-center text-[10px] uppercase tracking-widest text-neutral-500 font-light">
       <span>Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
       <a href="/equipamentos/" class="text-neutral-400 hover:text-[#F0E6D2] underline underline-offset-2">Equipamentos que o Márcio usa</a>
-      <a href="/privacidade.html" class="text-neutral-500 hover:text-[#F0E6D2] underline underline-offset-2">Política de Privacidade</a>
-      <a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener" class="text-neutral-600 hover:text-[#F0E6D2]">site por @joaomagalhaes.ia</a>
+      <span class="rodape-links flex items-center justify-center gap-3"><a href="/privacidade.html" class="text-neutral-500 hover:text-[#F0E6D2] underline underline-offset-2">Política de Privacidade</a><span aria-hidden="true">·</span><a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener" class="text-neutral-600 hover:text-[#F0E6D2]">site por @joaomagalhaes.ia</a></span>
     </div>
   </footer>
 

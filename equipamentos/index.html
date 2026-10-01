@@ -426,6 +426,9 @@
       .topo .btn-ember { padding: 7px 12px; font-size: 10px; white-space: nowrap; gap: 6px; }
       .topo .btn-ember svg { width: 13px; height: 13px; }
     }
+    /* rodapé: os dois links lado a lado */
+    .rodape-links { display: flex; justify-content: center; align-items: center; gap: 12px; white-space: nowrap; }
+    @media (max-width: 639px) { .rodape-links { font-size: min(10px, 2.75vw); letter-spacing: 0.05em; gap: 8px; } }
   </style>
 </head>
 <body>
@@ -580,8 +583,7 @@
   <footer>
     <div class="wrap">
       <span>Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
-      <a href="/privacidade.html">Política de Privacidade</a>
-      <a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener">site por @joaomagalhaes.ia</a>
+      <span class="rodape-links"><a href="/privacidade.html">Política de Privacidade</a><span aria-hidden="true">·</span><a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener">site por @joaomagalhaes.ia</a></span>
     </div>
   </footer>
 
