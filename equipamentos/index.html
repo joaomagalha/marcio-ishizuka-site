@@ -429,6 +429,10 @@
     /* rodapé: os dois links lado a lado */
     .rodape-links { display: flex; justify-content: center; align-items: center; gap: 12px; white-space: nowrap; }
     @media (max-width: 639px) { .rodape-links { font-size: min(10px, 2.75vw); letter-spacing: 0.05em; gap: 8px; } }
+    /* botão do bloco final: largura toda no celular; no computador, a mesma
+       largura da linha dos três fatos (max 460px) */
+    .fecho .btn-claro { width: 100%; justify-content: space-between; }
+    @media (min-width: 900px) { .fecho .btn-claro { max-width: 460px; } }
   </style>
 </head>
 <body>
