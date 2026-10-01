@@ -78,4 +78,19 @@
       });
     });
   });
+
+  // 30/09/2026: página /equipamentos (links de afiliado do Mercado Livre).
+  // Evento personalizado, não padrão: clique em equipamento não é conversão
+  // do curso e não pode confundir a otimização da campanha. Dedup por
+  // produto (data-produto), 1x por sessão cada.
+  var CTA_AFILIADO = 'a[href*="meli.la"], a[href*="mercadolivre.com"]';
+  document.querySelectorAll(CTA_AFILIADO).forEach(function (botao) {
+    botao.addEventListener('click', function () {
+      var produto = botao.getAttribute('data-produto') || 'Lista do Márcio';
+      var flag = 'nf_equip_' + produto.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+      if (!podeMedir() || jaDisparou(flag) || typeof window.fbq !== 'function') return;
+      window.fbq('trackCustom', 'CliqueEquipamento', { produto: produto });
+      marcar(flag);
+    });
+  });
 })();

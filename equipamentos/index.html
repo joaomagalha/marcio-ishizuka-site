@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Os equipamentos que o Márcio usa · Ninja Creators</title>
+  <meta name="description" content="Microfone, luz e tripé que o fotógrafo Márcio Ishizuka usa e recomenda pra gravar com o celular, separados por categoria, com link direto no Mercado Livre.">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://ninjadafoto.com.br/equipamentos/">
+  <meta property="og:title" content="Os equipamentos que o Márcio usa · Ninja Creators">
+  <meta property="og:description" content="Microfone, luz e tripé que o Márcio Ishizuka usa e recomenda pra gravar com o celular.">
+  <meta property="og:image" content="https://ninjadafoto.com.br/assets/og-image.jpg?v=3">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="/css/fonts.css?v=20260916d">
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-normal-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="/css/semente.css?v=20260916d">
+  <link rel="preload" as="image" href="/assets/equipamentos/hero-claro-mobile.webp" media="(max-width: 639px)">
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/archivo-expanded-latin.woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/equipamentos/hero-claro.webp" media="(min-width: 640px)">
+  <link rel="preload" as="image" href="/assets/equipamentos/hero-claro-recorte.webp" media="(min-width: 640px)">
+  <link rel="preload" as="image" href="/assets/equipamentos/hero-claro-recorte-mobile.webp" media="(max-width: 639px)">
+
+  <script src="/js/consent.js?v=20260916d" defer></script>
+  <script src="/js/pixel.js?v=20260930e" defer></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+
+  <!-- Meta Pixel e Clarity: os mesmos da home (index.html tem o comentário
+       completo sobre LGPD opt-out). Quem já recusou é revogado antes do init. -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    try {
+      if (localStorage.getItem('nf_consent') === 'denied') fbq('consent', 'revoke');
+    } catch (e) {}
+    fbq('init', '579964108858174');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=579964108858174&ev=PageView&noscript=1"
+    alt=""></noscript>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yfi5c6jgfa");
+  </script>
+
+  <!-- Página de equipamentos (30/09/2026): pedida pelo Márcio em 23/09
+       (referência: dominandoocelular.com/produtos), decidida na reunião de
+       25/09. CSS próprio aqui, em cima dos tokens de semente.css, pra não
+       precisar mexer no Tailwind (que só varre index.html).
+       Links: por enquanto todos apontam pra lista de afiliado dele
+       (meli.la/1ZxfPdG). Quando ele gerar o link de cada produto, trocar
+       só o href do botão do card. Sem preço de propósito: muda todo dia. -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+    body {
+      margin: 0;
+      background: var(--surface-0);
+      color: #E9E4DA;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .btn-ember { text-decoration: none; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    /* Cabeçalho: o mesmo da home (logo + botão do curso) */
+    /* Transparente por cima da hero; ganha fundo quando a hero sai da tela
+       (classe .solido, posta pelo script no fim da página). */
+    .topo {
+      position: sticky; top: 0; z-index: 50;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background .25s, border-color .25s;
+    }
+    .topo.solido { background: var(--surface-0); border-bottom-color: rgba(255,255,255,0.06); }
+    /* em cima da hero clara, o logo fica escuro */
+    .topo:not(.solido) .marca, .topo:not(.solido) .marca svg { color: #0A0A0A; }
+    .topo .wrap { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .marca {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none;
+      font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; font-size: 14px;
+    }
+    .marca svg { color: var(--cream); flex-shrink: 0; }
+    .topo .btn-ember { padding: 8px 16px; font-size: 11px; }
+    .btn-ember svg { width: 16px; height: 16px; }
+
+    /* Hero no estilo da referência (infinitemachine.com, escolhida pelo João
+       em 30/09): palavra gigante no topo, Márcio no centro, nome da lista em
+       vermelho embaixo à esquerda e botão vazado embaixo à direita.
+       Archivo 125% de largura, hospedada no site (sem Google Fonts, LGPD). */
+    @font-face {
+      font-family: 'Archivo Expandida';
+      src: url('/assets/fonts/archivo-expanded-latin.woff2') format('woff2');
+      font-weight: 100 900; font-display: swap;
+    }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .abre {
+      position: relative; overflow: hidden;
+      margin-top: -56px; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 72px 0 28px;
+      background: #DEDAD5 url("/assets/equipamentos/hero-claro-mobile.webp") center bottom 105px / cover no-repeat;
+    }
+    .abre::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(226,223,218,0.96) 0%, rgba(226,223,218,0.85) 24%, rgba(226,223,218,0) 46%);
+    }
+    .abre > * { position: relative; z-index: 3; }
+    /* Efeito "palavra atrás dele": o recorte do Márcio (Vision do macOS, 30/09)
+       repete o fundo com o mesmo tamanho e posição, por cima da palavra. */
+    .abre > .recorte {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: url("/assets/equipamentos/hero-claro-recorte-mobile.webp") center bottom 105px / cover no-repeat;
+    }
+    .abre > .topo-hero { z-index: 1; }
+    .abre::after { z-index: 2; }
+    .gigante {
+      margin: 0; padding: 0 20px;
+      font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900;
+      /* a palavra mede 10,66x o tamanho da fonte: ocupa a largura útil exata */
+      font-size: calc((100vw - 40px) / 10.8); line-height: 0.9; letter-spacing: -0.01em;
+      text-transform: uppercase; text-align: center; color: #0A0A0A;
+      white-space: nowrap;
+    }
+    .hero-menu {
+      display: none; justify-content: flex-end; gap: 22px;
+      max-width: 1440px; margin: 14px auto 0; padding: 0 20px; width: 100%;
+    }
+    .hero-menu a { color: #0A0A0A; text-decoration: none; font-size: 18px; letter-spacing: -0.01em; }
+    .hero-menu a:hover { color: #000; text-decoration: underline; text-underline-offset: 4px; }
+    .hero-base {
+      display: flex; flex-direction: column; gap: 22px;
+      max-width: 1440px; margin: 0 auto; padding: 0 20px; width: 100%;
+    }
+    .lista-titulo {
+      margin: 0 0 10px;
+      font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900;
+      font-size: min(calc((100vw - 40px) / 12.2), 64px); /* a frase mede 11,9x a fonte */ line-height: 0.95; letter-spacing: -0.01em;
+      text-transform: uppercase; color: var(--zhu); white-space: nowrap;
+    }
+    /* bloco de baixo com a largura exata do título vermelho: os parágrafos
+       quebram dentro dela (contain: inline-size) e com linhas equilibradas */
+    .hero-texto { width: fit-content; }
+    .hero-texto > p:not(.lista-titulo) { contain: inline-size; text-wrap: balance; }
+    .hero-apoio { margin: 0; max-width: none; font-size: 17px; line-height: 1.45; color: #0A0A0A; }
+    .hero-afiliado { margin: 10px 0 0; max-width: none; font-size: 12.5px; line-height: 1.45; color: #5A534A; }
+    .btn-vazado {
+      display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 18px 30px; border: 1.5px solid #0A0A0A;
+      color: #0A0A0A; text-decoration: none; font-size: 18px; font-weight: 400; letter-spacing: -0.01em;
+      transition: background .2s, color .2s;
+    }
+    .btn-vazado svg { width: 24px; height: 24px; }
+    /* indicador de rolagem no centro, embaixo (o "tracinho" da referência) */
+    .rolar { display: none; }
+    .btn-vazado:hover { background: #0A0A0A; color: var(--cream); }
+
+    /* Abas por categoria: grudam embaixo do cabeçalho */
+    .abas {
+      position: sticky; top: 56px; z-index: 40;
+      background: var(--surface-0);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .abas .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+    .abas .wrap::-webkit-scrollbar { display: none; }
+    .aba {
+      flex-shrink: 0;
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid rgba(240,230,210,0.22);
+      color: #D9D2C5; text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .aba:hover { border-color: var(--cream); color: #fff; }
+    .aba[aria-current="true"] { background: var(--cream); color: var(--cream-ink); border-color: var(--cream); }
+
+    /* Categorias e cards */
+    .cat { padding: 40px 0 8px; }
+    .cat-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .cat h2 { margin: 0; font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.02em; color: #fff; }
+    .cat .conta { font-size: 13px; color: #A39C90; white-space: nowrap; }
+    .cat p.cat-nota { margin: -8px 0 18px; color: #BDB6A9; font-size: 15px; max-width: 60ch; }
+    .grade { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    .card {
+      display: flex; flex-direction: column;
+      background: var(--surface-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    /* 4:3 no celular pra lista não ficar comprida demais; quadrado no desktop */
+    .foto { position: relative; background: #fff; aspect-ratio: 4 / 3; }
+    .foto img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .selo {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--zhu); color: #fff;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.02em;
+      padding: 5px 10px; border-radius: 999px;
+    }
+    .info { display: flex; flex-direction: column; gap: 8px; padding: 18px 18px 20px; flex: 1; }
+    .info h3 { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 700; color: #fff; }
+    .info p { margin: 0; font-size: 15px; color: #CFC8BB; flex: 1; }
+    .info .btn-ember { align-self: flex-start; margin-top: 8px; padding: 11px 18px; font-size: 13px; }
+
+    /* Fecho */
+    .fecho { padding: 56px 0 64px; }
+    .fecho .caixa {
+      background: var(--cream); color: var(--cream-ink);
+      border-radius: var(--r-md); padding: 32px 24px;
+    }
+    .fecho h2 { margin: 0 0 10px; font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
+    .fecho p { margin: 0 0 20px; font-size: 16px; max-width: 58ch; color: #3A3129; }
+
+    footer { padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer .wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #8A847A; font-weight: 300;
+    }
+    footer a { color: #8A847A; }
+    footer a:hover { color: var(--cream); }
+
+    a:focus-visible, .btn-ember:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+
+    @media (min-width: 640px) {
+      .topo .wrap { height: 64px; max-width: 1440px; padding: 0 40px; }
+      .abas { top: 64px; }
+      .marca { font-size: 16px; }
+      .abre {
+        margin-top: -64px; min-height: min(100vh, 920px); padding: 30px 0 34px;
+        background-image: url("/assets/equipamentos/hero-claro.webp");
+        /* largura 115% e topo puxado proporcional à tela: a palavra também
+           escala pela largura, então a cabeça sempre encosta nela */
+        background-size: 115% auto; background-position: center calc(23px - 23vw);
+      }
+      /* na hero a palavra É a marca: a barra do topo só aparece depois de rolar */
+      .topo:not(.solido) { opacity: 0; transform: translateY(-100%); pointer-events: none; }
+      .topo {
+        transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .35s ease,
+                    background .35s ease, border-color .35s ease;
+      }
+      .rolar {
+        display: block; position: absolute; left: 50%; bottom: 14px; z-index: 3;
+        width: 46px; height: 6px; margin-left: -23px; border-radius: 3px; background: rgba(10,10,10,0.7);
+      }
+      .gigante { padding: 0 40px; font-size: min(calc((100vw - 80px) / 10.8), 190px); }
+      .hero-menu, .hero-base { padding: 0 40px; }
+      .hero-base { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+      .btn-vazado { flex-shrink: 0; }
+      .hero-menu { display: flex; }
+      .abre > .recorte { background-image: url("/assets/equipamentos/hero-claro-recorte.webp"); background-size: 115% auto; background-position: center calc(23px - 23vw); }
+      /* no desktop o texto fica ao lado dele: sem degradê, corpo inteiro visível */
+      .abre::after { background: none; }
+      /* ele ocupa o meio da tela: o texto fica numa coluna estreita à esquerda */
+      .lista-titulo { font-size: min(2.6vw, 46px); margin-bottom: 12px; }
+      .hero-afiliado { font-size: 12px; }
+      .fecho .caixa { padding: 44px 40px; }
+      .foto { aspect-ratio: 1 / 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* ===== Página clara (30/09): a lista segue a hero e a referência
+       (loja de acessórios da Infinite Machine). Sobrescreve o tema escuro acima. */
+    body { background: #ECE9E4; color: #17120E; }
+    .topo.solido {
+      background: rgba(236, 233, 228, 0.82);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom-color: rgba(10,10,10,0.08);
+    }
+    @media (prefers-reduced-motion: reduce) { .topo { transition: opacity .2s ease !important; transform: none !important; } }
+    .topo .marca, .topo .marca svg { color: #0A0A0A; }
+    .abas { background: #ECE9E4; border-bottom: 1px solid rgba(10,10,10,0.08); }
+    .aba { border-color: rgba(10,10,10,0.25); color: #17120E; }
+    .aba:hover { border-color: #0A0A0A; color: #0A0A0A; }
+    .aba[aria-current="true"] { background: #0A0A0A; color: #F0E6D2; border-color: #0A0A0A; }
+
+    .cat { padding: 56px 0 8px; }
+    .cat-head {
+      align-items: flex-end; margin-bottom: 10px; padding-bottom: 14px;
+      border-bottom: 1.5px solid #0A0A0A;
+    }
+    .cat h2 {
+      font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(28px, 5vw, 52px); line-height: 0.95; letter-spacing: -0.01em;
+      text-transform: uppercase; color: #0A0A0A;
+    }
+    .cat .conta { font-size: 15px; color: #4A443C; }
+    .cat p.cat-nota { margin: 14px 0 28px; color: #3A342D; font-size: 16px; max-width: 52ch; text-wrap: pretty; }
+    /* celular: 2 por linha, como vitrine de loja; desktop: 3 ou 4 */
+    .grade { gap: 32px 12px; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 640px) {
+      .grade { gap: 48px 24px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+      /* lista com as mesmas margens da hero (1440 / 40px) */
+      .abas .wrap, .cat .wrap, .fecho .wrap, footer .wrap { max-width: 1440px; padding-left: 40px; padding-right: 40px; }
+    }
+
+    /* card sem caixa: foto num quadro cinza-claro e texto embaixo */
+    .card { background: none; border: 0; border-radius: 0; overflow: visible; }
+    .foto { background: #DFDBD5; aspect-ratio: 1 / 1; }
+    .foto img { mix-blend-mode: multiply; padding: 9%; } /* o branco da foto some no cinza */
+    .selo {
+      display: block; top: 12px; left: 12px; z-index: 1;
+      background: #0A0A0A; color: #F0E6D2; border-radius: 0;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.02em; padding: 6px 10px;
+    }
+    /* nome, descrição e link alinhados em linha entre os cards (subgrid) */
+    /* foto, nome, descrição e link viram 4 linhas compartilhadas entre os
+       cards da mesma fileira (subgrid): o nome de 2 linhas de um card empurra
+       a fileira inteira, e os textos e links ficam sempre na mesma altura */
+    .card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
+    .info { display: contents; }
+    .info h3 { margin-top: 16px; align-self: end; }
+    .info p { margin-top: 6px; }
+    .info .link-ml { margin-top: 12px; align-self: start; justify-self: start; }
+    .info { padding: 16px 0 0; gap: 6px; }
+    .info .destaque { margin: 0; font-size: 13px; font-weight: 600; color: var(--zhu); letter-spacing: 0.01em; }
+    .info h3 { font-size: 19px; font-weight: 600; color: #0A0A0A; letter-spacing: -0.01em; text-wrap: balance; }
+    .info p { font-size: 15px; color: #4A443C; text-wrap: pretty;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; flex: 1 0 auto; }
+    .link-ml {
+      align-self: flex-start; margin-top: 8px;
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #0A0A0A; text-decoration: none; font-size: 16px;
+      border-bottom: 1.5px solid #0A0A0A; padding-bottom: 3px;
+      transition: gap .2s;
+    }
+    .link-ml svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .link-ml { white-space: nowrap; }
+    @media (max-width: 639px) { .so-desk { display: none; } .selo { top: 8px; left: 8px; font-size: 10px; padding: 4px 7px; white-space: nowrap; } }
+    @media (max-width: 639px) {
+      .info h3 { font-size: 16px; }
+      .info p { font-size: 14px; }
+      .link-ml { font-size: 14px; gap: 6px; }
+    }
+    .link-ml:hover { gap: 14px; }
+    .link-ml:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 4px; }
+
+    .fecho { padding: 72px 0 80px; }
+    .fecho .caixa { background: #0A0A0A; color: #F0E6D2; border-radius: 0; }
+    .fecho h2 { font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; color: #F0E6D2; }
+    .fecho p { color: #CFC8BB; }
+    footer { border-top-color: rgba(10,10,10,0.1); }
+    footer .wrap, footer a, footer span { color: #5A534A; }
+    footer a:hover { color: #0A0A0A; }
+
+    /* Some ao rolar pra baixo, volta ao rolar pra cima (30/09). As abas de
+       categoria sobem junto pra não deixar um vão no lugar da barra. */
+    .topo { transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .35s ease, background .35s ease, border-color .35s ease; }
+    .topo.escondido { transform: translateY(-100%); }
+    .abas { transition: top .45s cubic-bezier(.22, 1, .36, 1); }
+    html.sem-topo .abas { top: 0; }
+
+    /* Bloco final (30/09): texto à esquerda, foto real do Márcio no estúdio à
+       direita, botão vazado claro no mesmo desenho do "Ver a lista" */
+    .fecho .caixa { display: grid; grid-template-columns: minmax(0, 1fr); padding: 0; overflow: hidden; }
+    .fecho-texto { padding: 36px 24px 40px; display: flex; flex-direction: column; align-items: flex-start; }
+    .fecho-kicker { margin: 0 0 16px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #A9A296; }
+    .fecho h2 { margin: 0 0 16px; font-size: clamp(28px, 4.4vw, 60px); line-height: 0.98; text-wrap: balance; max-width: 12ch; }
+    .fecho .fecho-texto > p:not(.fecho-kicker) { margin: 0 0 28px; font-size: 17px; line-height: 1.55; max-width: 40ch; color: #CFC8BB; text-wrap: pretty; }
+    .btn-claro { border-color: #F0E6D2; color: #F0E6D2; }
+    .btn-claro:hover { background: #F0E6D2; color: #0A0A0A; }
+    .fecho-foto { order: -1; aspect-ratio: 4 / 3; }
+    .fecho-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 74% 30%; display: block; }
+    @media (min-width: 900px) {
+      .fecho .caixa { grid-template-columns: 1.05fr 0.95fr; min-height: 520px; }
+      .fecho-texto { padding: 64px 56px; justify-content: center; }
+      .fecho-foto { order: 0; aspect-ratio: auto; }
+    }
+
+    /* Refino do bloco final (30/09) */
+    .fecho-kicker { display: flex; align-items: center; gap: 10px; }
+    .fecho-kicker .ponto { width: 8px; height: 8px; background: var(--zhu); flex-shrink: 0; }
+    .fecho h2 em { font-style: normal; color: var(--zhu); }
+    .fecho-fatos {
+      list-style: none; margin: 0 0 32px; padding: 0; width: 100%; max-width: 460px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(240,230,210,0.18);
+    }
+    .fecho-fatos li { padding: 14px 12px 0 0; display: flex; flex-direction: column; gap: 2px; }
+    .fecho-fatos li + li { padding-left: 14px; border-left: 1px solid rgba(240,230,210,0.18); }
+    .fecho-fatos strong { font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #F0E6D2; text-transform: uppercase; letter-spacing: -0.01em; }
+    .fecho-fatos span { font-size: 13px; color: #A9A296; }
+    .fecho-fatos strong { white-space: nowrap; }
+    @media (max-width: 639px) { .fecho-fatos strong { font-size: min(14px, 3.8vw); } .fecho-fatos span { font-size: 12px; } .fecho-fatos li + li { padding-left: 10px; } }
+    /* foto entra no preto sem corte seco */
+    .fecho-foto { position: relative; }
+    .fecho-foto::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0) 30%); }
+    @media (min-width: 900px) {
+      .fecho-foto::after { background: linear-gradient(to right, #0A0A0A 0%, rgba(10,10,10,0) 22%); }
+      .fecho .caixa { min-height: 580px; }
+    }
+
+    /* Responsividade (01/10) */
+    /* tablet em pé: usa a foto vertical do celular, que preenche a altura */
+    @media (min-width: 640px) and (max-aspect-ratio: 1/1) {
+      /* foto vertical na largura toda; a cabeça (46,7% da largura abaixo do
+         topo da foto) encosta embaixo da palavra */
+      .abre { background-image: url("/assets/equipamentos/hero-claro-mobile.webp"); background-size: 100% auto; background-position: center calc(150px - 46.7vw); }
+      .abre > .recorte { background-image: url("/assets/equipamentos/hero-claro-recorte-mobile.webp"); background-size: 100% auto; background-position: center calc(150px - 46.7vw); }
+      .abre::after { background: linear-gradient(to top, rgba(226,223,218,0.96) 0%, rgba(226,223,218,0.85) 22%, rgba(226,223,218,0) 42%); }
+      .hero-menu { display: none; }
+    }
+    /* celular estreito: logo e botão do topo cabem numa linha */
+    @media (max-width: 420px) {
+      .topo .wrap { padding: 0 14px; gap: 10px; }
+      .marca { font-size: 12px; gap: 6px; white-space: nowrap; }
+      .marca svg { width: 16px; height: 16px; }
+      .topo .btn-ember { padding: 7px 12px; font-size: 10px; white-space: nowrap; gap: 6px; }
+      .topo .btn-ember svg { width: 13px; height: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-ninja-logo" viewBox="0 0 512 512">
+          <path d="M85.407,220.025c-19.51-19.499-51.251-19.505-70.75,0.006C5.206,229.482,0,242.043,0,255.408c0,13.366,5.206,25.926,14.657,35.372l41.79,41.79c12.941-31.333,36.28-57.961,66.828-74.675L85.407,220.025z"/>
+          <path d="M147.233,283.177c-40.504,18.316-68.819,58.963-68.819,106.234v100.058c0,9.212,7.464,16.676,16.676,16.676h44.237l115.437-115.437L147.233,283.177z"/>
+          <path d="M409.573,283.064L186.491,506.145h275.48c9.212,0,16.676-7.464,16.676-16.676V389.411C478.647,342.041,450.213,301.325,409.573,283.064z"/>
+          <path d="M495.324,5.855h-33.353c-32.849,0-61.236,19.139-74.818,46.808C359.792,23.901,321.267,5.855,278.531,5.855c-82.757,0-150.087,67.33-150.087,150.087c0,12.26,1.64,24.117,4.426,35.532c0.201,1.531,0.543,3.015,1.131,4.386c17.545,63.414,75.612,110.17,144.531,110.17c68.912,0,126.975-46.747,144.525-110.151c0.597-1.387,0.944-2.888,1.145-4.44c2.781-11.403,4.417-23.249,4.417-35.497c0-17.561-3.19-34.353-8.757-50.029h8.757c45.979,0,83.382-37.403,83.382-83.382C512,13.319,504.536,5.855,495.324,5.855z M393.934,172.618h-59.815H222.943h-59.815c-0.787-5.462-1.332-11-1.332-16.676s0.545-11.214,1.332-16.676h43.138v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h77.823v16.676c0,9.212,7.464,16.676,16.676,16.676s16.676-7.464,16.676-16.676v-16.676h43.138c0.787,5.462,1.332,11,1.332,16.676S394.721,167.156,393.934,172.618z"/>
+        </symbol>
+    <symbol id="i-seta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12H20M14 18L20 12L14 6"/></symbol>
+  </svg>
+
+  <header class="topo">
+    <div class="wrap">
+      <a href="/" class="marca" aria-label="Ninja Creators, página inicial">
+        <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><use href="#i-ninja-logo"></use></svg>
+        <span>Ninja Creators</span>
+      </a>
+      <a href="/" class="btn-ember" aria-label="Conhecer o curso Ninja Creators">Conhecer o curso<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="abre">
+      <div class="recorte" aria-hidden="true"></div>
+      <div class="topo-hero">
+        <h1 class="gigante"><span aria-hidden="true">Equipamentos</span><span class="sr">Os equipamentos que o Márcio usa</span></h1>
+        <nav class="hero-menu" aria-label="Atalhos">
+          <a href="#audio">Áudio</a>
+          <a href="#luz">Iluminação</a>
+          <a href="#tripe">Tripé</a>
+          <a href="/">Curso</a>
+        </nav>
+      </div>
+      <div class="hero-base">
+        <div class="hero-texto">
+          <p class="lista-titulo">Lista do Márcio</p>
+          <p class="hero-apoio">Escolhidos por um fotógrafo de publicidade há 15&nbsp;anos.</p>
+          <p class="hero-afiliado">Links de afiliado: se você comprar por eles, o Márcio ganha uma comissão, sem custo extra pra&nbsp;você.</p>
+        </div>
+        <a class="btn-vazado" href="#audio">Ver a lista<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+      </div>
+      <span class="rolar" aria-hidden="true"></span>
+    </section>
+
+    <nav class="abas" aria-label="Categorias">
+      <div class="wrap">
+        <a class="aba" href="#audio">Áudio</a>
+        <a class="aba" href="#luz">Iluminação</a>
+        <a class="aba" href="#tripe">Tripé</a>
+      </div>
+    </nav>
+
+    <section class="cat" id="audio" aria-labelledby="t-audio">
+      <div class="wrap">
+        <div class="cat-head"><h2 id="t-audio">Áudio</h2><span class="conta">3 itens</span></div>
+        <p class="cat-nota">Som ruim é o que o público menos perdoa. Microfone de lapela sem fio é o que o Márcio indica.</p>
+        <div class="grade">
+          <article class="card">
+            <div class="foto"><span class="selo">O que o Márcio usa</span><img src="/assets/equipamentos/hollyland-lark-m2.webp" alt="Microfone de lapela sem fio Hollyland Lark M2 com estojo de carga" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Microfone Hollyland Lark M2 Combo</h3>
+              <p>Sem fio, com som limpo e estojo.</p>
+              <a class="link-ml" data-produto="Hollyland Lark M2" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="foto"><img src="/assets/equipamentos/hollyland-lark-a1.webp" alt="Microfone sem fio Hollyland Lark A1 com receptor USB-C" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Microfone Hollyland Lark A1</h3>
+              <p>Som parecido, metade do preço.</p>
+              <a class="link-ml" data-produto="Hollyland Lark A1" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="foto"><img src="/assets/equipamentos/lapela-kaidi.webp" alt="Microfone de lapela sem fio Kaidi com receptor USB-C" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Microfone de lapela sem fio Kaidi</h3>
+              <p>O baratinho que resolve.</p>
+              <a class="link-ml" data-produto="Lapela Kaidi" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cat" id="luz" aria-labelledby="t-luz">
+      <div class="wrap">
+        <div class="cat-head"><h2 id="t-luz">Iluminação</h2><span class="conta">2 itens</span></div>
+        <p class="cat-nota">Luz é o que mais muda o vídeo. Comece pela mais simples: luz e microfone já fazem diferença.</p>
+        <div class="grade">
+          <article class="card">
+            <div class="foto"><img src="/assets/equipamentos/luz-selfie-led-5w.webp" alt="Luz de LED pequena com clipe de prender no celular" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Luz de LED 5W de prender no celular</h3>
+              <p>A mais barata pra começar.</p>
+              <a class="link-ml" data-produto="Luz LED 5W" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="foto"><img src="/assets/equipamentos/bastao-sokani-x25.webp" alt="Bastão de LED RGB Sokani X25 em várias cores" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Bastão de LED RGB Sokani X25</h3>
+              <p>Muda de cor e temperatura.</p>
+              <a class="link-ml" data-produto="Sokani X25" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cat" id="tripe" aria-labelledby="t-tripe">
+      <div class="wrap">
+        <div class="cat-head"><h2 id="t-tripe">Tripé</h2><span class="conta">1 item</span></div>
+        <p class="cat-nota">Deixa a imagem parada e libera as suas mãos. Em várias aulas é o tripé que resolve.</p>
+        <div class="grade">
+          <article class="card">
+            <div class="foto"><img src="/assets/equipamentos/tripe-ulanzi-tt88.webp" alt="Tripé magnético Ulanzi TT88 com haste longa e suporte de celular" width="800" height="800" loading="lazy"></div>
+            <div class="info">
+              <h3>Tripé magnético Ulanzi TT88</h3>
+              <p>Selfie e gravação de cima.</p>
+              <a class="link-ml" data-produto="Ulanzi TT88" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="fecho">
+      <div class="wrap">
+        <div class="caixa">
+          <div class="fecho-texto">
+            <p class="fecho-kicker"><span class="ponto" aria-hidden="true"></span>O curso do Márcio</p>
+            <h2>Equipamento ajuda.<br><em>Saber usar é o que&nbsp;muda.</em></h2>
+            <p>O Márcio ensina, do zero, a tirar foto e vídeo com cara de profissional usando o celular que você já&nbsp;tem.</p>
+            <ul class="fecho-fatos">
+              <li><strong>Do zero</strong><span>no seu ritmo</span></li>
+              <li><strong>PDF</strong><span>em cada módulo</span></li>
+              <li><strong>7 dias</strong><span>de garantia</span></li>
+            </ul>
+            <a class="btn-vazado btn-claro" href="/">Conhecer o curso<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+          </div>
+          <div class="fecho-foto">
+            <img src="/assets/equipamentos/fecho-marcio-estudio.webp" alt="Márcio Ishizuka no estúdio dele, gravando com o celular" width="1000" height="985" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Márcio Ishizuka &copy; 2026. Todos os direitos reservados.</span>
+      <a href="/privacidade.html">Política de Privacidade</a>
+      <a href="https://instagram.com/joaomagalhaes.ia" target="_blank" rel="noopener">site por @joaomagalhaes.ia</a>
+    </div>
+  </footer>
+
+  <!-- Marca a aba da categoria que está na tela -->
+  <script>
+    (function () {
+      var abas = document.querySelectorAll('.aba');
+      if (!('IntersectionObserver' in window)) return;
+      // marca a categoria no meio da tela; na hero e no bloco final, nenhuma
+      var io = new IntersectionObserver(function (itens) {
+        itens.forEach(function (it) {
+          if (!it.isIntersecting) return;
+          var id = it.target.classList.contains('cat') ? it.target.id : '';
+          abas.forEach(function (a) {
+            a.setAttribute('aria-current', id && a.getAttribute('href') === '#' + id ? 'true' : 'false');
+          });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('.cat, .abre, .fecho').forEach(function (s) { io.observe(s); });
+    })();
+    (function () {
+      var topo = document.querySelector('.topo'), hero = document.querySelector('.abre');
+      if (!topo || !hero) return;
+      // aparece quando a pessoa já rolou um terço da hero (antes: só no fim
+      // dela, junto com as abas grudando, e o efeito parecia travado)
+      // trocar uma classe é barato: roda direto no scroll (sem esperar quadro)
+      var ultimoY = window.scrollY;
+      function confere() {
+        var y = window.scrollY, passou = y > hero.offsetHeight * 0.35;
+        topo.classList.toggle('solido', passou);
+        // depois da hero: desce = esconde, sobe = mostra (folga de 6 px contra tremida)
+        if (!passou) { topo.classList.remove('escondido'); }
+        else if (y - ultimoY > 6) { topo.classList.add('escondido'); }
+        else if (ultimoY - y > 6) { topo.classList.remove('escondido'); }
+        if (Math.abs(y - ultimoY) > 6 || !passou) ultimoY = y;
+        document.documentElement.classList.toggle('sem-topo', topo.classList.contains('escondido'));
+      }
+      window.addEventListener('scroll', confere, { passive: true });
+      window.addEventListener('resize', confere);
+      confere();
+    })();
+  </script>
+</body>
+</html>
