@@ -92,7 +92,7 @@
     }
     .topo.solido { background: var(--surface-0); border-bottom-color: rgba(255,255,255,0.06); }
     /* em cima da hero clara, o logo fica escuro */
-    .topo:not(.solido) .marca, .topo:not(.solido) .marca svg { color: #0A0A0A; }
+    .topo:not(.solido) .marca, .topo:not(.solido) .marca svg { color: var(--cream); }
     .topo .wrap { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .marca {
       display: flex; align-items: center; gap: 8px;
@@ -118,12 +118,12 @@
       margin-top: -56px; min-height: 100svh;
       display: flex; flex-direction: column; justify-content: space-between;
       padding: 72px 0 28px;
-      background: #DEDAD5 url("/assets/equipamentos/hero-claro-mobile.webp") center bottom 105px / cover no-repeat;
+      background: #0A0A0A url("/assets/equipamentos/hero-claro-mobile.webp") center bottom 105px / cover no-repeat;
     }
     .abre::after {
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background:
-        linear-gradient(to top, rgba(226,223,218,0.96) 0%, rgba(226,223,218,0.85) 24%, rgba(226,223,218,0) 46%);
+        linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.85) 24%, rgba(10,10,10,0) 46%);
     }
     .abre > * { position: relative; z-index: 3; }
     /* Efeito "palavra atrás dele": o recorte do Márcio (Vision do macOS, 30/09)
@@ -139,15 +139,15 @@
       font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900;
       /* a palavra mede 10,66x o tamanho da fonte: ocupa a largura útil exata */
       font-size: calc((100vw - 40px) / 10.8); line-height: 0.9; letter-spacing: -0.01em;
-      text-transform: uppercase; text-align: center; color: #0A0A0A;
+      text-transform: uppercase; text-align: center; color: var(--cream);
       white-space: nowrap;
     }
     .hero-menu {
       display: none; justify-content: flex-end; gap: 22px;
       max-width: 1440px; margin: 14px auto 0; padding: 0 20px; width: 100%;
     }
-    .hero-menu a { color: #0A0A0A; text-decoration: none; font-size: 18px; letter-spacing: -0.01em; }
-    .hero-menu a:hover { color: #000; text-decoration: underline; text-underline-offset: 4px; }
+    .hero-menu a { color: #E9E4DA; text-decoration: none; font-size: 18px; letter-spacing: -0.01em; }
+    .hero-menu a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
     .hero-base {
       display: flex; flex-direction: column; gap: 22px;
       max-width: 1440px; margin: 0 auto; padding: 0 20px; width: 100%;
@@ -162,18 +162,18 @@
        quebram dentro dela (contain: inline-size) e com linhas equilibradas */
     .hero-texto { width: fit-content; }
     .hero-texto > p:not(.lista-titulo) { contain: inline-size; text-wrap: balance; }
-    .hero-apoio { margin: 0; max-width: none; font-size: 17px; line-height: 1.45; color: #0A0A0A; }
-    .hero-afiliado { margin: 10px 0 0; max-width: none; font-size: 12.5px; line-height: 1.45; color: #5A534A; }
+    .hero-apoio { margin: 0; max-width: none; font-size: 17px; line-height: 1.45; color: #E2DCD0; }
+    .hero-afiliado { margin: 10px 0 0; max-width: none; font-size: 12.5px; line-height: 1.45; color: #A9A296; }
     .btn-vazado {
       display: inline-flex; align-items: center; justify-content: center; gap: 14px;
-      padding: 18px 30px; border: 1.5px solid #0A0A0A;
-      color: #0A0A0A; text-decoration: none; font-size: 18px; font-weight: 400; letter-spacing: -0.01em;
+      padding: 18px 30px; border: 1.5px solid var(--cream);
+      color: var(--cream); text-decoration: none; font-size: 18px; font-weight: 400; letter-spacing: -0.01em;
       transition: background .2s, color .2s;
     }
     .btn-vazado svg { width: 24px; height: 24px; }
     /* indicador de rolagem no centro, embaixo (o "tracinho" da referência) */
     .rolar { display: none; }
-    .btn-vazado:hover { background: #0A0A0A; color: var(--cream); }
+    .btn-vazado:hover { background: var(--cream); color: #0A0A0A; }
 
     /* Abas por categoria: grudam embaixo do cabeçalho */
     .abas {
@@ -220,15 +220,6 @@
     .info p { margin: 0; font-size: 15px; color: #CFC8BB; flex: 1; }
     .info .btn-ember { align-self: flex-start; margin-top: 8px; padding: 11px 18px; font-size: 13px; }
 
-    /* Fecho */
-    .fecho { padding: 56px 0 64px; }
-    .fecho .caixa {
-      background: var(--cream); color: var(--cream-ink);
-      border-radius: var(--r-md); padding: 32px 24px;
-    }
-    .fecho h2 { margin: 0 0 10px; font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
-    .fecho p { margin: 0 0 20px; font-size: 16px; max-width: 58ch; color: #3A3129; }
-
     footer { padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.05); }
     footer .wrap {
       display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
@@ -248,7 +239,7 @@
         background-image: url("/assets/equipamentos/hero-claro.webp");
         /* largura 115% e topo puxado proporcional à tela: a palavra também
            escala pela largura, então a cabeça sempre encosta nela */
-        background-size: 115% auto; background-position: center calc(23px - 23vw);
+        background-size: min(115%, 1840px) auto; background-position: center calc(23px - min(23vw, 368px));
       }
       /* na hero a palavra É a marca: a barra do topo só aparece depois de rolar */
       .topo:not(.solido) { opacity: 0; transform: translateY(-100%); pointer-events: none; }
@@ -258,20 +249,21 @@
       }
       .rolar {
         display: block; position: absolute; left: 50%; bottom: 14px; z-index: 3;
-        width: 46px; height: 6px; margin-left: -23px; border-radius: 3px; background: rgba(10,10,10,0.7);
+        width: 46px; height: 6px; margin-left: -23px; border-radius: 3px; background: rgba(240,230,210,0.6);
       }
-      .gigante { padding: 0 40px; font-size: min(calc((100vw - 80px) / 10.8), 190px); }
-      .hero-menu, .hero-base { padding: 0 40px; }
+      .gigante { padding: 0 40px; font-size: min(calc((100vw - 80px) / 10.8), 141px); }
+      /* acima de 1600 px a hero para de crescer (fundo preto liso dos lados) */
+      .hero-menu, .hero-base { padding: 0 40px; max-width: 1600px; }
       .hero-base { flex-direction: row; align-items: flex-end; justify-content: space-between; }
       .btn-vazado { flex-shrink: 0; }
-      .hero-menu { display: flex; }
-      .abre > .recorte { background-image: url("/assets/equipamentos/hero-claro-recorte.webp"); background-size: 115% auto; background-position: center calc(23px - 23vw); }
+      /* menu à esquerda, embaixo da palavra: o lado direito tem o bastão de luz */
+      .hero-menu { display: flex; justify-content: flex-start; }
+      .abre > .recorte { background-image: url("/assets/equipamentos/hero-claro-recorte.webp"); background-size: min(115%, 1840px) auto; background-position: center calc(23px - min(23vw, 368px)); }
       /* no desktop o texto fica ao lado dele: sem degradê, corpo inteiro visível */
       .abre::after { background: none; }
       /* ele ocupa o meio da tela: o texto fica numa coluna estreita à esquerda */
       .lista-titulo { font-size: min(2.6vw, 46px); margin-bottom: 12px; }
       .hero-afiliado { font-size: 12px; }
-      .fecho .caixa { padding: 44px 40px; }
       .foto { aspect-ratio: 1 / 1; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -308,7 +300,7 @@
     @media (min-width: 640px) {
       .grade { gap: 48px 24px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
       /* lista com as mesmas margens da hero (1440 / 40px) */
-      .abas .wrap, .cat .wrap, .fecho .wrap, footer .wrap { max-width: 1440px; padding-left: 40px; padding-right: 40px; }
+      .abas .wrap, .cat .wrap, footer .wrap { max-width: 1440px; padding-left: 40px; padding-right: 40px; }
     }
 
     /* card sem caixa: foto num quadro cinza-claro e texto embaixo */
@@ -352,13 +344,6 @@
     .link-ml:hover { gap: 14px; }
     .link-ml:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 4px; }
 
-    .fecho { padding: 72px 0 80px; }
-    .fecho .caixa { background: #0A0A0A; color: #F0E6D2; border-radius: 0; }
-    .fecho h2 { font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; color: #F0E6D2; }
-    .fecho p { color: #CFC8BB; }
-    footer { border-top-color: rgba(10,10,10,0.1); }
-    footer .wrap, footer a, footer span { color: #5A534A; }
-    footer a:hover { color: #0A0A0A; }
 
     /* Some ao rolar pra baixo, volta ao rolar pra cima (30/09). As abas de
        categoria sobem junto pra não deixar um vão no lugar da barra. */
@@ -367,47 +352,6 @@
     .abas { transition: top .45s cubic-bezier(.22, 1, .36, 1); }
     html.sem-topo .abas { top: 0; }
 
-    /* Bloco final (30/09): texto à esquerda, foto real do Márcio no estúdio à
-       direita, botão vazado claro no mesmo desenho do "Ver a lista" */
-    .fecho .caixa { display: grid; grid-template-columns: minmax(0, 1fr); padding: 0; overflow: hidden; }
-    .fecho-texto { padding: 36px 24px 40px; display: flex; flex-direction: column; align-items: flex-start; }
-    .fecho-kicker { margin: 0 0 16px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #A9A296; }
-    .fecho h2 { margin: 0 0 16px; font-size: clamp(28px, 4.4vw, 60px); line-height: 0.98; text-wrap: balance; max-width: 12ch; }
-    .fecho .fecho-texto > p:not(.fecho-kicker) { margin: 0 0 28px; font-size: 17px; line-height: 1.55; max-width: 40ch; color: #CFC8BB; text-wrap: pretty; }
-    .btn-claro { border-color: #F0E6D2; color: #F0E6D2; }
-    .btn-claro:hover { background: #F0E6D2; color: #0A0A0A; }
-    .fecho-foto { order: -1; aspect-ratio: 4 / 3; }
-    .fecho-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 74% 30%; display: block; }
-    @media (min-width: 900px) {
-      .fecho .caixa { grid-template-columns: 1.05fr 0.95fr; min-height: 520px; }
-      .fecho-texto { padding: 64px 56px; justify-content: center; }
-      .fecho-foto { order: 0; aspect-ratio: auto; }
-    }
-
-    /* Refino do bloco final (30/09) */
-    .fecho-kicker { display: flex; align-items: center; gap: 10px; }
-    .fecho-kicker .ponto { width: 8px; height: 8px; background: var(--zhu); flex-shrink: 0; }
-    .fecho h2 em { font-style: normal; color: var(--zhu); }
-    .fecho-fatos {
-      list-style: none; margin: 0 0 32px; padding: 0; width: 100%; max-width: 460px;
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid rgba(240,230,210,0.18);
-    }
-    .fecho-fatos li { padding: 14px 12px 0 0; display: flex; flex-direction: column; gap: 2px; }
-    .fecho-fatos li + li { padding-left: 14px; border-left: 1px solid rgba(240,230,210,0.18); }
-    .fecho-fatos strong { font-family: 'Archivo Expandida', 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: #F0E6D2; text-transform: uppercase; letter-spacing: -0.01em; }
-    .fecho-fatos span { font-size: 13px; color: #A9A296; }
-    .fecho-fatos strong { white-space: nowrap; }
-    @media (max-width: 639px) { .fecho-fatos strong { font-size: min(14px, 3.8vw); } .fecho-fatos span { font-size: 12px; } .fecho-fatos li + li { padding-left: 10px; } }
-    /* foto entra no preto sem corte seco */
-    .fecho-foto { position: relative; }
-    .fecho-foto::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0) 30%); }
-    @media (min-width: 900px) {
-      .fecho-foto::after { background: linear-gradient(to right, #0A0A0A 0%, rgba(10,10,10,0) 22%); }
-      .fecho .caixa { min-height: 580px; }
-    }
-
     /* Responsividade (01/10) */
     /* tablet em pé: usa a foto vertical do celular, que preenche a altura */
     @media (min-width: 640px) and (max-aspect-ratio: 1/1) {
@@ -415,7 +359,7 @@
          topo da foto) encosta embaixo da palavra */
       .abre { background-image: url("/assets/equipamentos/hero-claro-mobile.webp"); background-size: 100% auto; background-position: center calc(150px - 46.7vw); }
       .abre > .recorte { background-image: url("/assets/equipamentos/hero-claro-recorte-mobile.webp"); background-size: 100% auto; background-position: center calc(150px - 46.7vw); }
-      .abre::after { background: linear-gradient(to top, rgba(226,223,218,0.96) 0%, rgba(226,223,218,0.85) 22%, rgba(226,223,218,0) 42%); }
+      .abre::after { background: linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.85) 22%, rgba(10,10,10,0) 42%); }
       .hero-menu { display: none; }
     }
     /* celular estreito: logo e botão do topo cabem numa linha */
@@ -429,10 +373,45 @@
     /* rodapé: os dois links lado a lado */
     .rodape-links { display: flex; justify-content: center; align-items: center; gap: 12px; white-space: nowrap; }
     @media (max-width: 639px) { .rodape-links { font-size: min(10px, 2.75vw); letter-spacing: 0.05em; gap: 8px; } }
-    /* botão do bloco final: largura toda no celular; no computador, a mesma
-       largura da linha dos três fatos (max 460px) */
-    .fecho .btn-claro { width: 100%; justify-content: space-between; }
-    @media (min-width: 900px) { .fecho .btn-claro { max-width: 460px; } }
+
+    /* Bloco final (02/10): espelha a hero. Faixa preta de ponta a ponta, palavra
+       gigante "SABER USAR" atrás do Márcio (retrato de estúdio recortado pelo
+       Vision), texto embaixo à esquerda e botão vazado à direita.
+       --f = tamanho da palavra ("SABER USAR" mede 8,53x a fonte);
+       --h = altura da foto; a cabeça fica a 7,6% do topo da foto. */
+    .fecho {
+      --f: calc((100vw - 40px) / 8.7); --h: 560px; --pt: 48px;
+      position: relative; overflow: hidden; margin-top: 72px;
+      background: #0A0A0A; color: var(--cream);
+      min-height: calc(var(--pt) + var(--h) * 0.92 + 200px);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: var(--pt) 0 28px;
+    }
+    .fecho-gigante { position: relative; z-index: 1; margin: 0; font-size: var(--f) !important; }
+    .fecho-foto, .fecho-recorte {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: calc(var(--pt) + var(--f) * 0.72 - var(--h) * 0.076);
+      height: var(--h); width: auto; max-width: none; pointer-events: none;
+    }
+    .fecho-foto { z-index: 0; }
+    .fecho-recorte { z-index: 2; }
+    .fecho-base { position: relative; z-index: 3; }
+    .fecho .lista-titulo { font-size: min(calc((100vw - 40px) / 14.6), 64px); }
+    .fecho .hero-apoio { color: #E2DCD0; }
+    .fecho .hero-afiliado { color: #A9A296; font-size: 13px; }
+    .fecho::after {
+      content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.92) 30%, rgba(10,10,10,0) 48%);
+    }
+    @media (min-width: 640px) {
+      .fecho { --f: min(calc((100vw - 80px) / 8.7), 175px); --h: min(86vh, 820px); min-height: min(100vh, 920px); }
+      .fecho .lista-titulo { font-size: min(2.6vw, 46px); }
+      .fecho::after { background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0) 28%); }
+    }
+    /* rodapé escuro, continuando o bloco final */
+    footer { background: #0A0A0A; border-top: 1px solid rgba(255,255,255,0.06); }
+    footer .wrap, footer a, footer span { color: #8A847A; }
+    footer a:hover { color: var(--cream); }
   </style>
 </head>
 <body>
@@ -497,7 +476,7 @@
             <div class="info">
               <h3>Microfone Hollyland Lark M2 Combo</h3>
               <p>Sem fio, com som limpo e estojo.</p>
-              <a class="link-ml" data-produto="Hollyland Lark M2" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Hollyland Lark M2" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
           <article class="card">
@@ -505,7 +484,7 @@
             <div class="info">
               <h3>Microfone Hollyland Lark A1</h3>
               <p>Som parecido, metade do preço.</p>
-              <a class="link-ml" data-produto="Hollyland Lark A1" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Hollyland Lark A1" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
           <article class="card">
@@ -513,7 +492,7 @@
             <div class="info">
               <h3>Microfone de lapela sem fio Kaidi</h3>
               <p>O baratinho que resolve.</p>
-              <a class="link-ml" data-produto="Lapela Kaidi" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Lapela Kaidi" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
         </div>
@@ -530,7 +509,7 @@
             <div class="info">
               <h3>Luz de LED 5W de prender no celular</h3>
               <p>A mais barata pra começar.</p>
-              <a class="link-ml" data-produto="Luz LED 5W" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Luz LED 5W" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
           <article class="card">
@@ -538,7 +517,7 @@
             <div class="info">
               <h3>Bastão de LED RGB Sokani X25</h3>
               <p>Muda de cor e temperatura.</p>
-              <a class="link-ml" data-produto="Sokani X25" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Sokani X25" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
         </div>
@@ -555,31 +534,24 @@
             <div class="info">
               <h3>Tripé magnético Ulanzi TT88</h3>
               <p>Selfie e gravação de cima.</p>
-              <a class="link-ml" data-produto="Ulanzi TT88" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span class="so-desk">Ver no </span>Mercado Livre<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
+              <a class="link-ml" data-produto="Ulanzi TT88" href="https://meli.la/1ZxfPdG" target="_blank" rel="noopener nofollow sponsored"><span><span class="so-desk">Ver no </span>Mercado Livre</span><svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="fecho">
-      <div class="wrap">
-        <div class="caixa">
-          <div class="fecho-texto">
-            <p class="fecho-kicker"><span class="ponto" aria-hidden="true"></span>O curso do Márcio</p>
-            <h2>Equipamento ajuda.<br><em>Saber usar é o que&nbsp;muda.</em></h2>
-            <p>O Márcio ensina, do zero, a tirar foto e vídeo com cara de profissional usando o celular que você já&nbsp;tem.</p>
-            <ul class="fecho-fatos">
-              <li><strong>Do zero</strong><span>no seu ritmo</span></li>
-              <li><strong>PDF</strong><span>em cada módulo</span></li>
-              <li><strong>7 dias</strong><span>de garantia</span></li>
-            </ul>
-            <a class="btn-vazado btn-claro" href="/">Conhecer o curso<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
-          </div>
-          <div class="fecho-foto">
-            <img src="/assets/equipamentos/fecho-marcio-estudio.webp" alt="Márcio Ishizuka no estúdio dele, gravando com o celular" width="1000" height="985" loading="lazy">
-          </div>
+    <section class="fecho" aria-labelledby="t-fecho">
+      <img class="fecho-foto" src="/assets/equipamentos/fecho-marcio.webp" alt="" width="1066" height="1600" loading="lazy">
+      <h2 class="gigante fecho-gigante" id="t-fecho"><span aria-hidden="true">Saber usar</span><span class="sr">Equipamento ajuda. Saber usar é o que muda.</span></h2>
+      <img class="fecho-recorte" src="/assets/equipamentos/fecho-marcio-recorte.webp" alt="Márcio Ishizuka" width="1066" height="1600" loading="lazy">
+      <div class="hero-base fecho-base">
+        <div class="hero-texto">
+          <p class="lista-titulo">O curso do Márcio</p>
+          <p class="hero-apoio">Equipamento ajuda, mas é saber usar que muda. O Márcio ensina, do zero, a tirar foto e vídeo com cara de profissional usando o celular que você já&nbsp;tem.</p>
+          <p class="hero-afiliado fecho-fatos">Do zero, no seu ritmo · PDF em cada módulo · 7 dias de&nbsp;garantia</p>
         </div>
+        <a class="btn-vazado" href="/">Conhecer o curso<svg aria-hidden="true"><use href="#i-seta"></use></svg></a>
       </div>
     </section>
   </main>
@@ -619,7 +591,9 @@
         var y = window.scrollY, passou = y > hero.offsetHeight * 0.35;
         topo.classList.toggle('solido', passou);
         // depois da hero: desce = esconde, sobe = mostra (folga de 6 px contra tremida)
-        if (!passou) { topo.classList.remove('escondido'); }
+        // celular (até 639 px): a barra fica sempre visível (público 45+ se perde
+        // quando o menu some); só no computador ela some ao descer
+        if (!passou || window.innerWidth < 640) { topo.classList.remove('escondido'); }
         else if (y - ultimoY > 6) { topo.classList.add('escondido'); }
         else if (ultimoY - y > 6) { topo.classList.remove('escondido'); }
         if (Math.abs(y - ultimoY) > 6 || !passou) ultimoY = y;
