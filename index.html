@@ -338,6 +338,13 @@
      o cartão do preço aparece na borda de baixo pra mostrar que a página continua. */
   .hero2-gancho{max-width:34rem;margin:0 0 22px;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.45;font-weight:500;color:rgba(240,230,210,.92)}
   .hero2-faixa{display:none}
+  /* faixa de dúvidas (item 5, 14/10) */
+  .duvidas-faixa{position:relative;z-index:10;background:#0A0A0A;border-top:1px solid rgba(240,230,210,.08);border-bottom:1px solid rgba(240,230,210,.08);padding:22px 20px}
+  .duvidas-faixa ul{list-style:none;margin:0 auto;padding:0;max-width:72rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .duvidas-faixa li{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid rgba(240,230,210,.14);background:rgba(240,230,210,.04)}
+  .duvidas-faixa span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,230,210,.7)}
+  .duvidas-faixa b{font-size:16px;line-height:1.3;font-weight:700;color:#F0E6D2}
+  @media (max-width:1023px){.duvidas-faixa ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.duvidas-faixa li{padding:12px 13px}.duvidas-faixa b{font-size:15px}}
   @media (max-width:1023px){
     .hero2-foto,.hero-creds,.hero2-shade,.hero2-glow{display:none}
     .hero2-inner{margin-top:0;padding:22px 20px 28px}
@@ -548,13 +555,16 @@ p, li, .hero2-sub { text-wrap: pretty; }
       </div>
     </section>
 
-    <!-- MARQUEE -->
-    <section class="relative border-b border-white/5 bg-surface0 py-6 overflow-hidden z-10" aria-hidden="true">
-      <div class="hide-scrollbar overflow-hidden relative z-10">
-        <div class="flex w-max animate-marquee gap-12 whitespace-nowrap text-[10px] sm:text-xs font-bold uppercase tracking-widest text-neutral-400 select-none">
-          <div class="flex gap-12 items-center"><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-camera-linear"></use></svg>Câmera pelo celular</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-layers-minimalistic-linear"></use></svg>Resolução e formato</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-clapperboard-open-linear"></use></svg>Enquadramento de cinema</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-sun-2-linear"></use></svg>Luz sem comprar nada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-videocamera-record-linear"></use></svg>Aula ao vivo gravada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia</span></div><div class="flex gap-12 items-center"><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-camera-linear"></use></svg>Câmera pelo celular</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-layers-minimalistic-linear"></use></svg>Resolução e formato</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-clapperboard-open-linear"></use></svg>Enquadramento de cinema</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-sun-2-linear"></use></svg>Luz sem comprar nada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-videocamera-record-linear"></use></svg>Aula ao vivo gravada</span><span class="flex items-center gap-2"><svg class="icon text-[#F0E6D2]"><use href="#i-shield-check-linear"></use></svg>7 dias de garantia</span></div>
-        </div>
-      </div>
+    <!-- 14/10/2026 (item 5 da lista): no lugar do letreiro que rolava, as 4
+         dúvidas mais abertas no FAQ (Clarity, 08 a 13/10), respondidas com o
+         texto do próprio FAQ. Nada aqui promete além do que já está lá. -->
+    <section class="duvidas-faixa" aria-label="Dúvidas mais comuns">
+      <ul>
+        <li><span>Sem tempo?</span><b>Aulas de 1&nbsp;a&nbsp;10&nbsp;min</b></li>
+        <li><span>Precisa de iPhone?</span><b>Não. Vale pra qualquer celular</b></li>
+        <li><span>Celular não é bom?</span><b>Dá pra fazer com o que você tem</b></li>
+        <li><span>Difícil com tecnologia?</span><b>Começa do absoluto zero</b></li>
+      </ul>
     </section>
 
     <!-- 01 PRA QUEM (v2: citação grande, duas colunas) -->
