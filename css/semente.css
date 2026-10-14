@@ -500,3 +500,35 @@ a.btn-ember, .cookie-consent__btn--yes { background: #D63428; }
      o botão do header vira redundância. [04-01] */
   html header a.btn-mini { display: none; }
 }
+
+/* --- Aviso de cookies, 14/10/2026 (item 2, guia de cookies da ANPD de 2022):
+   "Recusar", "Gerenciar" e "Aceitar" com o mesmo formato e destaque (p. 22 e
+   33). Nenhum botão em vermelho: o vermelho fica só pra compra. O "Gerenciar"
+   abre as categorias (.is-gerenciar). --- */
+.cookie-consent .cookie-consent__acoes { gap: 0.5rem; }
+.cookie-consent .cookie-consent__btn {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  background: rgba(240, 230, 210, 0.06);
+  border: 1px solid rgba(240, 230, 210, 0.38);
+  color: #F0E6D2;
+  font-size: 11px;
+  transform: none;
+}
+.cookie-consent .cookie-consent__btn:hover {
+  background: rgba(240, 230, 210, 0.14);
+  border-color: rgba(240, 230, 210, 0.6);
+  color: #fff;
+  transform: none;
+}
+.cookie-consent .cookie-consent__txt b { color: #F0E6D2; font-weight: 700; }
+.cookie-consent__cats { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
+.cookie-consent__cats li { font-size: 12.5px; line-height: 1.45; color: rgba(255, 255, 255, 0.78); }
+.cookie-consent__cats li > span { display: block; padding: 0.35rem 0 0.35rem 1.9rem; }
+.cookie-consent__cats label { display: flex; gap: 0.6rem; align-items: flex-start; min-height: 44px; padding: 0.35rem 0; cursor: pointer; }
+.cookie-consent__cats input { width: 1.2rem; height: 1.2rem; margin-top: 0.1rem; flex-shrink: 0; accent-color: #D63428; }
+.cookie-consent__cats b { color: #F0E6D2; font-weight: 700; }
+@media (max-width: 480px) {
+  .cookie-consent .cookie-consent__acoes { width: 100%; }
+  .cookie-consent .cookie-consent__btn { flex: 1; padding: 0.5rem 0.4rem; }
+}

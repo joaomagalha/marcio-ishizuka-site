@@ -19,85 +19,150 @@
 // ATENÇÃO, quem for mexer: a revogação de quem JÁ recusou acontece de forma
 // SÍNCRONA no <head> do index.html, antes do fbq('init'). Este arquivo carrega
 // com defer e rodaria tarde demais pra impedir o primeiro PageView.
+//
+// 14/10/2026 (item 2 da lista de ataque, guia de cookies da ANPD de 2022):
+// os botões "Recusar", "Gerenciar" e "Aceitar" têm o mesmo formato e destaque
+// (p. 22 e 33 do guia), o "Gerenciar" abre as categorias (medição de visitas e
+// anúncios, cada uma com chave própria), e o link "Cookies" do rodapé reabre
+// as categorias pra mudar a escolha depois (window.nfCookies.abrir). O Pixel
+// CONTINUA opt-out, por decisão do João em 14/10/2026: começa ligado e só para
+// quando a pessoa recusa ou desliga "Anúncios".
+//
+// Chaves no localStorage:
+//   nf_consent         = 'granted' | 'denied'  -> anúncios (Meta Pixel). O <head>
+//                        do index.html e o js/pixel.js leem esta chave.
+//   nf_consent_medicao = 'granted' | 'denied'  -> medição de visitas (Clarity).
+//                        Sem ela (quem escolheu antes de 14/10), vale nf_consent.
+
 
 (function () {
   var CHAVE = 'nf_consent';
+  var CHAVE_MEDICAO = 'nf_consent_medicao';
 
-  function ler() {
+  function ler(chave) {
     try {
-      return localStorage.getItem(CHAVE);
+      return localStorage.getItem(chave);
     } catch (e) {
       return null;
     }
   }
 
-  function salvar(valor) {
+  function salvar(chave, valor) {
     try {
-      localStorage.setItem(CHAVE, valor);
+      localStorage.setItem(chave, valor);
     } catch (e) {}
   }
 
-  function revogarPixel() {
-    if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');
+  function pixel(ligado) {
+    if (typeof window.fbq === 'function') window.fbq('consent', ligado ? 'grant' : 'revoke');
   }
 
-  // Microsoft Clarity (projeto yfi5c6jgfa). Hoje o painel dele está com os
-  // cookies DESATIVADOS, então ele já roda sem cookie e estas chamadas são
-  // inofensivas. Ficam aqui prontas pro dia em que os cookies forem ligados no
-  // painel (Settings > Setup > Cookies), e aí o consentimento passa a valer
-  // pros dois lados sem precisar mexer em código.
-  function avisarClarity(aceitou) {
+  // Microsoft Clarity (projeto yfi5c6jgfa): consentimento separado pra
+  // medição (analytics) e anúncios (ad), na API consentv2.
+  function avisarClarity(medicao, anuncios) {
     if (typeof window.clarity !== 'function') return;
-    var v = aceitou ? 'granted' : 'denied';
-    window.clarity('consentv2', { ad_Storage: v, analytics_Storage: v });
+    window.clarity('consentv2', {
+      analytics_Storage: medicao ? 'granted' : 'denied',
+      ad_Storage: anuncios ? 'granted' : 'denied'
+    });
   }
 
-  function montarBanner() {
+  // Estado atual. Sem escolha salva, os dois começam ligados (opt-out).
+  function estado() {
+    var anuncios = ler(CHAVE) !== 'denied';
+    var med = ler(CHAVE_MEDICAO);
+    var medicao = med ? med !== 'denied' : anuncios;
+    return { medicao: medicao, anuncios: anuncios };
+  }
+
+  function aplicar(medicao, anuncios) {
+    salvar(CHAVE, anuncios ? 'granted' : 'denied');
+    salvar(CHAVE_MEDICAO, medicao ? 'granted' : 'denied');
+    pixel(anuncios);
+    avisarClarity(medicao, anuncios);
+  }
+
+  var POLITICA = 'Detalhes na <a href="/privacidade.html">Política de Privacidade</a>.';
+
+  function nivel1() {
+    return '<p class="cookie-consent__txt">A gente usa cookies pra medir os anúncios e as visitas. ' + POLITICA + '</p>' +
+      '<div class="cookie-consent__acoes">' +
+      '<button type="button" class="cookie-consent__btn" data-acao="recusar">Recusar</button>' +
+      '<button type="button" class="cookie-consent__btn" data-acao="gerenciar">Gerenciar</button>' +
+      '<button type="button" class="cookie-consent__btn" data-acao="aceitar">Aceitar</button>' +
+      '</div>';
+  }
+
+  function nivel2() {
+    var e = estado();
+    return '<p class="cookie-consent__txt"><b>Escolha os cookies.</b> ' + POLITICA + '</p>' +
+      '<ul class="cookie-consent__cats">' +
+      '<li><span><b>Necessários</b> guardam esta escolha. Sempre ligados.</span></li>' +
+      '<li><label><input type="checkbox" data-cat="medicao"' + (e.medicao ? ' checked' : '') + '> <span><b>Medição de visitas</b> (Microsoft Clarity): como a página é usada.</span></label></li>' +
+      '<li><label><input type="checkbox" data-cat="anuncios"' + (e.anuncios ? ' checked' : '') + '> <span><b>Anúncios</b> (Meta): resultado dos anúncios no Instagram e no Facebook.</span></label></li>' +
+      '</ul>' +
+      '<div class="cookie-consent__acoes">' +
+      '<button type="button" class="cookie-consent__btn" data-acao="recusar">Recusar tudo</button>' +
+      '<button type="button" class="cookie-consent__btn" data-acao="salvar">Salvar escolha</button>' +
+      '</div>';
+  }
+
+  var aberto = null;
+
+  function montar(conteudo) {
+    if (aberto) aberto.remove();
     var el = document.createElement('div');
     el.className = 'cookie-consent';
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Aviso de cookies');
-    el.innerHTML =
-      '<p class="cookie-consent__txt">A gente usa cookies pra medir os anúncios e entender de onde vêm as visitas. ' +
-      'Você pode recusar a qualquer momento. Detalhes na <a href="/privacidade.html">Política de Privacidade</a>.</p>' +
-      '<div class="cookie-consent__acoes">' +
-      '<button type="button" class="cookie-consent__btn cookie-consent__btn--no" data-consent="denied">Recusar</button>' +
-      '<button type="button" class="cookie-consent__btn cookie-consent__btn--yes" data-consent="granted">Entendi</button>' +
-      '</div>';
+    el.innerHTML = conteudo;
 
     el.addEventListener('click', function (ev) {
-      var alvo = ev.target.closest('[data-consent]');
+      var alvo = ev.target.closest('[data-acao]');
       if (!alvo) return;
-      var escolha = alvo.getAttribute('data-consent');
-      salvar(escolha);
-      if (escolha === 'denied') {
-        revogarPixel();
-        avisarClarity(false);
-      } else {
-        avisarClarity(true);
+      var acao = alvo.getAttribute('data-acao');
+      if (acao === 'gerenciar') {
+        el.innerHTML = nivel2();
+        el.classList.add('is-gerenciar');
+        return;
+      }
+      if (acao === 'aceitar') aplicar(true, true);
+      else if (acao === 'recusar') aplicar(false, false);
+      else if (acao === 'salvar') {
+        aplicar(
+          !!el.querySelector('[data-cat="medicao"]:checked'),
+          !!el.querySelector('[data-cat="anuncios"]:checked')
+        );
       }
       el.remove();
+      aberto = null;
     });
 
     document.body.appendChild(el);
+    aberto = el;
+    return el;
   }
 
+  // Link "Cookies" do rodapé: reabre as categorias pra mudar a escolha.
+  window.nfCookies = {
+    abrir: function () {
+      var el = montar(nivel2());
+      el.classList.add('is-gerenciar');
+    }
+  };
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('[data-cookies-abrir]');
+    if (!a) return;
+    ev.preventDefault();
+    window.nfCookies.abrir();
+  });
+
   function iniciar() {
-    var escolha = ler();
-
-    if (escolha === 'denied') {
-      revogarPixel();
-      avisarClarity(false);
-      return;
-    }
-
-    if (escolha === 'granted') {
-      avisarClarity(true);
-      return;
-    }
-
-    avisarClarity(true);
-    montarBanner();
+    var e = estado();
+    var escolheu = ler(CHAVE) !== null;
+    if (!e.anuncios) pixel(false);
+    avisarClarity(e.medicao, e.anuncios);
+    if (!escolheu) montar(nivel1());
   }
 
   if (document.readyState === 'loading') {
