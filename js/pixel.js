@@ -94,7 +94,7 @@
     });
   });
 
-  // 14/10/2026 (passo 3 do perpétuo): botão "Falar com o Márcio no WhatsApp"
+  // 14/10/2026 (passo 3 do perpétuo): botão "Tirar dúvida no WhatsApp"
   // perto do preço e no fim do FAQ. Contact é evento padrão da Meta e não é o
   // evento que a campanha otimiza (compra), então não atrapalha. 1x por sessão.
   var CTA_ZAP = 'a[href^="https://wa.me/"]';
