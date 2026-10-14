@@ -93,4 +93,14 @@
       marcar(flag);
     });
   });
+
+  // 15/10/2026 (passo 3 do perpétuo): botão "Falar com o Márcio no WhatsApp"
+  // perto do preço e no fim do FAQ. Contact é evento padrão da Meta e não é o
+  // evento que a campanha otimiza (compra), então não atrapalha. 1x por sessão.
+  var CTA_ZAP = 'a[href^="https://wa.me/"]';
+  document.querySelectorAll(CTA_ZAP).forEach(function (botao) {
+    botao.addEventListener('click', function () {
+      disparar('Contact', 'nf_zap_enviado', { content_name: 'Duvida antes de comprar' });
+    });
+  });
 })();
