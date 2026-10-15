@@ -367,6 +367,11 @@
     .hero2-faixa-selos .hero-chip{flex:1;min-width:0;padding:8px 11px;background:rgba(10,10,10,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:rgba(240,230,210,.22)}
     .hero2-faixa-selos .hero-chip b{font-size:16px}
     .hero2-faixa-selos .hero-chip span{font-size:min(11px,2.9vw);white-space:nowrap;color:rgba(240,230,210,.8)}
+    /* tablet (15/10): faixa larga cortava a cabeça; a foto fica numa coluna central e o fundo preto da foto some no fundo da faixa */
+    @media (min-width:560px){
+      .hero2-faixa>img{left:50%;width:min(100%,420px);transform:translateX(-50%);-webkit-mask-image:linear-gradient(to right,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(to right,transparent,#000 14%,#000 86%,transparent)}
+      .hero2-faixa .hero-foco{width:150px}
+    }
     .ticket{margin-top:22px}
     /* aviso de cookies menor: não cobre o título; botões continuam com 44px de toque */
     .cookie-consent{padding:.7rem .9rem;gap:.5rem .75rem;left:.6rem;right:.6rem}
@@ -471,6 +476,9 @@
   .mzo-rec::first-letter{color:var(--zhu)}
   .mzo-item figcaption{position:absolute;left:24px;right:24px;bottom:22px;z-index:3;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,210,.92);line-height:1.4}
   .mzo-item figcaption span{color:var(--zhu)}
+  .mzo-tipo{font-style:normal}
+  /* tablet (15/10): fotos menores, a legenda fica só com o nome pra não quebrar */
+  @media (min-width:768px) and (max-width:1100px){.mzo-tipo{display:none}}
   @media (hover:hover) and (prefers-reduced-motion:no-preference){.mzo-item:hover img{transform:scale(1.03)}.mzo-item:hover .mzo-foco{inset:18px}}
   @media (max-width:767px){
     .mz-outdoors{margin-top:44px;padding-top:32px}
@@ -755,22 +763,22 @@ p, li, .hero2-sub { text-wrap: pretty; }
             <figure class="mzo-item mzo-big">
               <img src="assets/outdoor-01.webp" alt="Outdoor iluminado da Serafina, à noite, na lateral de um prédio" width="800" height="1000" loading="lazy" decoding="async">
               <span class="mzo-foco" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b class="mzo-rec" aria-hidden="true">● REC</b>
-              <figcaption><span>01</span> · Serafina · fachada à noite</figcaption>
+              <figcaption><span>01</span> · Serafina<em class="mzo-tipo"> · fachada à noite</em></figcaption>
             </figure>
             <figure class="mzo-item mzo-a">
               <img src="assets/outdoor-02.webp" alt="Painel do SESI na lateral de um prédio" width="600" height="750" loading="lazy" decoding="async">
               <span class="mzo-foco" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-              <figcaption><span>02</span> · SESI · empena</figcaption>
+              <figcaption><span>02</span> · SESI<em class="mzo-tipo"> · empena</em></figcaption>
             </figure>
             <figure class="mzo-item mzo-b">
               <img src="assets/outdoor-03.webp" alt="Painel do Governo de Mato Grosso contra queimadas, com um bombeiro" width="600" height="750" loading="lazy" decoding="async">
               <span class="mzo-foco" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-              <figcaption><span>03</span> · Governo de MT · empena</figcaption>
+              <figcaption><span>03</span> · Governo de MT<em class="mzo-tipo"> · empena</em></figcaption>
             </figure>
             <figure class="mzo-item mzo-wide">
               <img src="assets/outdoor-04.webp" alt="Outdoor da Rádio Assembleia, da ALMT" width="800" height="500" loading="lazy" decoding="async">
               <span class="mzo-foco" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-              <figcaption><span>04</span> · ALMT · outdoor</figcaption>
+              <figcaption><span>04</span> · ALMT<em class="mzo-tipo"> · outdoor</em></figcaption>
             </figure>
           </div>
         </div>
