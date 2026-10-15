@@ -448,8 +448,9 @@ html .cta-h2 { line-height: 1.15; font-size: 48px; }
 }
 @media (max-width: 639px) {
   /* h2 em 2 ou 3 linhas no celular. [10-06] */
-  html .hero2-h1 .l1 { font-size: 32px; }
-  html .hero2-h1 .l2 { font-size: 28px; }
+  /* 15/10: título em 2 linhas no celular; a letra encolhe nas telas estreitas (71px = bordas e recuo do bloco) */
+  html .hero2-h1 .l1 { font-size: min(32px, calc((100vw - 71px) / 10.1)); white-space: nowrap; }
+  html .hero2-h1 .l2 { font-size: min(28px, calc((100vw - 71px) / 11.7)); white-space: nowrap; }
   html .hero2-sub { font-size: 15px; }
   html .sec-h2, html .pq-grid .sec-h2, html #como-funciona .sec-h2, html #prova-social h2, html #garantia h2 { font-size: 24px; }
   html .cta-h2 { font-size: 32px; }
