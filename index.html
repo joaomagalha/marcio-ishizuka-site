@@ -452,6 +452,12 @@
   .mz-p{margin-top:20px;font-size:16px;line-height:1.6;color:rgba(240,230,210,.8);font-weight:300}
   .mz-nums{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(240,230,210,.14)}
   .mz-nums b{display:block;font-weight:800;font-size:34px;line-height:1;color:#fff;letter-spacing:-.03em}.mz-nums li:last-child b{color:var(--zhu)}
+  .mz-outdoors{margin-top:48px}
+  .mz-outdoors-tit{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,210,.6);margin:0 0 14px}
+  .mz-outdoors ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .mz-outdoors li{border-radius:14px;overflow:hidden;border:1px solid rgba(240,230,210,.14);background:#141210;aspect-ratio:4/5}
+  .mz-outdoors img{width:100%;height:100%;object-fit:cover;display:block}
+  @media (max-width:767px){.mz-outdoors{margin-top:32px}.mz-outdoors ul{grid-template-columns:1fr 1fr;gap:10px}}
   .mz-nums span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,230,210,.55);margin-top:6px}
   .preco-big{font-weight:800;font-size:clamp(4rem,7vw,6rem);line-height:.95;letter-spacing:-.04em;color:#fff}
   .cta-h2{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:1;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:22px}
@@ -715,6 +721,16 @@ p, li, .hero2-sub { text-wrap: pretty; }
               <li><b>Outdoors</b><span>espalhados pela cidade</span></li>
             </ul>
           </div>
+        </div>
+        <!-- 15/10/2026: os outdoors aparecem de verdade (quadros do vídeo do anúncio; João confirmou que todos são trabalho do Márcio) -->
+        <div class="mz-outdoors">
+          <p class="mz-outdoors-tit">Alguns outdoors feitos pelo Márcio em Cuiabá</p>
+          <ul>
+            <li><img src="assets/outdoor-01.webp" alt="Outdoor iluminado da Serafina, à noite, na lateral de um prédio" width="600" height="750" loading="lazy" decoding="async"></li>
+            <li><img src="assets/outdoor-02.webp" alt="Painel do SESI na lateral de um prédio" width="600" height="750" loading="lazy" decoding="async"></li>
+            <li><img src="assets/outdoor-03.webp" alt="Painel do Governo de Mato Grosso contra queimadas, com um bombeiro" width="600" height="750" loading="lazy" decoding="async"></li>
+            <li><img src="assets/outdoor-04.webp" alt="Outdoor da Rádio Assembleia, da ALMT" width="600" height="750" loading="lazy" decoding="async"></li>
+          </ul>
         </div>
       </div>
     </section>
