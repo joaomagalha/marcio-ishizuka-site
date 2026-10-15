@@ -333,10 +333,9 @@
   .cta-bar b{font-weight:800;font-size:18px;color:#fff}
   .cta-bar span{font-size:11px;color:rgba(240,230,210,.7)}
   @media (max-width:1023px){body{padding-bottom:72px}.cookie-consent{bottom:80px!important}}
-  /* 14/10/2026: 1ª tela que continua o anúncio. No celular o texto vem primeiro
-     (gancho, título, subtítulo) e a foto vira um retrato pequeno ao lado do nome;
+  /* 14/10/2026: 1ª tela que continua o anúncio (15/10: a pergunta do anúncio é o título). No celular o texto vem primeiro
+     (título, subtítulo) e a foto vira um retrato pequeno ao lado do nome;
      o cartão do preço aparece na borda de baixo pra mostrar que a página continua. */
-  .hero2-gancho{max-width:34rem;margin:0 0 22px;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.45;font-weight:500;color:rgba(240,230,210,.92)}
   .hero2-faixa{display:none}
   /* lista de módulos pelo resultado (item 6, 14/10): frase do que a pessoa passa a fazer, aulas dentro de "Ver as aulas" */
   .curr-ganho{margin:0 0 16px;max-width:46rem;font-size:18px;line-height:1.45;font-weight:600;color:#F0E6D2}
@@ -357,7 +356,6 @@
   @media (max-width:1023px){
     .hero2-foto,.hero-creds,.hero2-shade,.hero2-glow{display:none}
     .hero2-inner{margin-top:0;padding:22px 20px 28px}
-    .hero2-gancho{font-size:16px;margin-bottom:16px}
     /* faixa de estúdio (14/10, escolhida pelo João no lugar do retrato pequeno) */
     .hero2-faixa{display:block;position:relative;margin-top:20px;height:min(76vw,320px);border-radius:16px;overflow:hidden;border:1px solid rgba(240,230,210,.2);background:#0A0A0A}
     .hero2-faixa>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
@@ -464,6 +462,7 @@
 @media (max-width:639px){.rodape-links{font-size:min(10px,2.75vw);letter-spacing:.05em;gap:8px}}
 /* 01/10: evita palavra sozinha na última linha dos parágrafos e itens */
 p, li, .hero2-sub { text-wrap: pretty; }
+.hero2-h1 .l2 { text-wrap: balance; }
 </style>
 </head>
 <body class="semente antialiased selection:bg-[#F0E6D2] selection:text-black min-h-screen flex flex-col overflow-x-hidden">
@@ -527,14 +526,13 @@ p, li, .hero2-sub { text-wrap: pretty; }
         <li class="hero-chip"><b>Outdoors</b><span>feitos por ele em Cuiabá</span></li>
       </ul>
       <div class="hero2-inner">
-        <!-- 14/10/2026: a 1ª tela repete o gancho do anúncio (opção A, aprovada pelo João) -->
-        <p class="hero2-gancho">Muita gente boa no que faz <mark class="hl">trava na hora de gravar</mark>. O&nbsp;problema nunca foi o&nbsp;celular.</p>
+        <!-- 15/10/2026: a pergunta do anúncio virou o título (pedido do João; antes era uma frase pequena acima do título) -->
         <div class="hero2-lockup">
           <h1 class="hero2-h1">
-            <span class="l1">Fotos e vídeos<br>profissionais.</span>
-            <span class="l2">Só com o seu celular.</span>
+            <span class="l1">Bom no que faz,</span>
+            <span class="l2">mas trava na hora de gravar?</span>
           </h1>
-          <p class="hero2-sub"><mark class="hl">Do zero</mark>, pra quem nunca gravou. Aulas de 1&nbsp;a&nbsp;10&nbsp;min, sem comprar equipamento.</p>
+          <p class="hero2-sub">Fotos e vídeos profissionais só com o seu celular. <mark class="hl">Do zero</mark>, aulas de 1&nbsp;a&nbsp;10&nbsp;min, sem comprar equipamento.</p>
         </div>
         <div class="hero2-faixa">
           <img src="assets/hero-marcio-mobile.webp" alt="Márcio Ishizuka" width="900" height="1125">
